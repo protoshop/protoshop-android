@@ -21,8 +21,18 @@ public class LuaActivity extends Activity {
 
     private LuaState mLuaState;
 
+    //要展示的Scene ID。
     private String mScene;
+    //Scene 所在工程ID。
     private String mAppID;
+
+    //Finish 广播
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            LuaActivity.this.finish();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +46,7 @@ public class LuaActivity extends Activity {
         mScene = intent.getStringExtra(Constants.SCENE);
         mAppID = intent.getStringExtra(Constants.APPID);
 
-        String luaStr = Util.getLusStr(this,mAppID, mScene + ".lua");
+        String luaStr = Util.getLusStr(this, mAppID, mScene + ".lua");
 
         if (TextUtils.isEmpty(luaStr)) {
             TextView textView = new TextView(this);
@@ -45,70 +55,53 @@ public class LuaActivity extends Activity {
             return;
         }
 
-        LuaLog.e(luaStr); 
+        LuaLog.e(luaStr);
 
-        try {
-            mLuaState = LuaStateFactory.newLuaState();
-            mLuaState.LdoString(luaStr);
-            mLuaState.getField(LuaState.LUA_GLOBALSINDEX, "onCreate");
-            mLuaState.pushJavaObject(this);
-            mLuaState.call(1, 0);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        LuaLog.e("LuaActivity", "out--[onCreate]");
+        //执行Lua代码
+        mLuaState = LuaStateFactory.newLuaState();
+        mLuaState.LdoString(luaStr);
+        mLuaState.getField(LuaState.LUA_GLOBALSINDEX, "onCreate");
+        mLuaState.pushJavaObject(this);
+        mLuaState.call(1, 0);
 
         IntentFilter filter = new IntentFilter(mScene);
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, filter);
+
+        LuaLog.e("LuaActivity", "out--[onCreate]");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        mLuaState.getField(LuaState.LUA_GLOBALSINDEX, "onResume");
-//        mLuaState.pushJavaObject(this);
-//        mLuaState.call(1, 0);
+        mLuaState.getField(LuaState.LUA_GLOBALSINDEX, "onResume");
+        mLuaState.pushJavaObject(this);
+        mLuaState.call(1, 0);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-//        LuaLog.e("into---[onStop]");
-//        mLuaState.getField(LuaState.LUA_GLOBALSINDEX, "onStop");
-//        mLuaState.pushJavaObject(this);
-//        mLuaState.call(1, 0);
+        LuaLog.e("into---[onStop]");
+        mLuaState.getField(LuaState.LUA_GLOBALSINDEX, "onStop");
+        mLuaState.pushJavaObject(this);
+        mLuaState.call(1, 0);
     }
 
-    private BroadcastReceiver receiver = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-            LuaActivity.this.finish();
-
-        }
-    };
-
+    //重写startActivity。查看要启动的Scene是否在缓存中，如果存在判断为返回,Scene上Activity被finish。
     @Override
     public void startActivity(Intent intent) {
-
         String scenceId = intent.getStringExtra(Constants.SCENE);
-
         if (ScenceCache.getInstance().scences.contains(scenceId)) {
-
             List<String> scences = ScenceCache.getInstance().scences;
             List<String> subList = scences.subList(scences.indexOf(scenceId) + 1, scences.size());
-
             for (String string : subList) {
                 LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(new Intent(string));
             }
-            //finish();
         } else {
             ScenceCache.getInstance().scences.add(scenceId);
             super.startActivity(intent);
             overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
         }
-
     }
 
     @Override

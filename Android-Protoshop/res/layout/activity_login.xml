@@ -87,7 +87,7 @@
         android:background="@drawable/orange_backgroud_shape"
         android:gravity="center"
         android:padding="@dimen/_10"
-        android:text="域账号登陆"
+        android:text="域账号登录"
         android:textColor="@color/white"
         android:textStyle="bold" />
 

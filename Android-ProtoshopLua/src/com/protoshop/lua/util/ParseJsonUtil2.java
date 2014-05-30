@@ -43,7 +43,7 @@ public class ParseJsonUtil2 {
         //开始解析JSON
 
         //获取JSON中的Scene
-        JSONArray scenceArray = jsonObject.getJSONArray("scences");
+        JSONArray scenceArray = jsonObject.getJSONArray("scenes");
         for (int i = 0; i < scenceArray.length(); i++) {
             String scenceStr = new String(scenceTemplate);
             JSONObject scenceObject = scenceArray.getJSONObject(i);
@@ -78,9 +78,9 @@ public class ParseJsonUtil2 {
             matcher = pattern.matcher(scenceStr);
             scenceStr = matcher.replaceAll(luaElementStr);
 
-            pattern = Pattern.compile("#");
-            matcher = pattern.matcher(scenceStr);
-            scenceStr = matcher.replaceAll("\\$");
+            //            pattern = Pattern.compile("#");
+            //            matcher = pattern.matcher(scenceStr);
+            //            scenceStr = matcher.replaceAll("\\$");
 
             //存储生成的Lua脚本
             Util.saveScence(context, appID, scenceId + ".lua", scenceStr);
@@ -93,7 +93,7 @@ public class ParseJsonUtil2 {
                                         String setAttrTemplate, String setActionTemplate) throws JSONException {
         //解析JSON中的element
         StringBuffer elementBuffer = new StringBuffer();
-        
+
         JSONArray elementArray = parentElementObject.getJSONArray("elements");
         for (int j = 0; j < elementArray.length(); j++) {
             JSONObject elementObject = elementArray.getJSONObject(j);
@@ -120,6 +120,14 @@ public class ParseJsonUtil2 {
             matcher = pattern.matcher(setAttrStr);
             setAttrStr = matcher.replaceAll(elementObject.toString());
 
+            pattern = Pattern.compile("#lable");
+            matcher = pattern.matcher(setAttrStr);
+            if (elementObject.has("text")) {
+                setAttrStr = matcher.replaceAll(elementObject.getString("text"));
+            } else {
+                setAttrStr = matcher.replaceAll("");
+            }
+
             pattern = Pattern.compile("#view");
             matcher = pattern.matcher(setAttrStr);
             setAttrStr = matcher.replaceAll(viewId);
@@ -131,34 +139,31 @@ public class ParseJsonUtil2 {
             elementBuffer.append(setAttrStr + "\n");
 
             if (elementObject.has("elements")) {
-//                if (type.equalsIgnoreCase("ScrollView")) {
-//                    elementBuffer.append(parseElements(viewId, elementObject.getJSONArray("elements").getJSONObject(0),
-//                        createViewTemplate, setAttrTemplate, setActionTemplate));
-//                } else {
-                    elementBuffer.append(parseElements(viewId, elementObject, createViewTemplate, setAttrTemplate,
-                        setActionTemplate));
+                //                if (type.equalsIgnoreCase("ScrollView")) {
+                //                    elementBuffer.append(parseElements(viewId, elementObject.getJSONArray("elements").getJSONObject(0),
+                //                        createViewTemplate, setAttrTemplate, setActionTemplate));
+                //                } else {
+                elementBuffer.append(parseElements(viewId, elementObject, createViewTemplate, setAttrTemplate,
+                    setActionTemplate));
                 //}
             }
 
             //插入command中的setAction方法。替换参数#acitonJson
-            if (elementObject.has("actions")) {
-                JSONArray actionArray = elementObject.getJSONArray("actions");
-                for (int k = 0; k < actionArray.length(); k++) {
-                    JSONObject actionObject = actionArray.getJSONObject(k);
+            if (elementObject.has("jumpto")) {
+                JSONObject actionObject = elementObject.getJSONObject("jumpto");
+                String setActionStr = new String(setActionTemplate);
 
-                    String setActionStr = new String(setActionTemplate);
+                pattern = Pattern.compile("#actionJson");
+                matcher = pattern.matcher(setActionStr);
+                setActionStr = matcher.replaceAll(actionObject.toString());
 
-                    pattern = Pattern.compile("#actionJson");
-                    matcher = pattern.matcher(setActionStr);
-                    setActionStr = matcher.replaceAll(actionObject.toString());
+                pattern = Pattern.compile("#view");
+                matcher = pattern.matcher(setActionStr);
+                setActionStr = matcher.replaceAll(viewId);
 
-                    pattern = Pattern.compile("#view");
-                    matcher = pattern.matcher(setActionStr);
-                    setActionStr = matcher.replaceAll(viewId);
-
-                  elementBuffer.append(setActionStr + "\n");
-                }
+                elementBuffer.append(setActionStr + "\n");
             }
+
         }
         return elementBuffer.toString();
     }

@@ -9,12 +9,15 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ctrip.protoshop.constans.Constans;
 import com.ctrip.protoshop.constans.Function;
+import com.ctrip.protoshop.http.CookieRequest;
 import com.ctrip.protoshop.http.HttpCallback;
 import com.ctrip.protoshop.http.HttpUtil;
 import com.ctrip.protoshop.http.PostRequest;
@@ -117,6 +120,27 @@ public class BaseActivity extends Activity {
                     callback.onErrorResponse(error);
                 }
             });
+        ProtoshopApplication.getInstance().requestQueue.add(request);
+    }
+    
+    public void setCookieRequest(Function function,final HttpCallback callback){
+        callback.onHttpStart();
+        CookieRequest request = new CookieRequest(Method.GET, HttpUtil.getUrlByFunction(this, function), null,
+            new Response.Listener<JSONObject>() {
+
+                @Override
+                public void onResponse(JSONObject response) {
+                    callback.onResponse(response);
+                }
+            }, new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    callback.onErrorResponse(error);
+                }
+            });
+        CookieSyncManager.createInstance(this).sync();
+        request.setCookie(CookieManager.getInstance().getCookie("http://protoshop.ctripqa.com/ProtoShop/SSOLogin"));
         ProtoshopApplication.getInstance().requestQueue.add(request);
     }
 

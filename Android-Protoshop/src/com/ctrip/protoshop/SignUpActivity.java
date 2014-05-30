@@ -76,13 +76,17 @@ public class SignUpActivity extends BaseActivity implements OnClickListener, Htt
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
     }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
+        String string = s.toString();
+        if(string.contains("@")){
+            string=string.substring(0,string.indexOf("@"));
+        }
+        mEmailAdapter.clear();
         for (String str : mEmails) {
-            mEmailAdapter.add(s + str);
+            mEmailAdapter.add(string + str);
         }
         mEmailAdapter.notifyDataSetChanged();
     }
@@ -158,8 +162,8 @@ public class SignUpActivity extends BaseActivity implements OnClickListener, Htt
                         startActivity(intent);
 
                         finish();
-                    } 
-                }else if ("1".equals(status) && response.has("message")) {
+                    }
+                } else if ("1".equals(status) && response.has("message")) {
                     resultStr = response.getString("message");
 
                     // String code = response.getString("code");
@@ -169,8 +173,8 @@ public class SignUpActivity extends BaseActivity implements OnClickListener, Htt
                     //       resultStr = "邮箱格式错误!";
                     //      }
 
-                }else{
-                    resultStr="服务器错误，请联系开发人员!";
+                } else {
+                    resultStr = "服务器错误，请联系开发人员!";
                 }
             }
 

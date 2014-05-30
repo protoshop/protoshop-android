@@ -192,7 +192,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_10"
-                android:layout_marginTop="@dimen/_10"
+                android:layout_marginTop="@dimen/_5"
                 android:background="@drawable/white_gray_line_backgroud"
                 android:gravity="center_vertical" >
 
@@ -276,6 +276,56 @@
                         android:text="240"
                         android:textColor="@color/gray_dddddd" />
                 </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/contribute_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10"
+                android:layout_marginTop="@dimen/_10"
+                android:background="@drawable/white_gray_line_backgroud" >
+
+                <com.ctrip.protoshop.custom.IconView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView51"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="@dimen/_10"
+                    android:paddingLeft="@dimen/_15"
+                    android:paddingRight="@dimen/_10"
+                    android:paddingTop="@dimen/_10"
+                    android:text="@string/fa_jpy"
+                    android:textAppearance="@style/text_icon" />
+
+                <TextView
+                    android:id="@+id/textView51"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/textView4"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="@dimen/_10"
+                    android:paddingRight="@dimen/_10"
+                    android:paddingTop="@dimen/_10"
+                    android:text="Buy Me a coffee"
+                    android:textAppearance="@style/text_000000_20" />
+
+                <com.ctrip.protoshop.custom.IconView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView51"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="@dimen/_10"
+                    android:paddingLeft="@dimen/_15"
+                    android:paddingRight="@dimen/_10"
+                    android:paddingTop="@dimen/_10"
+                    android:text="@string/fa_angle_right"
+                    android:textAppearance="@style/text_icon" />
             </RelativeLayout>
 
             <com.ctrip.protoshop.custom.AnimationButton

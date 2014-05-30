@@ -3,19 +3,21 @@ package com.ctrip.protoshop;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.webkit.JavascriptInterface;
+import android.text.TextUtils;
+import android.webkit.CookieManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
+import com.android.volley.VolleyError;
 import com.ctrip.protoshop.constans.Constans;
+import com.ctrip.protoshop.constans.Function;
+import com.ctrip.protoshop.http.HttpCallback;
 import com.ctrip.protoshop.util.ProtoshopLog;
 
-public class DomainActivity extends Activity {
+public class DomainActivity extends BaseActivity {
     private WebView mWebView;
 
     @Override
@@ -24,11 +26,10 @@ public class DomainActivity extends Activity {
         setContentView(R.layout.activity_domain);
 
         mWebView = (WebView) findViewById(R.id.domain_webView);
+        mWebView.getSettings().setBuiltInZoomControls(true);
+        mWebView.getSettings().setUseWideViewPort(true);
+        mWebView.getSettings().setLoadWithOverviewMode(true);
         mWebView.loadUrl("http://protoshop.ctripqa.com/ProtoShop/SSOLogin");
-
-        mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.addJavascriptInterface(new InJavaScriptLocalObj(), "local_obj");
-
         mWebView.setWebViewClient(new WebViewClient() {
 
             @Override
@@ -39,52 +40,45 @@ public class DomainActivity extends Activity {
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                ProtoshopLog.e(url);
-                if (url.equals(getString(R.string.domain_callback_url))) {
-
-                    view.loadUrl("javascript:window.local_obj.showSource("
-                        + "document.getElementsByTagName('pre')[0].innerHTML);");
+                CookieManager cookieManager = CookieManager.getInstance();
+                String cookieStr = cookieManager.getCookie(url);
+                ProtoshopLog.e("webView", url);
+                if (url.equals("http://protoshop.ctripqa.com/ProtoShop/SSOAuthCallBack")
+                    && !TextUtils.isEmpty(cookieStr)) {
+                    getUserInfo(url, cookieStr);
                 }
-
             }
 
         });
 
     }
 
-    final class InJavaScriptLocalObj {
-        @JavascriptInterface
-        public void showSource(String jsonStr) {
-            ProtoshopLog.e(jsonStr);
-            try {
-                JSONObject response = new JSONObject(jsonStr);
-                String resultStr = "认证失败!";
+    protected void getUserInfo(String url, String cookieStr) {
+        ProtoshopLog.e("into--[getUserInfo]");
 
+        setCookieRequest(Function.DOMAIN_CALLBACK, new HttpCallback() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                ProtoshopLog.e(error.toString());
+            }
+
+            @Override
+            public void onResponse(JSONObject response) {
+                ProtoshopLog.e("Cookie", response.toString());
                 try {
-                    String status = "";
-
-                    if (response.has("status")) {
-                        status = response.getString("status");
-                        if ("0".equals(status) && response.has("result")) {
-                            resultStr = dealLoginResult(response);
-                        } else if ("1".equals(status) && response.has("message")) {
-                            resultStr = response.getString("message");
-                        } else {
-                            resultStr = "服务器错误，请联系开发人员!";
-                        }
-                    }
-
+                    dealLoginResult(response);
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    resultStr = "服务器返回错误!";
                 }
-
-                Toast.makeText(getApplicationContext(), resultStr, Toast.LENGTH_SHORT).show();
-
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
-        }
+
+            @Override
+            public void onHttpStart() {
+
+            }
+        });
+
     }
 
     /**

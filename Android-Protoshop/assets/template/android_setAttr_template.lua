@@ -1,1 +1,0 @@
-Command:setAttr(#parent,#view,'#attrJson')

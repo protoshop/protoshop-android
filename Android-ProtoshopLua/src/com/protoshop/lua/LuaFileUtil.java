@@ -10,14 +10,14 @@ import android.content.Context;
 public class LuaFileUtil {
 
     public static File getProgramFloder(Context context) {
-        File floder = new File(((LuaConfig)context.getApplicationContext()).getFloderPath());
+        File floder = new File(((LuaConfig) context.getApplicationContext()).getFloderPath());
         if (!floder.exists()) {
             floder.mkdirs();
         }
         return floder;
     }
 
-    public static File getResources(Context context,String appName, String resource) {
+    public static File getResources(Context context, String appName, String resource) {
         File floderFile = getProgramFloder(context);
         String path = floderFile.getAbsolutePath() + File.separator + appName + File.separator + resource;
         File file = new File(path);

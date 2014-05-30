@@ -1,7 +1,6 @@
 package com.protoshop.lua.util;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,7 +10,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import android.content.Context;
-import android.util.Log;
 import com.protoshop.lua.LuaConfig;
 
 public class Util {

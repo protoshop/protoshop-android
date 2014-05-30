@@ -20,4 +20,6 @@ public class Constans {
     public static final String LOGOUT="logout";
     public static final String SIGN_UP="sign_up";
     public static final String CLEAR_CACHE="clear_cache";
+    
+    public static final Environment ENVIRONMENT=Environment.INNERNET;
 }

@@ -3,7 +3,7 @@ package com.protoshop.lua.util;
 import android.util.Log;
 
 public class LuaLog {
-    public static boolean debug = true;
+    public static boolean debug = false;
 
     public static void e(String msg) {
         if (debug) {

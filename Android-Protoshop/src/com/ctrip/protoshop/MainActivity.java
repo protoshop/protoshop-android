@@ -16,6 +16,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.protoshop.lua.LuaActivity;
+import com.protoshop.lua.cache.ScenceCache;
 
 //import com.protoshop.lua.util.ParseJsonUtil;
 
@@ -64,7 +66,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, H
 
     private int mCurPosition = 0;
     private boolean isPullRefresh = false;
-    
+
     //获取工程入口
     private IHomeScence mHomeScence;
 
@@ -87,21 +89,22 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, H
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initUI();
-        
+
         ProtoshopApplication.getInstance().cachePath = Util.getUserRootFile().getAbsolutePath();
-        
-        mHomeScence=new NetHomeScenceImp();
+
+        mHomeScence = new NetHomeScenceImp();
         getPrograms();
 
         LocalBroadcastManager.getInstance(this).registerReceiver(clearCacheReceiver,
             new IntentFilter(Constans.CLEAR_CACHE));
 
-        
     }
 
     private void initUI() {
         mLoadingLayout = findViewById(R.id.loading_layout);
         mLoadTipView = (TextView) mLoadingLayout.findViewById(R.id.program_comment_view);
+
+        findViewById(R.id.title_reload_view).setOnClickListener(this);
 
         View settingView = findViewById(R.id.title_setting_view);
         settingView.setOnClickListener(this);
@@ -127,7 +130,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, H
      * 获取项目列表
      */
     private void getPrograms() {
-        getProgramsFromService();
+        getProgramsFromService(true);
         getProgramsFromLocal();
     }
 
@@ -135,9 +138,12 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, H
      * 
      * 获取服务器最新项目列表.
      */
-    private void getProgramsFromService() {
-        mLoadTipView.setText("更新列表中...");
+    private void getProgramsFromService(boolean isNeedTip) {
         //发送请求，获取项目列表
+        if (isNeedTip) {
+            mLoadingLayout.setVisibility(View.VISIBLE);
+            mLoadTipView.setText("更新列表中...");
+        }
         Map<String, String> params = new HashMap<String, String>();
         params.put("token", ProtoshopApplication.getInstance().token);
         sendGetParamRequest(Function.PROGRAM_LIST, params, this);
@@ -165,7 +171,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, H
                 for (ProgramModel model : mLocalModels) {
                     if (nameList.contains(model.appID)) {
                         model.isLoadZip = true;
-                        model.home_scence = mHomeScence.getHomeSccence(getApplicationContext(),model.appID);
+                        model.home_scence = mHomeScence.getHomeSccence(getApplicationContext(), model.appID);
                         mProgramMap.put(model.appID, model);
                     }
                 }
@@ -225,7 +231,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, H
                     mPullToRefreshListView.getLoadingLayoutProxy().setLastUpdatedLabel(Util.getTodayDate(new Date()));
                 }
             } else {
-                Toast.makeText(getApplicationContext(),R.string.server_error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.server_error, Toast.LENGTH_SHORT).show();
             }
 
         } catch (JSONException e) {
@@ -260,7 +266,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, H
             intent.putExtra(Constans.SCENE, model.home_scence);
             intent.putExtra(Constans.APPID, model.appID);
 
-            ProtoshopApplication.getInstance().mScences.add(model.home_scence);
+            ScenceCache.getInstance().scences.add(model.home_scence);
             startActivity(intent);
 
         } else {
@@ -274,6 +280,8 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, H
     public void onClick(View v) {
         if (v.getId() == R.id.title_setting_view) {
             startActivity(new Intent(getApplicationContext(), SettingActivity.class));
+        } else if (v.getId() == R.id.title_reload_view) {
+            getProgramsFromService(true);
         }
     }
 
@@ -281,7 +289,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, H
     public void onRefresh(PullToRefreshBase<ListView> refreshView) {
         //发送请求，获取项目列表
         isPullRefresh = true;
-        getProgramsFromService();
+        getProgramsFromService(false);
 
     }
 
@@ -338,7 +346,8 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, H
                                 finish();
                                 Toast.makeText(getApplicationContext(), "请重新登陆!", Toast.LENGTH_SHORT).show();
                             } else if ("15003".equals(code) || "15002".equals(code)) {
-                                Toast.makeText(getApplicationContext(), R.string.server_error, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), R.string.server_error, Toast.LENGTH_SHORT)
+                                    .show();
                             }
                         }
                     }
@@ -370,10 +379,12 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, H
                 try {
                     Util.unZipFiles(response, Util.getUserRootFile().getAbsolutePath());
                     Util.deleteFile(response);
+                    mProgramMap.put(mModels.get(mCurPosition).appID, mModels.get(mCurPosition));
                     mModels.get(mCurPosition).isLoadZip = true;
                     mAdapter.notifyDataSetChanged();
                     //Toast.makeText(getApplicationContext(), "ZIP解压完成,开始生成Lua!", Toast.LENGTH_SHORT).show();
-                    mModels.get(mCurPosition).home_scence = mHomeScence.getHomeSccence(getApplicationContext(),mModels.get(mCurPosition).appID);
+                    mModels.get(mCurPosition).home_scence = mHomeScence.getHomeSccence(getApplicationContext(),
+                        mModels.get(mCurPosition).appID);
                     // mLoadingLayout.setVisibility(View.GONE);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -434,6 +445,32 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, H
         Util.saveFile(Constans.LOCAL_PROGRAM_LIST, response.toString());
 
         return list;
+    }
+
+    boolean isFirst = true;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (isFirst) {
+                Toast.makeText(getApplicationContext(), "再按一次就退出了!", Toast.LENGTH_SHORT).show();
+                new Thread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(1000);
+                            isFirst = true;
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+                isFirst = false;
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override

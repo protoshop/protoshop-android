@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.Editable;
@@ -14,6 +15,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,6 +63,9 @@ public class SettingActivity extends BaseActivity implements OnClickListener, Te
         mSendView.setOnClickListener(this);
         mShowCountView = (TextView) findViewById(R.id.show_text_count_view);
 
+        /*捐献按钮*/
+        findViewById(R.id.contribute_layout).setOnClickListener(this);
+
         /*登出按钮*/
         ((AnimationButton) findViewById(R.id.logout_btn)).setOnConfirmLisntener(this);
 
@@ -83,6 +88,8 @@ public class SettingActivity extends BaseActivity implements OnClickListener, Te
             dealFeedback(v);
         } else if (v.getId() == R.id.save_nick_name_btn) {
             saveNickName(v);
+        } else if (v.getId() == R.id.contribute_layout) {
+            dealContribute();
         }
     }
 
@@ -209,6 +216,17 @@ public class SettingActivity extends BaseActivity implements OnClickListener, Te
     }
 
     /**
+     * 捐献操作.
+     */
+    private void dealContribute() {
+        Intent intent = new Intent();
+        intent.setAction("android.intent.action.VIEW");
+        Uri content_url = Uri.parse("https://qr.alipay.com/ap27zqsxo3v5q61z1f");
+        intent.setData(content_url);
+        startActivity(intent);
+    }
+
+    /**
      * 
      * 清除缓存并发送清除缓存广播
      * 
@@ -223,7 +241,24 @@ public class SettingActivity extends BaseActivity implements OnClickListener, Te
      * 用户登出
      */
     private void dealLogout() {
-        //CookieManager.getInstance().removeAllCookie();
+        CookieSyncManager syncManager=CookieSyncManager.createInstance(this);
+        syncManager.startSync();
+        CookieManager.getInstance().removeAllCookie();
+        sendGetRequest(Function.LOGINOUT, new HttpCallback() {
+            
+            @Override
+            public void onErrorResponse(VolleyError error) {                
+            }
+            
+            @Override
+            public void onResponse(JSONObject response) {                
+            }
+            
+            @Override
+            public void onHttpStart() {                
+            }
+        });
+
         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(new Intent(Constans.LOGOUT));
         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         SharedPreferences preferences = getSharedPreferences(Constans.USER_INFO, 0);

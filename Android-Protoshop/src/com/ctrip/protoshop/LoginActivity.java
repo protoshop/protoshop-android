@@ -13,13 +13,13 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.NoConnectionError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.ctrip.protoshop.constans.Constans;
 import com.ctrip.protoshop.constans.Function;
@@ -36,6 +36,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Http
     private EditText mNameView;
     private EditText mPswView;
     private TextView mLoginView;
+    private TextView mDomainView;
     private TextView mSignUpView;
 
     private String mNameStr;
@@ -54,7 +55,14 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Http
         mLoginView = (TextView) findViewById(R.id.login_btn_view);
         mSignUpView = (TextView) findViewById(R.id.sign_up_view);
         //域账号登陆
-        findViewById(R.id.domain_btn_view).setOnClickListener(this);
+        mDomainView = (TextView) findViewById(R.id.domain_btn_view);
+        if (Constans.ENVIRONMENT.isNeedDomain()) {
+            mDomainView.setVisibility(View.VISIBLE);
+            mDomainView.setOnClickListener(this);
+        } else {
+            mDomainView.setVisibility(View.GONE);
+            mDomainView.setOnClickListener(null);
+        }
 
         mLoginView.setOnClickListener(this);
         mSignUpView.setOnClickListener(this);
@@ -91,6 +99,11 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Http
             @Override
             public void onErrorResponse(VolleyError error) {
                 ProtoshopLog.e("error", error.toString());
+                if (error instanceof NoConnectionError) {
+                    Toast.makeText(getApplicationContext(), "请连接网络!", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof TimeoutError) {
+                    Toast.makeText(getApplicationContext(), "网络连接超时!", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -261,14 +274,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Http
     @Override
     public void onHttpStart() {
 
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            System.exit(1);
-        }
-        return super.onKeyDown(keyCode, event);
     }
 
     @Override

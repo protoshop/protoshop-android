@@ -4,7 +4,7 @@ import java.io.IOException;
 import org.json.JSONException;
 import android.content.Context;
 import com.ctrip.protoshop.interfaces.IHomeScence;
-import com.protoshop.lua.util.ParseJsonUtil;
+import com.protoshop.lua.util.ParseJsonUtil2;
 
 public class LocalParseHomeScenceImp implements IHomeScence {
 
@@ -12,7 +12,7 @@ public class LocalParseHomeScenceImp implements IHomeScence {
     public String getHomeSccence(Context context, String appID) {
 
         try {
-            return ParseJsonUtil.ParseJson(context, appID);
+            return ParseJsonUtil2.ParseJson(context, appID);
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (IOException e) {

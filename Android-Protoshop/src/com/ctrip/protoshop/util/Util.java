@@ -1,7 +1,6 @@
 package com.ctrip.protoshop.util;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -23,7 +22,6 @@ import java.util.zip.ZipFile;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import com.ctrip.protoshop.ProtoshopApplication;
@@ -100,12 +98,17 @@ public class Util {
                     buffer.append(str);
                     buffer.append("\n");
                 }
+                reader.close();
+                streamReader.close();
+                inputStream.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+          
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+        
         return buffer.toString();
     }
 

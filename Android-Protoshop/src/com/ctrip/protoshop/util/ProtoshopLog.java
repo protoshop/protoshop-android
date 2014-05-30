@@ -1,9 +1,11 @@
 package com.ctrip.protoshop.util;
 
 import android.util.Log;
+import com.ctrip.protoshop.constans.Constans;
 
 public class ProtoshopLog {
-    public static boolean debug = true;
+
+    public static boolean debug = Constans.ENVIRONMENT.isNeedLog();
 
     public static void e(String msg) {
         if (debug) {
