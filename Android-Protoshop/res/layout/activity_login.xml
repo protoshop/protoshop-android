@@ -1,0 +1,131 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/http_async_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_backgroud_shape"
+    tools:context=".LoginActivity" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/_30"
+        android:layout_marginTop="@dimen/_80"
+        android:text="Protoshop"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/LinearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/_10"
+        android:layout_marginLeft="@dimen/_10"
+        android:layout_marginRight="@dimen/_10"
+        android:background="@drawable/white_normal_round_shape"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/login_name_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5"
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="@string/login_name_hint"
+            android:padding="@dimen/_3"
+            android:singleLine="true" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_a3a3a3" />
+
+        <EditText
+            android:id="@+id/login_psw_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5"
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="@string/login_psw_hint"
+            android:inputType="textPassword"
+            android:padding="@dimen/_3"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/login_btn_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/LinearLayout1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/_10"
+        android:layout_marginRight="@dimen/_10"
+        android:background="@drawable/orange_backgroud_shape"
+        android:gravity="center"
+        android:padding="@dimen/_10"
+        android:text="Login"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/domain_btn_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_btn_view"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/_10"
+        android:layout_marginRight="@dimen/_10"
+        android:layout_marginTop="@dimen/_10"
+        android:background="@drawable/orange_backgroud_shape"
+        android:gravity="center"
+        android:padding="@dimen/_10"
+        android:text="域账号登陆"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/sign_up_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/_50"
+        android:padding="@dimen/_20"
+        android:text="Sign Up for Protoshop"
+        android:textColor="@color/blue_3cc2fd" />
+
+    <LinearLayout
+        android:id="@+id/progress_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/progress_drawable"
+            android:indeterminateDuration="1100"
+            android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+            android:progressDrawable="@drawable/progress_icon" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="加载中...."
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="AnimationButton">
+        <attr name="icon_text" format="string|reference" />
+        <attr name="content_text" format="string|reference" />
+        <attr name="animation_text" format="string|reference" />
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="gold">#f5ca01</color>
+    <color name="transparent">#00000000</color>
+    <color name="backgroud_color">#1c252d</color>
+    <color name="gray_9a9a9a">#9a9a9a</color>
+    <color name="gray_e0e0e0">#e0e0e0</color>
+    <color name="gray_cccccc">#cccccc</color>
+    <color name="gray_a3a3a3">#a3a3a3</color>
+    <color name="gray_9fa1a3">#9fa1a3</color>
+    <color name="gray_f0f0f0">#f0f0f0</color>
+    <color name="gray_dddddd">#dddddd</color>
+    <color name="blue_1ba1eb">#1ba1eb</color>
+    <color name="blue_1a6acc">#1a6acc</color>
+    <color name="blue_3cc2fd">#3cc2fd</color>
+    <color name="blue_004db6">#004db6</color>
+    <color name="blue_014eb6">#014eb6</color>
+    <color name="blue_60d3ff">#60d3ff</color>
+    <color name="orange_ff8400">#ff8400</color>
+    <color name="orange_ff8a00">#ff8a00</color>
+    <color name="orange_ffd5b8">#ffd5b8</color>
+    <color name="red_ae7cff">#ae7cff</color>
+    <color name="red_fc3e39">#fc3e39</color>
+    <color name="green_59d56e">#59d56e</color>
+
+</resources>

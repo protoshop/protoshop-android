@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Protoshop</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_splash">Protoshop</string>
+    <string name="title_activity_lua">LuaActivity</string>
+    <string name="title_activity_test">TestActivity</string>
+
+    <!-- Http URL -->
+    <string name="program_list_url">http://protoshop.ctripqa.com/ProtoShop/fetchlist/?device=android</string>
+    <string name="zip_url">http://protoshop.ctripqa.com/ProtoShop/createZip/</string>
+    <string name="lua_url">http://protoshop.ctripqa.com/ProtoShop/wsparserLua/</string>
+    <string name="sign_up_url">http://protoshop.ctripqa.com/ProtoShop/register/</string>
+    <string name="login_url">http://protoshop.ctripqa.com/ProtoShop/login/</string>
+    <string name="changepsw_url">http://protoshop.ctripqa.com/ProtoShop/updatepwd/</string>
+    <string name="feedback_url">http://protoshop.ctripqa.com/ProtoShop/feedback/</string>
+    <string name="userinfo_url">http://protoshop.ctripqa.com/ProtoShop/userinfo/</string>
+    <string name="update_user_info_url">http://protoshop.ctripqa.com/ProtoShop/updateuser/</string>
+    <string name="domain_callback_url">http://protoshop.ctripqa.com/ProtoShop/SSOAuthCallBack/</string>
+    <string name="logout_url">http://protoshop.ctripqa.com/ProtoShop/SSOLogout</string>
+
+    <!-- Test Http URL -->
+    <string name="test_program_list_url">http://protoshop.ctripqa.com/ProtoShop/fetchlist/?device=android</string>
+    <string name="test_zip_url">http://protoshop.ctripqa.com/ProtoShop/createZip/</string>
+    <string name="test_lua_url">http://protoshop.ctripqa.com/ProtoShop/wsparserLua/</string>
+    <string name="test_sign_up_url">http://protoshop.ctripqa.com/ProtoShop/register/</string>
+    <string name="test_login_url">http://protoshop.ctripqa.com/ProtoShop/login/</string>
+    <string name="test_changepsw_url">http://protoshop.ctripqa.com/ProtoShop/updatepwd/</string>
+    <string name="test_feedback_url">http://protoshop.ctripqa.com/ProtoShop/feedback/</string>
+    <string name="test_userinfo_url">http://protoshop.ctripqa.com/ProtoShop/userinfo/</string>
+    <string name="test_update_user_info_url">http://protoshop.ctripqa.com/ProtoShop/updateuser/</string>
+    <string name="test_domain_callback_url">http://protoshop.ctripqa.com/ProtoShop/SSOAuthCallBack/</string>
+    <string name="test_logout_url">http://protoshop.ctripqa.com/ProtoShop/SSOLogout</string>
+
+    <!-- tip -->
+    <string name="program_list_title">土豪项目列表</string>
+    <string name="loading_text">加载中&#8230;</string>
+    <string name="error_text">网络连接错误，请稍后再试!</string>
+    <string name="error_refresh_btn_text">点击刷新</string>
+    <string name="no_content_text">暂无内容!</string>
+
+    <!-- icon-text -->
+    <string name="setting_icon">&#xf013;</string>
+    <string name="reload_right_icon">&#xf01e;</string>
+    <string name="reload_left_icon">&#xf0e2;</string>
+    <string name="arrow_left_icon">&#xf054;</string>
+    <string name="fa_search">&#xf002;</string>
+    <string name="fa_circle">&#xf111;</string>
+    <string name="fa_lock">&#xf023;</string>
+    <string name="fa_angle_left">&#xf104;</string>
+    <string name="fa_user">&#xf007;</string>
+    <string name="fa_envelope">&#xf0e0;</string>
+    <string name="fa_power_off">&#xf011;</string>
+    <string name="fa_list_alt">&#xf022;</string>
+    <string name="fa_bitbucket">&#xf171;</string>
+    <string name="fa_angle_right">&#xf105;</string>
+    <string name="fa_trash_o">&#xf014;</string>
+    <string name="fa_check">&#xf00c;</string>
+
+    <!-- Setting -->
+    <string name="setting_title_text">Setting</string>
+    <!-- error tip -->
+    <string name="server_error">服务器错误，请联系开发人员!</string>
+    <string name="connect_network">请连接网络!</string>
+    <string name="parse_error">解析JSON出错!</string>
+
+    <!-- other -->
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="login_name_hint">Email Address</string>
+    <string name="login_psw_hint">Password</string>
+    <string name="search_hint">Prototype Name</string>
+    <string name="title_activity_register">Register</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="sign_up_text">Sign Up</string>
+    <string name="sign_up_tip_text">By clicking Sign Up, you agree to our Protoshop Terms and that you have read our Privacy Policy, including our Cookie Use. Create your own prototypes and enjoy.</string>
+    <string name="sign_up_btn_text">Sign Up</string>
+    <string name="title_activity_setting">SettingActivity</string>
+    <string name="user_name_hint_text">NickName</string>
+    <string name="setting_text">Protoshop: Prototype+shop, v2.0. This tool allows you to build interactive prototypes. You can quickly incorporate the feedback and create new iterations for quickly retesting.</string>
+    <string name="feed_back_hint_text">Please type your feedback here.</string>
+    <string name="title_activity_change_psw">ChangePswActivity</string>
+    <string name="change_psw_title_text">Change Password</string>
+    <string name="title_activity_domain">DomainActivity</string>
+
+</resources>

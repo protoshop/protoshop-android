@@ -1,0 +1,110 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tohell="http://schemas.android.com/apk/res/com.ctrip.protoshop"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_cccccc"
+    tools:context=".MainActivity" >
+
+    <RelativeLayout
+        android:id="@+id/title_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue_014eb6"
+        android:gravity="right"
+        android:padding="@dimen/_7" >
+
+        <com.ctrip.protoshop.custom.IconView
+            android:id="@+id/title_reload_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/_10"
+            android:layout_toLeftOf="@+id/title_setting_view"
+            android:padding="@dimen/_5"
+            android:text="@string/reload_right_icon"
+            android:textColor="@color/white"
+            android:textSize="23sp" />
+
+        <com.ctrip.protoshop.custom.IconView
+            android:id="@+id/title_setting_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/title_reload_view"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/_5"
+            android:text="@string/setting_icon"
+            android:textColor="@color/white"
+            android:textSize="23sp" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="23sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_view"
+        android:layout_margin="@dimen/_10"
+        android:background="@drawable/search_backgroud_shape"
+        android:padding="@dimen/_5" >
+
+        <com.ctrip.protoshop.custom.IconView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/_5"
+            android:layout_marginRight="@dimen/_5"
+            android:text="@string/fa_search"
+            android:textColor="@color/gray_cccccc"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@+id/textView2"
+            android:background="@null"
+            android:hint="@string/search_hint"
+            android:textColorHint="@color/gray_cccccc" >
+        </EditText>
+    </RelativeLayout>
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/program_expandableListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/search_layout"
+        android:background="@color/white"
+        android:cacheColorHint="@color/transparent"
+        android:divider="@color/gray_e0e0e0"
+        android:dividerHeight="1dp"
+        android:fadingEdge="none"
+        android:fastScrollEnabled="false"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:listSelector="@color/transparent"
+        android:scrollbars="none"
+        tohell:ptrHeaderTextColor="@color/gold" />
+
+    <include
+        android:id="@+id/loading_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        layout="@layout/loading_layout"
+        android:visibility="gone" />
+
+</RelativeLayout>

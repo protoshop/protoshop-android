@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/animation_btn_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/_10"
+    android:layout_marginTop="@dimen/_10"
+    android:background="@drawable/white_gray_line_backgroud"
+    android:gravity="center_vertical" >
+
+    <com.ctrip.protoshop.custom.IconView
+        android:id="@+id/anim_icon_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/anim_content_view"
+        android:layout_alignParentLeft="true"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/_10"
+        android:paddingLeft="@dimen/_15"
+        android:paddingRight="@dimen/_10"
+        android:paddingTop="@dimen/_10"
+        android:text="@string/fa_trash_o"
+        android:textAppearance="@style/text_icon" />
+
+    <TextView
+        android:id="@+id/anim_content_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/anim_icon_view"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/_10"
+        android:paddingRight="@dimen/_10"
+        android:paddingTop="@dimen/_10"
+        android:text="Clear Cache"
+        android:textAppearance="@style/text_000000_20" />
+
+    <TextView
+        android:id="@+id/anim_confirm_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="@color/red_fc3e39"
+        android:gravity="center"
+        android:paddingBottom="@dimen/_10"
+        android:paddingLeft="@dimen/_10"
+        android:paddingRight="@dimen/_10"
+        android:paddingTop="@dimen/_10"
+        android:text="Confirm?"
+        android:textAppearance="@style/text_ffffff_20"
+        android:visibility="visible" />
+
+    <com.ctrip.protoshop.custom.IconView
+        android:id="@+id/anim_result_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/green_round_shape"
+        android:gravity="center"
+        android:padding="@dimen/_5"
+        android:layout_marginRight="@dimen/_5"
+        android:text="@string/fa_check"
+        android:textAppearance="@style/text_ffffff_20"
+        android:visibility="gone" />
+
+</RelativeLayout>

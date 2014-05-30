@@ -1,0 +1,5 @@
+package com.ctrip.protoshop.constans;
+
+public enum Function {
+    SIGN_Up,LOGIN, PROGRAM_LIST, ZIP, LUA,CHANGE_PSW,FEEDBACK,USERINFO,UPDATE_USERINFO,DOMAIN_CALLBACK,LOGINOUT
+}

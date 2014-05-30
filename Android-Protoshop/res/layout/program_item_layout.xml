@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/program_icon_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/_5"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/program_name_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignTop="@+id/program_icon_view"
+        android:layout_toRightOf="@+id/program_icon_view"
+        android:text="TextView"
+        android:textAppearance="@style/text_000000_20" />
+
+    <TextView
+        android:id="@+id/program_comment_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/program_name_view"
+        android:layout_below="@+id/program_name_view"
+        android:text="TextView"
+        android:textColor="@color/gray_9a9a9a" />
+
+    <com.ctrip.protoshop.custom.IconView
+        android:layout_marginLeft="@dimen/_5"
+        android:id="@+id/program_secret_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/program_icon_view"
+        android:layout_toRightOf="@+id/program_name_view"
+        android:text="@string/fa_lock"
+        android:textColor="@color/red_ae7cff"
+        android:textSize="20sp" />
+
+   <com.ctrip.protoshop.custom.IconView
+        android:id="@+id/program_arrow_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/_10"
+        android:text="@string/fa_circle"
+        android:textColor="@color/blue_60d3ff"
+        android:textSize="16sp" />
+
+</RelativeLayout>

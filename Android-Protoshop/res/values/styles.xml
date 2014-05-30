@@ -1,0 +1,50 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light.NoTitleBar"></style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="SplashTheme" parent="AppBaseTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/splash_backgroud_shape</item>
+    </style>
+
+    <style name="text_f5ca01_18">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#f5ca01</item>
+    </style>
+
+    <style name="text_000000_20">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="text_a3a3a3_20">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#a3a3a3</item>
+    </style>
+
+    <style name="text_ffffff_20">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <style name="text_59d56e_20">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#59d56e</item>
+    </style>
+
+    <style name="text_icon">
+        <item name="android:textSize">23sp</item>
+        <item name="android:textColor">@color/gray_9fa1a3</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+</resources>

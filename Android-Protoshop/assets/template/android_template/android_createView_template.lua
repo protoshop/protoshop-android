@@ -1,0 +1,1 @@
+#view=Command:createView(activity,'#type')
