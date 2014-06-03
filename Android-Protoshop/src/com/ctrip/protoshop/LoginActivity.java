@@ -101,6 +101,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Http
 		}
 	}
 
+	//邮箱后缀提示
 	private TextWatcher mNameWatcher = new TextWatcher() {
 
 		@Override
