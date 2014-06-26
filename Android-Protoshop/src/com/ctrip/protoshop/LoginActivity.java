@@ -78,7 +78,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Http
 		mNameView.setAdapter(mEmailAdapter);
 		mNameView.setThreshold(1);
 
-		//mNameView.addTextChangedListener(mNameWatcher);
+		mNameView.addTextChangedListener(mNameWatcher);
 
 	}
 
