@@ -36,6 +36,8 @@ public class Command {
             BitmapDrawable drawable = LuaBitmapUtil.getBitmapDrawable(activity, applicationID, background);
             if (drawable == null) {
                 scenceLayout.setBackgroundColor(Color.WHITE);
+            }else{
+            	scenceLayout.setBackgroundDrawable(drawable);
             }
         }
         activity.setContentView(scenceLayout);
