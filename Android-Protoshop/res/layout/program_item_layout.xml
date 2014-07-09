@@ -31,7 +31,7 @@
         android:text="TextView"
         android:textColor="@color/gray_9a9a9a" />
 
-    <com.ctrip.protoshop.custom.IconView
+    <com.ctrip.protoshop.widget.IconView
         android:layout_marginLeft="@dimen/_5"
         android:id="@+id/program_secret_view"
         android:layout_width="wrap_content"
@@ -42,7 +42,7 @@
         android:textColor="@color/red_ae7cff"
         android:textSize="20sp" />
 
-   <com.ctrip.protoshop.custom.IconView
+   <com.ctrip.protoshop.widget.IconView
         android:id="@+id/program_arrow_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

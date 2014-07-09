@@ -8,7 +8,7 @@
     android:background="@drawable/white_gray_line_backgroud"
     android:gravity="center_vertical" >
 
-    <com.ctrip.protoshop.custom.IconView
+    <com.ctrip.protoshop.widget.IconView
         android:id="@+id/anim_icon_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
         android:textAppearance="@style/text_ffffff_20"
         android:visibility="visible" />
 
-    <com.ctrip.protoshop.custom.IconView
+    <com.ctrip.protoshop.widget.IconView
         android:id="@+id/anim_result_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

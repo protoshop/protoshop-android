@@ -14,7 +14,7 @@
         android:gravity="right"
         android:padding="@dimen/_7" >
 
-        <com.ctrip.protoshop.custom.IconView
+        <com.ctrip.protoshop.widget.IconView
             android:id="@+id/title_reload_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
             android:textColor="@color/white"
             android:textSize="23sp" />
 
-        <com.ctrip.protoshop.custom.IconView
+        <com.ctrip.protoshop.widget.IconView
             android:id="@+id/title_setting_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
         android:background="@drawable/search_backgroud_shape"
         android:padding="@dimen/_5" >
 
-        <com.ctrip.protoshop.custom.IconView
+        <com.ctrip.protoshop.widget.IconView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

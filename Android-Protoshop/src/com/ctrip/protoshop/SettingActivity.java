@@ -23,11 +23,11 @@ import com.android.volley.VolleyError;
 import com.ctrip.protoshop.constans.Constans;
 import com.ctrip.protoshop.constans.Environment;
 import com.ctrip.protoshop.constans.Function;
-import com.ctrip.protoshop.custom.AnimationButton;
-import com.ctrip.protoshop.custom.AnimationButton.OnConfirmLisntener;
 import com.ctrip.protoshop.http.HttpCallback;
 import com.ctrip.protoshop.util.ProtoshopLog;
 import com.ctrip.protoshop.util.Util;
+import com.ctrip.protoshop.widget.AnimationButton;
+import com.ctrip.protoshop.widget.AnimationButton.OnConfirmLisntener;
 
 public class SettingActivity extends BaseActivity implements OnClickListener, TextWatcher, OnConfirmLisntener {
 

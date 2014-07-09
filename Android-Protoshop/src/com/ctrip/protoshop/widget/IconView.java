@@ -1,4 +1,4 @@
-package com.ctrip.protoshop.custom;
+package com.ctrip.protoshop.widget;
 
 import com.ctrip.protoshop.util.Util;
 import android.content.Context;

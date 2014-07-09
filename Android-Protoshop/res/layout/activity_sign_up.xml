@@ -14,7 +14,7 @@
         android:background="@color/blue_014eb6"
         android:padding="@dimen/_7" >
 
-        <com.ctrip.protoshop.custom.IconView
+        <com.ctrip.protoshop.widget.IconView
             android:id="@+id/sign_up_back_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

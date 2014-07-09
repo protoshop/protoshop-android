@@ -17,7 +17,7 @@
 
         <!-- android:text="@string/fa_angle_left" -->
 
-        <com.ctrip.protoshop.custom.IconView
+        <com.ctrip.protoshop.widget.IconView
             android:id="@+id/setting_back_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
                 android:layout_marginTop="@dimen/_20"
                 android:background="@drawable/white_gray_line_backgroud" >
 
-                <com.ctrip.protoshop.custom.IconView
+                <com.ctrip.protoshop.widget.IconView
                     android:id="@+id/textView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                     android:text="admin@ctrip.com"
                     android:textAppearance="@style/text_a3a3a3_20" />
 
-                <com.ctrip.protoshop.custom.IconView
+                <com.ctrip.protoshop.widget.IconView
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -137,7 +137,7 @@
                 android:layout_marginTop="@dimen/_10"
                 android:background="@drawable/white_gray_line_backgroud" >
 
-                <com.ctrip.protoshop.custom.IconView
+                <com.ctrip.protoshop.widget.IconView
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -164,7 +164,7 @@
                     android:text="Change Password"
                     android:textAppearance="@style/text_000000_20" />
 
-                <com.ctrip.protoshop.custom.IconView
+                <com.ctrip.protoshop.widget.IconView
                     android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -179,7 +179,7 @@
                     android:textAppearance="@style/text_icon" />
             </RelativeLayout>
 
-            <com.ctrip.protoshop.custom.AnimationButton
+            <com.ctrip.protoshop.widget.AnimationButton
                 android:id="@+id/clear_cache_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -196,7 +196,7 @@
                 android:background="@drawable/white_gray_line_backgroud"
                 android:gravity="center_vertical" >
 
-                <com.ctrip.protoshop.custom.IconView
+                <com.ctrip.protoshop.widget.IconView
                     android:id="@+id/iconView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -286,7 +286,7 @@
                 android:layout_marginTop="@dimen/_10"
                 android:background="@drawable/white_gray_line_backgroud" >
 
-                <com.ctrip.protoshop.custom.IconView
+                <com.ctrip.protoshop.widget.IconView
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -313,7 +313,7 @@
                     android:text="Buy Me a coffee"
                     android:textAppearance="@style/text_000000_20" />
 
-                <com.ctrip.protoshop.custom.IconView
+                <com.ctrip.protoshop.widget.IconView
                     android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -328,7 +328,7 @@
                     android:textAppearance="@style/text_icon" />
             </RelativeLayout>
 
-            <com.ctrip.protoshop.custom.AnimationButton
+            <com.ctrip.protoshop.widget.AnimationButton
                 android:id="@+id/logout_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

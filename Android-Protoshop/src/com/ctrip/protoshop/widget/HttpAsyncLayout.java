@@ -1,4 +1,4 @@
-package com.ctrip.protoshop.custom;
+package com.ctrip.protoshop.widget;
 
 import org.json.JSONObject;
 import android.content.Context;
