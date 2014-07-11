@@ -52,6 +52,7 @@ import com.protoshop.lua.cache.ScenceCache;
 //import com.protoshop.lua.util.ParseJsonUtil;
 
 public class MainActivity extends BaseActivity implements OnItemClickListener, HttpCallback, OnRefreshListener<ListView>, OnClickListener {
+	private final static String TAG = MainActivity.class.getSimpleName();
 
 	private View mLoadingLayout;
 	private TextView mLoadTipView;
@@ -116,7 +117,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, H
 		mListView = mPullToRefreshListView.getRefreshableView();
 		mListView.setOnItemClickListener(this);
 		mModels = new ArrayList<ProgramModel>();
-		mAdapter = new ProgramAdapter(this,mModels);
+		mAdapter = new ProgramAdapter(this, mModels);
 		mListView.setAdapter(mAdapter);
 
 		mProgramMap = new HashMap<String, ProgramModel>();
@@ -267,9 +268,11 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, H
 			ScenceCache.getInstance().scences.add(model.home_scence);
 			startActivity(intent);
 
-		} else {
+		} else if (!model.isLoading) {
 			mLoadTipView.setText(R.string.loading_text);
 			loadZipInfo(mCurPosition);
+		} else if (model.isLoading) {
+			Toast.makeText(this, "正在下载,请耐心等待!", Toast.LENGTH_SHORT).show();
 		}
 
 	}
@@ -299,15 +302,18 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, H
 	 */
 	private void loadZipInfo(int position) {
 		mCurPosition = position;
+		final ProgramModel programModel = mModels.get(position);
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("appid", mModels.get(position).appID);
+		params.put("appid", programModel.appID);
 		params.put("token", ProtoshopApplication.getInstance().token);
-		ProtoshopLog.e("appId", mModels.get(position).appID);
+		ProtoshopLog.e("appId", programModel.appID);
 		ProtoshopLog.e("token", ProtoshopApplication.getInstance().token);
 		sendPostRequest(Function.ZIP, params, new HttpCallback() {
 
 			@Override
 			public void onErrorResponse(VolleyError error) {
+				programModel.isLoading = false;
+				mAdapter.notifyDataSetChanged();
 				mLoadingLayout.setVisibility(View.GONE);
 				ProtoshopLog.e("error", error.toString());
 				if (error instanceof NoConnectionError) {
@@ -318,6 +324,8 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, H
 			@Override
 			public void onResponse(JSONObject response) {
 				ProtoshopLog.e(response.toString());
+				programModel.isLoading = false;
+				mAdapter.notifyDataSetChanged();
 				try {
 					if (response.has("status")) {
 						String statusStr = response.getString("status");
@@ -328,7 +336,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, H
 							try {
 								model.url = jsonObject.getString("url");
 								Toast.makeText(getApplicationContext(), "获取Zip信息成功,开始下载ZIP文件!", Toast.LENGTH_SHORT).show();
-								loadZipFile(model);
+								loadZipFile(programModel, model);
 							} catch (JSONException e) {
 								e.printStackTrace();
 								mLoadingLayout.setVisibility(View.GONE);
@@ -355,6 +363,8 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, H
 
 			@Override
 			public void onHttpStart() {
+				programModel.isLoading = true;
+				mAdapter.notifyDataSetChanged();
 				mLoadingLayout.setVisibility(View.GONE);
 			}
 		});
@@ -366,11 +376,15 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, H
 	 * 
 	 * @param 压缩包MODEL
 	 */
-	private void loadZipFile(ZipModel model) {
-		FileReuest reuest = new FileReuest(model.url, new Listener<File>() {
+	private void loadZipFile(final ProgramModel programModel, ZipModel model) {
+		programModel.isLoading = true;
+		mAdapter.notifyDataSetChanged();
+		FileReuest request = new FileReuest(model.url, new Listener<File>() {
 
 			@Override
 			public void onResponse(File response) {
+				programModel.isLoading = false;
+				mAdapter.notifyDataSetChanged();
 				Toast.makeText(getApplicationContext(), "Zip下载完成，开始解压!", Toast.LENGTH_SHORT).show();
 				try {
 					Util.unZipFiles(response, Util.getUserRootFile().getAbsolutePath());
@@ -389,12 +403,15 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, H
 
 			@Override
 			public void onErrorResponse(VolleyError arg0) {
+				programModel.isLoading = false;
+				mAdapter.notifyDataSetChanged();
 				mLoadingLayout.setVisibility(View.GONE);
 				Toast.makeText(getApplicationContext(), "获取压缩包失败!", Toast.LENGTH_SHORT).show();
 				ProtoshopLog.e("error", arg0.toString());
 			}
 		});
-		ProtoshopApplication.getInstance().requestQueue.add(reuest);
+		request.setTag(TAG);
+		ProtoshopApplication.getInstance().requestQueue.add(request);
 	}
 
 	/**
@@ -467,6 +484,16 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, H
 			}
 		}
 		return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		ProtoshopApplication.getInstance().requestQueue.cancelAll(TAG);
+		for (ProgramModel model : mModels) {
+			model.isLoading = false;
+		}
+		mAdapter.notifyDataSetChanged();
 	}
 
 	@Override

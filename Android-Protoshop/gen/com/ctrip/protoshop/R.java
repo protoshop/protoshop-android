@@ -2280,14 +2280,15 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int orange_backgroud_shape=0x7f02000c;
         public static final int progress_drawable=0x7f02000d;
         public static final int progress_icon=0x7f02000e;
-        public static final int search_backgroud_shape=0x7f02000f;
-        public static final int splash_backgroud_shape=0x7f020010;
-        public static final int splash_icon=0x7f020011;
-        public static final int tohell=0x7f020012;
-        public static final int white_gray_line_backgroud=0x7f020013;
-        public static final int white_normal_round_shape=0x7f020014;
-        public static final int white_round_shape=0x7f020015;
-        public static final int yellow_item_selector=0x7f020016;
+        public static final int radar=0x7f02000f;
+        public static final int search_backgroud_shape=0x7f020010;
+        public static final int splash_backgroud_shape=0x7f020011;
+        public static final int splash_icon=0x7f020012;
+        public static final int tohell=0x7f020013;
+        public static final int white_gray_line_backgroud=0x7f020014;
+        public static final int white_normal_round_shape=0x7f020015;
+        public static final int white_round_shape=0x7f020016;
+        public static final int yellow_item_selector=0x7f020017;
     }
     public static final class id {
         public static final int LinearLayout1=0x7f06000c;
@@ -2400,6 +2401,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int program_module_layout=0x7f03000e;
         public static final int pull_to_refresh_header_horizontal=0x7f03000f;
         public static final int pull_to_refresh_header_vertical=0x7f030010;
+        public static final int test=0x7f030011;
     }
     public static final class menu {
         public static final int domain=0x7f0b0000;

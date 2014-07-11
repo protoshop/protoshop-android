@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -29,6 +30,7 @@ public class ProgramAdapter extends ProtoshopAdapter {
 			holder = new ViewHolder();
 			convertView = View.inflate(context, R.layout.program_item_layout, null);
 			holder.iconView = (NetworkImageView) convertView.findViewById(R.id.program_icon_view);
+			holder.progressBar = (ProgressBar) convertView.findViewById(R.id.program_progressBar);
 			holder.appNameView = (TextView) convertView.findViewById(R.id.program_name_view);
 			holder.commentView = (TextView) convertView.findViewById(R.id.program_comment_view);
 			holder.isPublicView = (TextView) convertView.findViewById(R.id.program_secret_view);
@@ -44,6 +46,12 @@ public class ProgramAdapter extends ProtoshopAdapter {
 		holder.iconView.setDefaultImageResId(R.drawable.ic_launcher);
 		holder.iconView.setErrorImageResId(R.drawable.ic_launcher);
 		holder.iconView.setImageUrl(model.icon, mImageLoader);
+
+		if (model.isLoading) {
+			holder.progressBar.setVisibility(View.VISIBLE);
+		} else {
+			holder.progressBar.setVisibility(View.GONE);
+		}
 
 		holder.appNameView.setText(model.appName);
 		holder.commentView.setText(model.comment);
@@ -64,6 +72,7 @@ public class ProgramAdapter extends ProtoshopAdapter {
 
 	static class ViewHolder {
 		NetworkImageView iconView;
+		ProgressBar progressBar;
 		TextView appNameView;
 		TextView commentView;
 		TextView isPublicView;

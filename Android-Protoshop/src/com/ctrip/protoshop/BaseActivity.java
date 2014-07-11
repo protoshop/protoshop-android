@@ -24,6 +24,7 @@ import com.ctrip.protoshop.util.ProtoshopLog;
 import com.ctrip.protoshop.util.Util;
 
 public class BaseActivity extends Activity {
+	private final static String TAG = BaseActivity.class.getSimpleName();
 	/**
 	 * 登出广播，Setting页面登出后，进入登陆页面。其他页面自动关闭。
 	 */
@@ -53,6 +54,7 @@ public class BaseActivity extends Activity {
 	public void sendGetRequest(Function function, final HttpCallback callback) {
 		callback.onHttpStart();
 		JsonObjectRequest request = new JsonObjectRequest(Method.GET, HttpUtil.getUrlByFunction(this, function), null, callback, callback);
+		request.setTag(TAG);
 		ProtoshopApplication.getInstance().requestQueue.add(request);
 	}
 
@@ -72,6 +74,7 @@ public class BaseActivity extends Activity {
 		String url = HttpUtil.getUrlByFunction(this, function) + Util.spliceParam(params);
 		ProtoshopLog.e("GET_URL", url);
 		JsonObjectRequest request = new JsonObjectRequest(Method.GET, url, null, callback, callback);
+		request.setTag(TAG);
 		ProtoshopApplication.getInstance().requestQueue.add(request);
 	}
 
@@ -86,6 +89,7 @@ public class BaseActivity extends Activity {
 	public void sendPostRequest(Function function, Map<String, String> postParam, final HttpCallback callback) {
 		callback.onHttpStart();
 		PostRequest request = new PostRequest(HttpUtil.getUrlByFunction(this, function), postParam, callback, callback);
+		request.setTag(TAG);
 		ProtoshopApplication.getInstance().requestQueue.add(request);
 	}
 
@@ -94,6 +98,7 @@ public class BaseActivity extends Activity {
 		CookieRequest request = new CookieRequest(Method.GET, HttpUtil.getUrlByFunction(this, function), null, callback, callback);
 		CookieSyncManager.createInstance(this).sync();
 		request.setCookie(CookieManager.getInstance().getCookie("http://protoshop.ctripqa.com/ProtoShop/SSOLogin"));
+		request.setTag(TAG);
 		ProtoshopApplication.getInstance().requestQueue.add(request);
 	}
 
