@@ -190,16 +190,17 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, O
 	 */
 
 	@Override
-	public void onResponse(JSONObject response) {
+	public void onResponse(String response) {
 		ProtoshopLog.e("into--[onResponse]");
-		ProtoshopLog.e(response.toString());
+		ProtoshopLog.e(response);
 
 		try {
+			JSONObject resultObject = new JSONObject(response);
 			String status;
-			if (response.has("status")) {
-				status = response.getString("status");
-				if ("1".equals(status) && response.has("code")) {
-					String code = response.getString("code");
+			if (resultObject.has("status")) {
+				status = resultObject.getString("status");
+				if ("1".equals(status) && resultObject.has("code")) {
+					String code = resultObject.getString("code");
 					if ("10002".equals(code) || "10003".equals(code)) {
 						mLoadingLayout.setVisibility(View.GONE);
 						LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(Constans.LOGOUT));
@@ -208,8 +209,8 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, O
 						Toast.makeText(getApplicationContext(), "请重新登陆!", Toast.LENGTH_SHORT).show();
 					}
 
-				} else if ("0".equals(status) && response.has("result")) {
-					List<ProgramModel> models = parseResult(response);
+				} else if ("0".equals(status) && resultObject.has("result")) {
+					List<ProgramModel> models = parseResult(resultObject);
 
 					// 服务器获取的列表中是否有本地缓存，如果有本地缓存，并且editTime相同，不用刷新。否则刷新。服务器没有，本地有，默认本地删除。
 					for (ProgramModel programModel : models) {
@@ -322,16 +323,17 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, O
 			}
 
 			@Override
-			public void onResponse(JSONObject response) {
-				ProtoshopLog.e(response.toString());
+			public void onResponse(String response) {
+				ProtoshopLog.e(response);
 				programModel.isLoading = false;
 				mAdapter.notifyDataSetChanged();
 				try {
-					if (response.has("status")) {
-						String statusStr = response.getString("status");
+					JSONObject resultObject = new JSONObject();
+					if (resultObject.has("status")) {
+						String statusStr = resultObject.getString("status");
 						if ("0".equals(statusStr)) {
 							ZipModel model = new ZipModel();
-							JSONArray resultArray = response.getJSONArray("result");
+							JSONArray resultArray = resultObject.getJSONArray("result");
 							JSONObject jsonObject = resultArray.getJSONObject(0);
 							try {
 								model.url = jsonObject.getString("url");
@@ -344,7 +346,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, O
 							}
 
 						} else if ("1".equals(statusStr)) {
-							String code = response.getString("code");
+							String code = resultObject.getString("code");
 							if ("15005".equals(code)) {
 								LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcast(new Intent(Constans.LOGOUT));
 								startActivity(new Intent(getApplicationContext(), LoginActivity.class));
