@@ -13,9 +13,9 @@ import android.widget.TextView;
 import com.android.volley.ParseError;
 import com.android.volley.VolleyError;
 import com.ctrip.protoshop.R;
-import com.ctrip.protoshop.http.HttpCallback;
+import com.ctrip.protoshop.http.OnHttpListener;
 
-public class HttpAsyncLayout extends FrameLayout implements HttpCallback, OnClickListener {
+public class HttpAsyncLayout extends FrameLayout implements OnHttpListener, OnClickListener {
 	private OnHttpAsyncListner onHttpAsyncListner;
 
 	private LinearLayout mProgressLayout;

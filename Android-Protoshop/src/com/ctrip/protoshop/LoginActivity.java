@@ -27,12 +27,12 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.ctrip.protoshop.constans.Constans;
 import com.ctrip.protoshop.constans.Function;
-import com.ctrip.protoshop.http.HttpCallback;
+import com.ctrip.protoshop.http.OnHttpListener;
 import com.ctrip.protoshop.util.MD5Util;
 import com.ctrip.protoshop.util.ProtoshopLog;
 import com.ctrip.protoshop.util.Util;
 
-public class LoginActivity extends BaseActivity implements OnClickListener, HttpCallback {
+public class LoginActivity extends BaseActivity implements OnClickListener, OnHttpListener {
 	private static final int REQUEST_DOMMAIN_CODE = 1111;
 
 	private View mProgressView;
@@ -134,7 +134,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Http
 	 */
 	private void dealDomainLogin() {
 
-		sendGetRequest(Function.DOMAIN_CALLBACK, new HttpCallback() {
+		sendGetRequest(Function.DOMAIN_CALLBACK, new OnHttpListener() {
 
 			@Override
 			public void onErrorResponse(VolleyError error) {

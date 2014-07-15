@@ -35,7 +35,7 @@ import com.ctrip.protoshop.adapter.ProgramAdapter;
 import com.ctrip.protoshop.constans.Constans;
 import com.ctrip.protoshop.constans.Function;
 import com.ctrip.protoshop.http.FileReuest;
-import com.ctrip.protoshop.http.HttpCallback;
+import com.ctrip.protoshop.http.OnHttpListener;
 import com.ctrip.protoshop.interfaces.IHomeScence;
 import com.ctrip.protoshop.interfaces.imp.NetHomeScenceImp;
 import com.ctrip.protoshop.model.ProgramModel;
@@ -51,7 +51,7 @@ import com.protoshop.lua.cache.ScenceCache;
 
 //import com.protoshop.lua.util.ParseJsonUtil;
 
-public class MainActivity extends BaseActivity implements OnItemClickListener, HttpCallback, OnRefreshListener<ListView>, OnClickListener {
+public class MainActivity extends BaseActivity implements OnItemClickListener, OnHttpListener, OnRefreshListener<ListView>, OnClickListener {
 	private final static String TAG = MainActivity.class.getSimpleName();
 
 	private View mLoadingLayout;
@@ -308,7 +308,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, H
 		params.put("token", ProtoshopApplication.getInstance().token);
 		ProtoshopLog.e("appId", programModel.appID);
 		ProtoshopLog.e("token", ProtoshopApplication.getInstance().token);
-		sendPostRequest(Function.ZIP, params, new HttpCallback() {
+		sendPostRequest(Function.ZIP, params, new OnHttpListener() {
 
 			@Override
 			public void onErrorResponse(VolleyError error) {

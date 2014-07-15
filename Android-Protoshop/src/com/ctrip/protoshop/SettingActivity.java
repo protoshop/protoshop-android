@@ -23,7 +23,7 @@ import com.android.volley.VolleyError;
 import com.ctrip.protoshop.constans.Constans;
 import com.ctrip.protoshop.constans.Environment;
 import com.ctrip.protoshop.constans.Function;
-import com.ctrip.protoshop.http.HttpCallback;
+import com.ctrip.protoshop.http.OnHttpListener;
 import com.ctrip.protoshop.util.ProtoshopLog;
 import com.ctrip.protoshop.util.Util;
 import com.ctrip.protoshop.widget.AnimationButton;
@@ -107,7 +107,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener, Te
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("token", ProtoshopApplication.getInstance().token);
 		params.put("nickname", nickName);
-		sendPostRequest(Function.UPDATE_USERINFO, params, new HttpCallback() {
+		sendPostRequest(Function.UPDATE_USERINFO, params, new OnHttpListener() {
 
 			@Override
 			public void onErrorResponse(VolleyError error) {
@@ -178,7 +178,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener, Te
 		postParams.put("content", feedback);
 		postParams.put("source", "2");
 		mFeedbackInputLayout.setVisibility(View.GONE);
-		sendPostRequest(Function.FEEDBACK, postParams, new HttpCallback() {
+		sendPostRequest(Function.FEEDBACK, postParams, new OnHttpListener() {
 
 			@Override
 			public void onErrorResponse(VolleyError error) {
@@ -250,7 +250,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener, Te
 			CookieSyncManager syncManager = CookieSyncManager.createInstance(this);
 			syncManager.startSync();
 			CookieManager.getInstance().removeAllCookie();
-			sendGetRequest(Function.LOGINOUT, new HttpCallback() {
+			sendGetRequest(Function.LOGINOUT, new OnHttpListener() {
 
 				@Override
 				public void onErrorResponse(VolleyError error) {

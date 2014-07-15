@@ -23,12 +23,12 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.ctrip.protoshop.constans.Constans;
 import com.ctrip.protoshop.constans.Function;
-import com.ctrip.protoshop.http.HttpCallback;
+import com.ctrip.protoshop.http.OnHttpListener;
 import com.ctrip.protoshop.util.MD5Util;
 import com.ctrip.protoshop.util.ProtoshopLog;
 import com.ctrip.protoshop.util.Util;
 
-public class SignUpActivity extends BaseActivity implements OnClickListener, HttpCallback, TextWatcher {
+public class SignUpActivity extends BaseActivity implements OnClickListener, OnHttpListener, TextWatcher {
 
     private View mProgressView;
 

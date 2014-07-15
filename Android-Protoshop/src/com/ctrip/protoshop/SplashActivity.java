@@ -14,10 +14,10 @@ import android.text.TextUtils;
 import com.android.volley.VolleyError;
 import com.ctrip.protoshop.constans.Constans;
 import com.ctrip.protoshop.constans.Function;
-import com.ctrip.protoshop.http.HttpCallback;
+import com.ctrip.protoshop.http.OnHttpListener;
 import com.ctrip.protoshop.util.ProtoshopLog;
 
-public class SplashActivity extends BaseActivity implements Callback, HttpCallback {
+public class SplashActivity extends BaseActivity implements Callback, OnHttpListener {
 
 	private static final int DURATION_TIME = 1000;
 	private static final int ANIMATION = 1111;

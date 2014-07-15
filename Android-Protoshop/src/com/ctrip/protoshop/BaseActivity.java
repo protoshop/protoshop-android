@@ -17,7 +17,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.ctrip.protoshop.constans.Constans;
 import com.ctrip.protoshop.constans.Function;
 import com.ctrip.protoshop.http.CookieRequest;
-import com.ctrip.protoshop.http.HttpCallback;
+import com.ctrip.protoshop.http.OnHttpListener;
 import com.ctrip.protoshop.http.HttpUtil;
 import com.ctrip.protoshop.http.PostRequest;
 import com.ctrip.protoshop.util.ProtoshopLog;
@@ -51,7 +51,7 @@ public class BaseActivity extends Activity {
 	 * @param callback
 	 *            :网络回调函数
 	 */
-	public void sendGetRequest(Function function, final HttpCallback callback) {
+	public void sendGetRequest(Function function, final OnHttpListener callback) {
 		callback.onHttpStart();
 		JsonObjectRequest request = new JsonObjectRequest(Method.GET, HttpUtil.getUrlByFunction(this, function), null, callback, callback);
 		request.setTag(TAG);
@@ -69,7 +69,7 @@ public class BaseActivity extends Activity {
 	 * @param callback
 	 *            :网络回调函数
 	 */
-	public void sendGetParamRequest(Function function, Map<String, String> params, final HttpCallback callback) {
+	public void sendGetParamRequest(Function function, Map<String, String> params, final OnHttpListener callback) {
 		callback.onHttpStart();
 		String url = HttpUtil.getUrlByFunction(this, function) + Util.spliceParam(params);
 		ProtoshopLog.e("GET_URL", url);
@@ -86,14 +86,14 @@ public class BaseActivity extends Activity {
 	 * @param postParam
 	 * @param callback
 	 */
-	public void sendPostRequest(Function function, Map<String, String> postParam, final HttpCallback callback) {
+	public void sendPostRequest(Function function, Map<String, String> postParam, final OnHttpListener callback) {
 		callback.onHttpStart();
 		PostRequest request = new PostRequest(HttpUtil.getUrlByFunction(this, function), postParam, callback, callback);
 		request.setTag(TAG);
 		ProtoshopApplication.getInstance().requestQueue.add(request);
 	}
 
-	public void setCookieRequest(Function function, final HttpCallback callback) {
+	public void setCookieRequest(Function function, final OnHttpListener callback) {
 		callback.onHttpStart();
 		CookieRequest request = new CookieRequest(Method.GET, HttpUtil.getUrlByFunction(this, function), null, callback, callback);
 		CookieSyncManager.createInstance(this).sync();

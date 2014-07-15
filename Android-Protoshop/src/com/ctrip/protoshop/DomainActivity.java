@@ -14,7 +14,7 @@ import android.webkit.WebViewClient;
 import com.android.volley.VolleyError;
 import com.ctrip.protoshop.constans.Constans;
 import com.ctrip.protoshop.constans.Function;
-import com.ctrip.protoshop.http.HttpCallback;
+import com.ctrip.protoshop.http.OnHttpListener;
 import com.ctrip.protoshop.util.ProtoshopLog;
 
 public class DomainActivity extends BaseActivity {
@@ -56,7 +56,7 @@ public class DomainActivity extends BaseActivity {
     protected void getUserInfo(String url, String cookieStr) {
         ProtoshopLog.e("into--[getUserInfo]");
 
-        setCookieRequest(Function.DOMAIN_CALLBACK, new HttpCallback() {
+        setCookieRequest(Function.DOMAIN_CALLBACK, new OnHttpListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
