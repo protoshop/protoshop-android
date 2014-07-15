@@ -4,7 +4,7 @@ package com.ctrip.protoshop.constans;
 
 public enum Environment {
 
-    OUTERNET("http://api.protoshop.io", false, false), INNERNET("http://protoshop.ctripqa.com/ProtoShop", false, true),
+    OUTERNET("http://api.protoshop.io", true, false), INNERNET("http://protoshop.ctripqa.com/ProtoShop", false, true),
     TEST("http://protoshop.ctripqa.com/debugProtoShop", true, true);
 
     private String host;
