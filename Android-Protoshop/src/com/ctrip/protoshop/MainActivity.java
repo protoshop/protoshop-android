@@ -379,16 +379,16 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, O
 	private void loadZipFile(final ProgramModel programModel, ZipModel model) {
 		programModel.isLoading = true;
 		mAdapter.notifyDataSetChanged();
-		FileReuest request = new FileReuest(model.url, new Listener<File>() {
+		FileReuest request = new FileReuest(model.url, new Listener<String>() {
 
 			@Override
-			public void onResponse(File response) {
+			public void onResponse(String response) {
 				programModel.isLoading = false;
 				mAdapter.notifyDataSetChanged();
 				Toast.makeText(getApplicationContext(), "Zip下载完成，开始解压!", Toast.LENGTH_SHORT).show();
 				try {
 					Util.unZipFiles(response, Util.getUserRootFile().getAbsolutePath());
-					Util.deleteFile(response);
+					Util.deleteFile(new File(response));
 					mProgramMap.put(mModels.get(mCurPosition).appID, mModels.get(mCurPosition));
 					mModels.get(mCurPosition).isLoadZip = true;
 					mAdapter.notifyDataSetChanged();

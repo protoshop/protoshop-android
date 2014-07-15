@@ -16,10 +16,9 @@ import com.android.volley.Request.Method;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ctrip.protoshop.constans.Constans;
 import com.ctrip.protoshop.constans.Function;
-import com.ctrip.protoshop.http.CookieRequest;
-import com.ctrip.protoshop.http.OnHttpListener;
+import com.ctrip.protoshop.http.AppRequest;
 import com.ctrip.protoshop.http.HttpUtil;
-import com.ctrip.protoshop.http.PostRequest;
+import com.ctrip.protoshop.http.OnHttpListener;
 import com.ctrip.protoshop.util.ProtoshopLog;
 import com.ctrip.protoshop.util.Util;
 
@@ -88,14 +87,14 @@ public class BaseActivity extends Activity {
 	 */
 	public void sendPostRequest(Function function, Map<String, String> postParam, final OnHttpListener callback) {
 		callback.onHttpStart();
-		PostRequest request = new PostRequest(HttpUtil.getUrlByFunction(this, function), postParam, callback, callback);
+		AppRequest request = new AppRequest(HttpUtil.getUrlByFunction(this, function), postParam, callback, callback);
 		request.setTag(TAG);
 		ProtoshopApplication.getInstance().requestQueue.add(request);
 	}
 
 	public void setCookieRequest(Function function, final OnHttpListener callback) {
 		callback.onHttpStart();
-		CookieRequest request = new CookieRequest(Method.GET, HttpUtil.getUrlByFunction(this, function), null, callback, callback);
+		AppRequest request = new AppRequest(Method.GET, HttpUtil.getUrlByFunction(this, function), null, callback, callback);
 		CookieSyncManager.createInstance(this).sync();
 		request.setCookie(CookieManager.getInstance().getCookie("http://protoshop.ctripqa.com/ProtoShop/SSOLogin"));
 		request.setTag(TAG);

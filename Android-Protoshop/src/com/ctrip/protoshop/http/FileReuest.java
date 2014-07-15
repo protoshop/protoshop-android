@@ -15,7 +15,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.ctrip.protoshop.util.Util;
 
-public class FileReuest extends Request<File> {
+public class FileReuest extends Request<String> {
     private static final int FILE_TIME_OUT = 1000;
     private static final int FILE_MAX_RETRIES = 2;
     private static final float FILE_BACKOFF_MULT = 2f;
@@ -24,20 +24,20 @@ public class FileReuest extends Request<File> {
 
     private String defaultZipName = "default.zip";
 
-    private Listener<File> mListener;
+    private Listener<String> mListener;
 
-    public FileReuest(int method, String url, Listener<File> listener, ErrorListener errorListener) {
+    public FileReuest(int method, String url, Listener<String> listener, ErrorListener errorListener) {
         super(method, url, errorListener);
         setRetryPolicy(new DefaultRetryPolicy(FILE_TIME_OUT, FILE_MAX_RETRIES, FILE_BACKOFF_MULT));
         mListener = listener;
     }
 
-    public FileReuest(String url, Response.Listener<File> listener, ErrorListener errorListener) {
+    public FileReuest(String url, Response.Listener<String> listener, ErrorListener errorListener) {
         this(Method.POST, url, listener, errorListener);
     }
 
     @Override
-    protected Response<File> parseNetworkResponse(NetworkResponse response) {
+    protected Response<String> parseNetworkResponse(NetworkResponse response) {
         // Serialize all decode on a global lock to reduce concurrent heap usage.
         synchronized (sDecodeLock) {
             try {
@@ -49,7 +49,7 @@ public class FileReuest extends Request<File> {
         }
     }
 
-    private Response<File> doParse(NetworkResponse response) {
+    private Response<String> doParse(NetworkResponse response) {
         byte[] bytes = response.data;
         File file;
         if (bytes.length > 0) {
@@ -70,11 +70,11 @@ public class FileReuest extends Request<File> {
             VolleyLog.e("Zip File does not exist,url=%s", response.data.length, getUrl());
             return Response.error(new VolleyError("Download the file does not exist!"));
         }
-        return Response.success(file, HttpHeaderParser.parseCacheHeaders(response));
+        return Response.success(file.getAbsolutePath(), HttpHeaderParser.parseCacheHeaders(response));
     }
 
     @Override
-    protected void deliverResponse(File response) {
+    protected void deliverResponse(String response) {
         mListener.onResponse(response);
     }
 
