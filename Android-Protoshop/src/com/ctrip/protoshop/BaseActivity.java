@@ -13,7 +13,6 @@ import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 
 import com.android.volley.Request.Method;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.ctrip.protoshop.constans.Constans;
 import com.ctrip.protoshop.constans.Function;
 import com.ctrip.protoshop.http.AppRequest;
@@ -47,12 +46,12 @@ public class BaseActivity extends Activity {
 	 * 
 	 * @param function
 	 *            :发送请求的功能类型
-	 * @param callback
+	 * @param onHttpListener
 	 *            :网络回调函数
 	 */
-	public void sendGetRequest(Function function, final OnHttpListener callback) {
-		callback.onHttpStart();
-		JsonObjectRequest request = new JsonObjectRequest(Method.GET, HttpUtil.getUrlByFunction(this, function), null, callback, callback);
+	public void sendGetRequest(Function function, final OnHttpListener onHttpListener) {
+		onHttpListener.onHttpStart();
+		AppRequest request = new AppRequest(Method.GET, HttpUtil.getUrlByFunction(this, function), onHttpListener, onHttpListener);
 		request.setTag(TAG);
 		ProtoshopApplication.getInstance().requestQueue.add(request);
 	}
@@ -65,14 +64,14 @@ public class BaseActivity extends Activity {
 	 *            :发送请求的功能类型
 	 * @param params
 	 *            :需要添加的参数
-	 * @param callback
+	 * @param onHttpListener
 	 *            :网络回调函数
 	 */
-	public void sendGetParamRequest(Function function, Map<String, String> params, final OnHttpListener callback) {
-		callback.onHttpStart();
+	public void sendGetParamRequest(Function function, Map<String, String> params, final OnHttpListener onHttpListener) {
+		onHttpListener.onHttpStart();
 		String url = HttpUtil.getUrlByFunction(this, function) + Util.spliceParam(params);
 		ProtoshopLog.e("GET_URL", url);
-		JsonObjectRequest request = new JsonObjectRequest(Method.GET, url, null, callback, callback);
+		AppRequest request = new AppRequest(Method.GET, url, onHttpListener, onHttpListener);
 		request.setTag(TAG);
 		ProtoshopApplication.getInstance().requestQueue.add(request);
 	}
@@ -83,18 +82,18 @@ public class BaseActivity extends Activity {
 	 * 
 	 * @param function
 	 * @param postParam
-	 * @param callback
+	 * @param onHttpListener
 	 */
-	public void sendPostRequest(Function function, Map<String, String> postParam, final OnHttpListener callback) {
-		callback.onHttpStart();
-		AppRequest request = new AppRequest(HttpUtil.getUrlByFunction(this, function), postParam, callback, callback);
+	public void sendPostRequest(Function function, Map<String, String> postParam, final OnHttpListener onHttpListener) {
+		onHttpListener.onHttpStart();
+		AppRequest request = new AppRequest(HttpUtil.getUrlByFunction(this, function), postParam, onHttpListener, onHttpListener);
 		request.setTag(TAG);
 		ProtoshopApplication.getInstance().requestQueue.add(request);
 	}
 
-	public void setCookieRequest(Function function, final OnHttpListener callback) {
-		callback.onHttpStart();
-		AppRequest request = new AppRequest(Method.GET, HttpUtil.getUrlByFunction(this, function), null, callback, callback);
+	public void setCookieRequest(Function function, final OnHttpListener onHttpListener) {
+		onHttpListener.onHttpStart();
+		AppRequest request = new AppRequest(Method.GET, HttpUtil.getUrlByFunction(this, function), onHttpListener, onHttpListener);
 		CookieSyncManager.createInstance(this).sync();
 		request.setCookie(CookieManager.getInstance().getCookie("http://protoshop.ctripqa.com/ProtoShop/SSOLogin"));
 		request.setTag(TAG);
