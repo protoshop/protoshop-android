@@ -64,10 +64,10 @@ public class DomainActivity extends BaseActivity {
             }
 
             @Override
-            public void onResponse(JSONObject response) {
+            public void onResponse(String response) {
                 ProtoshopLog.e("Cookie", response.toString());
                 try {
-                    dealLoginResult(response);
+                    dealLoginResult(new JSONObject(response));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
