@@ -300,7 +300,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, H
 	 * 
 	 * @param position
 	 */
-	private void loadZipInfo(int position) {
+	private synchronized void loadZipInfo(int position) {
 		mCurPosition = position;
 		final ProgramModel programModel = mModels.get(position);
 		Map<String, String> params = new HashMap<String, String>();
