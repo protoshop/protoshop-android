@@ -1,8 +1,10 @@
 package com.ctrip.protoshop;
 
 import java.util.HashMap;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -19,6 +21,7 @@ import android.webkit.CookieSyncManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.VolleyError;
 import com.ctrip.protoshop.constans.Constans;
 import com.ctrip.protoshop.constans.Environment;
@@ -116,16 +119,17 @@ public class SettingActivity extends BaseActivity implements OnClickListener, Te
 			}
 
 			@Override
-			public void onResponse(JSONObject response) {
+			public void onResponse(String response) {
 				try {
-					ProtoshopLog.e(response.toString());
-					if (response.has("status")) {
-						String status = response.getString("status");
+					JSONObject resultObject = new JSONObject(response);
+					ProtoshopLog.e(resultObject.toString());
+					if (resultObject.has("status")) {
+						String status = resultObject.getString("status");
 						if ("0".equals(status)) {
 							Toast.makeText(getApplicationContext(), "修改成功!", Toast.LENGTH_SHORT).show();
 						} else if ("1".equals(status)) {
-							if (response.has("code")) {
-								String errorCode = response.getString("code");
+							if (resultObject.has("code")) {
+								String errorCode = resultObject.getString("code");
 								if ("5002".equals(errorCode)) {
 									dealLogout();
 								} else if ("5003".equals(errorCode)) {
@@ -187,15 +191,16 @@ public class SettingActivity extends BaseActivity implements OnClickListener, Te
 			}
 
 			@Override
-			public void onResponse(JSONObject response) {
-				ProtoshopLog.e(response.toString());
+			public void onResponse(String response) {
+				ProtoshopLog.e(response);
 				try {
+					JSONObject resultObject = new JSONObject(response);
 					String resultStr = "反馈成功!";
-					if (response.has("status")) {
-						String status = response.getString("status");
-						if ("1".equals(status) && response.has("code")) {
+					if (resultObject.has("status")) {
+						String status = resultObject.getString("status");
+						if ("1".equals(status) && resultObject.has("code")) {
 
-							String errorCode = response.getString("code");
+							String errorCode = resultObject.getString("code");
 							if ("13005".equals(errorCode)) {
 								resultStr = "服务器错误!";
 							} else if ("13004".equals(errorCode)) {
@@ -257,7 +262,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener, Te
 				}
 
 				@Override
-				public void onResponse(JSONObject response) {
+				public void onResponse(String response) {
 				}
 
 				@Override
