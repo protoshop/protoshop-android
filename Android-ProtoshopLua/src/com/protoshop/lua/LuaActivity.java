@@ -2,8 +2,10 @@ package com.protoshop.lua;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.keplerproject.luajava.LuaState;
 import org.keplerproject.luajava.LuaStateFactory;
+
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -13,9 +15,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+
 import com.protoshop.lua.Constant.Constants;
 import com.protoshop.lua.cache.ScenceCache;
 import com.protoshop.lua.util.LuaLog;
@@ -50,6 +54,16 @@ public class LuaActivity extends Activity {
 		mScene = intent.getStringExtra(Constants.SCENE);
 		mAppID = intent.getStringExtra(Constants.APPID);
 
+		if (TextUtils.isEmpty(mScene)) {
+			showError("数据解析错误!\n请清除缓存重新下载!");
+			return;
+		}
+
+		if (TextUtils.isEmpty(mAppID)) {
+			showError("数据解析错误!\n请清除缓存重新下载!");
+			return;
+		}
+
 		getWindow().getDecorView().setTag(mScene);
 		List<View> hotViews = new ArrayList<View>();
 		ScenceCache.getInstance().hotMap.put(mScene, hotViews);
@@ -78,12 +92,24 @@ public class LuaActivity extends Activity {
 		LuaLog.e("LuaActivity", "out--[onCreate]");
 	}
 
+	private void showError(String msg) {
+		TextView textView = new TextView(this);
+		textView.setText(msg);
+		textView.setGravity(Gravity.CENTER);
+		textView.setTextColor(Color.RED);
+		textView.setTextSize(20);
+		textView.setBackgroundColor(Color.WHITE);
+		setContentView(textView);
+	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();
-		mLuaState.getField(LuaState.LUA_GLOBALSINDEX, "onResume");
-		mLuaState.pushJavaObject(this);
-		mLuaState.call(1, 0);
+		if (mLuaState != null) {
+			mLuaState.getField(LuaState.LUA_GLOBALSINDEX, "onResume");
+			mLuaState.pushJavaObject(this);
+			mLuaState.call(1, 0);
+		}
 	}
 
 	@Override
@@ -107,9 +133,11 @@ public class LuaActivity extends Activity {
 	protected void onStop() {
 		super.onStop();
 		LuaLog.e("into---[onStop]");
-		mLuaState.getField(LuaState.LUA_GLOBALSINDEX, "onStop");
-		mLuaState.pushJavaObject(this);
-		mLuaState.call(1, 0);
+		if (mLuaState != null) {
+			mLuaState.getField(LuaState.LUA_GLOBALSINDEX, "onStop");
+			mLuaState.pushJavaObject(this);
+			mLuaState.call(1, 0);
+		}
 	}
 
 	// 重写startActivity。查看要启动的Scene是否在缓存中，如果存在判断为返回,Scene上Activity被finish。

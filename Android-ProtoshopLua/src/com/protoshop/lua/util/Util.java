@@ -48,7 +48,7 @@ public class Util {
         }
     }
 
-    public static String readStream(InputStream inputStream) {
+    public static synchronized String readStream(InputStream inputStream) {
 
         StringBuffer buffer = new StringBuffer();
         try {
