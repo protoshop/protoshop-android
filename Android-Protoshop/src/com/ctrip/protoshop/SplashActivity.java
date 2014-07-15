@@ -72,13 +72,15 @@ public class SplashActivity extends BaseActivity implements Callback, OnHttpList
 	 * 网络请求成功回调函数
 	 */
 	@Override
-	public void onResponse(JSONObject response) {
+	public void onResponse(String response) {
+		
 		ProtoshopLog.e(response.toString());
 		try {
-			if (response.has("status")) {
-				String statusStr = response.getString("status");
-				if ("0".equals(statusStr) && response.has("result")) {
-					JSONArray array = response.getJSONArray("result");
+			JSONObject resultObject=new JSONObject(response);
+			if (resultObject.has("status")) {
+				String statusStr = resultObject.getString("status");
+				if ("0".equals(statusStr) && resultObject.has("result")) {
+					JSONArray array = resultObject.getJSONArray("result");
 					JSONObject userObject = array.getJSONObject(0);
 					if (userObject.has("email")) {
 						ProtoshopApplication.getInstance().userInfo.email = userObject.getString("email");
@@ -92,8 +94,8 @@ public class SplashActivity extends BaseActivity implements Callback, OnHttpList
 					startActivity(new Intent(this, MainActivity.class));
 					finish();
 				} else if ("1".equals(statusStr)) {
-					if (response.has("code")) {
-						String code = response.getString("code");
+					if (resultObject.has("code")) {
+						String code = resultObject.getString("code");
 						if ("4001".equals(code) || "4002".equals(code) || "4003".equals(code)) {
 							startActivity(new Intent(this, LoginActivity.class));
 							finish();
