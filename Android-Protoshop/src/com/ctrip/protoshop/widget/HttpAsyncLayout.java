@@ -1,6 +1,5 @@
 package com.ctrip.protoshop.widget;
 
-import org.json.JSONObject;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -10,6 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.android.volley.ParseError;
 import com.android.volley.VolleyError;
 import com.ctrip.protoshop.R;
@@ -22,7 +22,7 @@ public class HttpAsyncLayout extends FrameLayout implements OnHttpListener, OnCl
 	private LinearLayout mErrorLayout;
 
 	public interface OnHttpAsyncListner {
-		public void onSuccessListener(JSONObject response);
+		public void onSuccessListener(String response);
 
 		public void onErrorListener(VolleyError error);
 
@@ -70,7 +70,7 @@ public class HttpAsyncLayout extends FrameLayout implements OnHttpListener, OnCl
 	}
 
 	@Override
-	public void onResponse(JSONObject response) {
+	public void onResponse(String response) {
 		mProgressLayout.setVisibility(View.GONE);
 		mErrorLayout.setVisibility(View.GONE);
 		if (onHttpAsyncListner != null) {
