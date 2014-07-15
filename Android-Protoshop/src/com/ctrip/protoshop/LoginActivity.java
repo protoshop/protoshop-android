@@ -101,7 +101,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, OnHt
 		}
 	}
 
-	//邮箱后缀提示
+	// 邮箱后缀提示
 	private TextWatcher mNameWatcher = new TextWatcher() {
 
 		@Override
@@ -147,18 +147,19 @@ public class LoginActivity extends BaseActivity implements OnClickListener, OnHt
 			}
 
 			@Override
-			public void onResponse(JSONObject response) {
+			public void onResponse(String response) {
 				ProtoshopLog.e("Domain_First", response.toString());
 				try {
-					if (response.has("status")) {
-						String status = response.getString("status");
-						if ("1".equals(status) && response.has("code")) {
-							String code = response.getString("code");
+					JSONObject resultObject = new JSONObject(response);
+					if (resultObject.has("status")) {
+						String status = resultObject.getString("status");
+						if ("1".equals(status) && resultObject.has("code")) {
+							String code = resultObject.getString("code");
 							if ("1002".equals(code)) {
 								startActivityForResult(new Intent(getApplicationContext(), DomainActivity.class), REQUEST_DOMMAIN_CODE);
 							}
 						} else if ("0".equals(status)) {
-							dealLoginResult(response);
+							dealLoginResult(resultObject);
 						}
 					}
 				} catch (JSONException e) {
@@ -225,20 +226,21 @@ public class LoginActivity extends BaseActivity implements OnClickListener, OnHt
 	 * 登陆网络请求回调函数
 	 */
 	@Override
-	public void onResponse(JSONObject response) {
-		ProtoshopLog.e(response.toString());
+	public void onResponse(String response) {
+		ProtoshopLog.e(response);
 		mProgressView.setVisibility(View.GONE);
 		String resultStr = "登陆失败!";
 
 		try {
+			JSONObject resultObject=new JSONObject(response);
 			String status = "";
 
-			if (response.has("status")) {
-				status = response.getString("status");
-				if ("0".equals(status) && response.has("result")) {
-					resultStr = dealLoginResult(response);
-				} else if ("1".equals(status) && response.has("message")) {
-					resultStr = response.getString("message");
+			if (resultObject.has("status")) {
+				status = resultObject.getString("status");
+				if ("0".equals(status) && resultObject.has("result")) {
+					resultStr = dealLoginResult(resultObject);
+				} else if ("1".equals(status) && resultObject.has("message")) {
+					resultStr = resultObject.getString("message");
 				} else {
 					resultStr = "服务器错误，请联系开发人员!";
 				}
