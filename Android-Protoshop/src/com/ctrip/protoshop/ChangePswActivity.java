@@ -1,8 +1,10 @@
 package com.ctrip.protoshop;
 
 import java.util.HashMap;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.android.volley.VolleyError;
 import com.ctrip.protoshop.constans.Constans;
 import com.ctrip.protoshop.constans.Function;
@@ -19,7 +22,7 @@ import com.ctrip.protoshop.util.MD5Util;
 import com.ctrip.protoshop.util.ProtoshopLog;
 import com.ctrip.protoshop.util.Util;
 
-public class ChangePswActivity extends BaseActivity implements OnClickListener, OnHttpListener {
+public class ChangePswActivity extends BaseActivity {
 
 	private View mBackView;
 	private View mSaveView;
@@ -121,42 +124,41 @@ public class ChangePswActivity extends BaseActivity implements OnClickListener, 
 			public void onResponse(String response) {
 				ProtoshopLog.e(response);
 
-//				ProtoshopLog.e(response.toString());
-//				mProgressView.setVisibility(View.GONE);
-//				String resultStr = "修改成功";
-//				try {
-//
-//					String status;
-//					if (response.has("status")) {
-//						status = response.getString("status");
-//						if ("1".equals(status) && response.has("code")) {
-//
-//							String code = response.getString("code");
-//							if ("3002".equals(code)) {
-//								resultStr = "请重新登陆!";
-//								LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(Constans.LOGOUT));
-//								startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-//								finish();
-//							} else if ("3005".equals(code)) {
-//								resultStr = "服务器错误，请稍后再试!";
-//							} else if ("3004".equals(code)) {
-//								resultStr = "旧密码错误!";
-//							} else {
-//								resultStr = "未知错误,请联系开发者!";
-//							}
-//
-//						} else if ("0".equals(status)) {
-//							resultStr = "修改密码成功!";
-//							finish();
-//						}
-//					}
-//				} catch (JSONException e) {
-//					e.printStackTrace();
-//					resultStr = "解析出错!";
-//				}
-//
-//				Toast.makeText(getApplicationContext(), resultStr, Toast.LENGTH_SHORT).show();
-			
+				mProgressView.setVisibility(View.GONE);
+				String resultStr = "修改成功";
+				try {
+					JSONObject resultObject = new JSONObject(response);
+					String status;
+					if (resultObject.has("status")) {
+						status = resultObject.getString("status");
+						if ("1".equals(status) && resultObject.has("code")) {
+
+							String code = resultObject.getString("code");
+							if ("3002".equals(code)) {
+								resultStr = "请重新登陆!";
+								LocalBroadcastManager.getInstance(ChangePswActivity.this).sendBroadcast(new Intent(Constans.LOGOUT));
+								startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+								finish();
+							} else if ("3005".equals(code)) {
+								resultStr = "服务器错误，请稍后再试!";
+							} else if ("3004".equals(code)) {
+								resultStr = "旧密码错误!";
+							} else {
+								resultStr = "未知错误,请联系开发者!";
+							}
+
+						} else if ("0".equals(status)) {
+							resultStr = "修改密码成功!";
+							finish();
+						}
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+					resultStr = "解析出错!";
+				}
+
+				Toast.makeText(getApplicationContext(), resultStr, Toast.LENGTH_SHORT).show();
+
 			}
 
 			@Override
@@ -164,20 +166,6 @@ public class ChangePswActivity extends BaseActivity implements OnClickListener, 
 			}
 		});
 
-	}
-
-	/**
-	 * 修改密码回调函数
-	 */
-	@Override
-	public void onResponse(JSONObject response) {}
-
-	@Override
-	public void onErrorResponse(VolleyError error) {
-	}
-
-	@Override
-	public void onHttpStart() {
 	}
 
 }
