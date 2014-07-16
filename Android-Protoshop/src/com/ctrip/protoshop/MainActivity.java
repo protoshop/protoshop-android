@@ -55,7 +55,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, O
 	private PullToRefreshListView mPullToRefreshListView;
 	private List<ProgramModel> mModels;
 	private List<ProgramModel> mLocalModels;
-	private Map<String, ProgramModel> mProgramMap;
+	private Map<String, ProgramModel> mProgramLoadedMap;
 	private ProgramAdapter mAdapter;
 
 	private boolean isPullRefresh = false;
@@ -72,7 +72,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, O
 		public void onReceive(Context context, Intent intent) {
 			for (ProgramModel model : mModels) {
 				if (!(model.state instanceof NormalState)) {
-					model.state = new NormalState(MainActivity.this, mAdapter, mHomeScence, mProgramMap);
+					model.state = new NormalState(MainActivity.this, mAdapter, mHomeScence, mProgramLoadedMap);
 				}
 			}
 			mAdapter.notifyDataSetChanged();
@@ -116,7 +116,7 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, O
 		mAdapter = new ProgramAdapter(this, mModels);
 		mListView.setAdapter(mAdapter);
 
-		mProgramMap = new HashMap<String, ProgramModel>();
+		mProgramLoadedMap = new HashMap<String, ProgramModel>();
 	}
 
 	/**
@@ -166,9 +166,9 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, O
 					if (nameList.contains(model.appID)) {
 						model.state = new LoadedState(MainActivity.this);
 						model.home_scence = mHomeScence.getHomeSccence(getApplicationContext(), model.appID);
-						mProgramMap.put(model.appID, model);
+						mProgramLoadedMap.put(model.appID, model);
 					} else {
-						model.state = new NormalState(MainActivity.this, mAdapter, mHomeScence, mProgramMap);
+						model.state = new NormalState(MainActivity.this, mAdapter, mHomeScence, mProgramLoadedMap);
 					}
 				}
 
@@ -212,15 +212,15 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, O
 
 					// 服务器获取的列表中是否有本地缓存，如果有本地缓存，并且editTime相同，不用刷新。否则刷新。服务器没有，本地有，默认本地删除。
 					for (ProgramModel programModel : models) {
-						if (mProgramMap.containsKey(programModel.appID)) {
-							if (programModel.editTime.equals(mProgramMap.get(programModel.appID).editTime)) {
-								programModel.home_scence = mProgramMap.get(programModel.appID).home_scence;
+						if (mProgramLoadedMap.containsKey(programModel.appID)) {
+							if (programModel.editTime.equals(mProgramLoadedMap.get(programModel.appID).editTime)) {
+								programModel.home_scence = mProgramLoadedMap.get(programModel.appID).home_scence;
 								programModel.state = new LoadedState(MainActivity.this);
 							} else {
-								programModel.state = new NormalState(MainActivity.this, mAdapter, mHomeScence, mProgramMap);
+								programModel.state = new NormalState(MainActivity.this, mAdapter, mHomeScence, mProgramLoadedMap);
 							}
 						} else {
-							programModel.state = new NormalState(MainActivity.this, mAdapter, mHomeScence, mProgramMap);
+							programModel.state = new NormalState(MainActivity.this, mAdapter, mHomeScence, mProgramLoadedMap);
 						}
 					}
 

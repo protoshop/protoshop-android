@@ -2311,7 +2311,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int disabled=0x7f060000;
         public static final int domain_btn_view=0x7f060022;
         public static final int domain_webView=0x7f06001c;
-        public static final int editText1=0x7f06002b;
         public static final int edite_layout=0x7f060011;
         public static final int error_refresh_btn=0x7f06004c;
         public static final int error_tip_view=0x7f06004b;
@@ -2339,6 +2338,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int program_module_view=0x7f060054;
         public static final int program_name_view=0x7f060050;
         public static final int program_progressBar=0x7f06004d;
+        public static final int program_search_view=0x7f06002b;
         public static final int program_secret_view=0x7f060051;
         public static final int program_view=0x7f060053;
         public static final int progressBar1=0x7f060025;
