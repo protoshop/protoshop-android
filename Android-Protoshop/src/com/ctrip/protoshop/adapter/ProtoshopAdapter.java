@@ -7,12 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-public abstract class ProtoshopAdapter extends BaseAdapter {
+public abstract class ProtoshopAdapter<T> extends BaseAdapter {
 	private Context mContext;
-	private List<?> mList;
+	private List<T> mList;
 
-	public ProtoshopAdapter(Context context, List<?> list) {
+	public ProtoshopAdapter(Context context, List<T> list) {
 		mContext = context;
+		mList = list;
+	}
+
+	public void updateList(List<T> list) {
 		mList = list;
 	}
 

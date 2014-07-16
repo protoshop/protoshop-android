@@ -17,12 +17,15 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,13 +49,15 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 //import com.protoshop.lua.util.ParseJsonUtil;
 
-public class MainActivity extends BaseActivity implements OnItemClickListener, OnHttpListener, OnRefreshListener<ListView>, OnClickListener {
+public class MainActivity extends BaseActivity {
 	private final static String TAG = MainActivity.class.getSimpleName();
 
 	private View mLoadingLayout;
 	private TextView mLoadTipView;
 	private ListView mListView;
 	private PullToRefreshListView mPullToRefreshListView;
+	private EditText mSearchView;
+	private View mDeleteSearchView;
 	private List<ProgramModel> mModels;
 	private List<ProgramModel> mLocalModels;
 	private Map<String, ProgramModel> mProgramLoadedMap;
@@ -79,6 +84,10 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, O
 		}
 	};
 
+	private View mReloadView;
+
+	private View mSettingView;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -95,28 +104,92 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, O
 	}
 
 	private void initUI() {
+
+		mProgramLoadedMap = new HashMap<String, ProgramModel>();
+
 		mLoadingLayout = findViewById(R.id.loading_layout);
 		mLoadTipView = (TextView) mLoadingLayout.findViewById(R.id.program_comment_view);
 
-		findViewById(R.id.title_reload_view).setOnClickListener(this);
-
-		View settingView = findViewById(R.id.title_setting_view);
-		settingView.setOnClickListener(this);
+		mReloadView = findViewById(R.id.title_reload_view);
+		mSettingView = findViewById(R.id.title_setting_view);
 
 		mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.program_expandableListView);
 		mPullToRefreshListView.setMode(Mode.PULL_FROM_START);
-		mPullToRefreshListView.setOnRefreshListener(this);
 		mPullToRefreshListView.getLoadingLayoutProxy().setPullLabel("下拉刷新");
 		mPullToRefreshListView.getLoadingLayoutProxy().setRefreshingLabel("加载中....");
 		mPullToRefreshListView.getLoadingLayoutProxy().setReleaseLabel("释放刷新");
 
 		mListView = mPullToRefreshListView.getRefreshableView();
-		mListView.setOnItemClickListener(this);
 		mModels = new ArrayList<ProgramModel>();
 		mAdapter = new ProgramAdapter(this, mModels);
 		mListView.setAdapter(mAdapter);
 
-		mProgramLoadedMap = new HashMap<String, ProgramModel>();
+		mSearchView = (EditText) findViewById(R.id.program_search_view);
+		mDeleteSearchView=findViewById(R.id.delete_search_view);
+
+		addOnListener();
+	}
+
+	private void addOnListener() {
+		mReloadView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				getProgramsFromService(true);
+			}
+		});
+		mSettingView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(getApplicationContext(), SettingActivity.class));
+			}
+		});
+
+		mSearchView.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				mAdapter.getFilter().filter(s);
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+			}
+		});
+		
+		mDeleteSearchView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mSearchView.setText("");
+			}
+		});
+
+		mListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				ProgramModel model = (ProgramModel) mAdapter.getItem(position - 1);
+				if (model instanceof ProgramModel) {
+					model.state.onItemClick(model);
+				}
+			}
+		});
+		mPullToRefreshListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
+
+			@Override
+			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+				// 发送请求，获取项目列表
+				isPullRefresh = true;
+				getProgramsFromService(false);
+			}
+		});
+
 	}
 
 	/**
@@ -140,7 +213,77 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, O
 		}
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("token", ProtoshopApplication.getInstance().token);
-		sendGetParamRequest(Function.PROGRAM_LIST, params, this);
+		sendGetParamRequest(Function.PROGRAM_LIST, params, new OnHttpListener() {
+
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				ProtoshopLog.e(error.toString());
+				mLoadingLayout.setVisibility(View.GONE);
+			}
+
+			@Override
+			public void onResponse(String response) {
+				ProtoshopLog.e("into--[onResponse]");
+				ProtoshopLog.e(response);
+
+				try {
+					JSONObject resultObject = new JSONObject(response);
+					String status;
+					if (resultObject.has("status")) {
+						status = resultObject.getString("status");
+						if ("1".equals(status) && resultObject.has("code")) {
+							String code = resultObject.getString("code");
+							if ("10002".equals(code) || "10003".equals(code)) {
+								mLoadingLayout.setVisibility(View.GONE);
+								LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcast(new Intent(Constans.LOGOUT));
+								startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+								finish();
+								Toast.makeText(getApplicationContext(), "请重新登陆!", Toast.LENGTH_SHORT).show();
+							}
+
+						} else if ("0".equals(status) && resultObject.has("result")) {
+							List<ProgramModel> models = parseResult(resultObject);
+
+							// 服务器获取的列表中是否有本地缓存，如果有本地缓存，并且editTime相同，不用刷新。否则刷新。服务器没有，本地有，默认本地删除。
+							for (ProgramModel programModel : models) {
+								if (mProgramLoadedMap.containsKey(programModel.appID)) {
+									if (programModel.editTime.equals(mProgramLoadedMap.get(programModel.appID).editTime)) {
+										programModel.home_scence = mProgramLoadedMap.get(programModel.appID).home_scence;
+										programModel.state = new LoadedState(MainActivity.this);
+									} else {
+										programModel.state = new NormalState(MainActivity.this, mAdapter, mHomeScence, mProgramLoadedMap);
+									}
+								} else {
+									programModel.state = new NormalState(MainActivity.this, mAdapter, mHomeScence, mProgramLoadedMap);
+								}
+							}
+
+							mModels.clear();
+							mModels.addAll(models);
+							mAdapter.notifyDataSetChanged();
+							mLoadingLayout.setVisibility(View.GONE);
+							mPullToRefreshListView.onRefreshComplete();
+
+							mPullToRefreshListView.getLoadingLayoutProxy().setLastUpdatedLabel(Util.getTodayDate(new Date()));
+						}
+					} else {
+						Toast.makeText(getApplicationContext(), R.string.server_error, Toast.LENGTH_SHORT).show();
+					}
+
+				} catch (JSONException e) {
+					e.printStackTrace();
+					Toast.makeText(getApplicationContext(), R.string.server_error, Toast.LENGTH_SHORT).show();
+					return;
+				}
+			}
+
+			@Override
+			public void onHttpStart() {
+				if (!isPullRefresh) {
+					mLoadingLayout.setVisibility(View.VISIBLE);
+				}
+			}
+		});
 
 	}
 
@@ -178,109 +321,6 @@ public class MainActivity extends BaseActivity implements OnItemClickListener, O
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-
-	}
-
-	/*
-	 * 获取服务器列表回调函数
-	 * 
-	 * @see com.android.volley.Response.Listener#onResponse(java.lang.Object)
-	 */
-
-	@Override
-	public void onResponse(String response) {
-		ProtoshopLog.e("into--[onResponse]");
-		ProtoshopLog.e(response);
-
-		try {
-			JSONObject resultObject = new JSONObject(response);
-			String status;
-			if (resultObject.has("status")) {
-				status = resultObject.getString("status");
-				if ("1".equals(status) && resultObject.has("code")) {
-					String code = resultObject.getString("code");
-					if ("10002".equals(code) || "10003".equals(code)) {
-						mLoadingLayout.setVisibility(View.GONE);
-						LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(Constans.LOGOUT));
-						startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-						finish();
-						Toast.makeText(getApplicationContext(), "请重新登陆!", Toast.LENGTH_SHORT).show();
-					}
-
-				} else if ("0".equals(status) && resultObject.has("result")) {
-					List<ProgramModel> models = parseResult(resultObject);
-
-					// 服务器获取的列表中是否有本地缓存，如果有本地缓存，并且editTime相同，不用刷新。否则刷新。服务器没有，本地有，默认本地删除。
-					for (ProgramModel programModel : models) {
-						if (mProgramLoadedMap.containsKey(programModel.appID)) {
-							if (programModel.editTime.equals(mProgramLoadedMap.get(programModel.appID).editTime)) {
-								programModel.home_scence = mProgramLoadedMap.get(programModel.appID).home_scence;
-								programModel.state = new LoadedState(MainActivity.this);
-							} else {
-								programModel.state = new NormalState(MainActivity.this, mAdapter, mHomeScence, mProgramLoadedMap);
-							}
-						} else {
-							programModel.state = new NormalState(MainActivity.this, mAdapter, mHomeScence, mProgramLoadedMap);
-						}
-					}
-
-					mModels.clear();
-					mModels.addAll(models);
-					mAdapter.notifyDataSetChanged();
-					mLoadingLayout.setVisibility(View.GONE);
-					mPullToRefreshListView.onRefreshComplete();
-
-					mPullToRefreshListView.getLoadingLayoutProxy().setLastUpdatedLabel(Util.getTodayDate(new Date()));
-				}
-			} else {
-				Toast.makeText(getApplicationContext(), R.string.server_error, Toast.LENGTH_SHORT).show();
-			}
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-			Toast.makeText(getApplicationContext(), R.string.server_error, Toast.LENGTH_SHORT).show();
-			return;
-		}
-	}
-
-	@Override
-	public void onErrorResponse(VolleyError error) {
-		ProtoshopLog.e(error.toString());
-		mLoadingLayout.setVisibility(View.GONE);
-	}
-
-	@Override
-	public void onHttpStart() {
-		if (!isPullRefresh) {
-			mLoadingLayout.setVisibility(View.VISIBLE);
-		}
-	}
-
-	/**
-	 * 列表点击回调
-	 */
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		ProgramModel model = (ProgramModel) mAdapter.getItem(position - 1);
-		if (model instanceof ProgramModel) {
-			model.state.onItemClick(model);
-		}
-	}
-
-	@Override
-	public void onClick(View v) {
-		if (v.getId() == R.id.title_setting_view) {
-			startActivity(new Intent(getApplicationContext(), SettingActivity.class));
-		} else if (v.getId() == R.id.title_reload_view) {
-			getProgramsFromService(true);
-		}
-	}
-
-	@Override
-	public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-		// 发送请求，获取项目列表
-		isPullRefresh = true;
-		getProgramsFromService(false);
 
 	}
 
