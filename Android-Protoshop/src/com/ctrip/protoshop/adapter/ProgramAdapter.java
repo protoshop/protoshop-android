@@ -32,6 +32,12 @@ public class ProgramAdapter extends ProtoshopAdapter<ProgramModel> implements Fi
 		mImageLoader = new ImageLoader(ProtoshopApplication.getInstance().requestQueue, new BitmapCache());
 	}
 
+	public void notifyDataSetChanged(List<ProgramModel> programModels) {
+		mOriginalValues=null;
+		updateList(programModels);
+		notifyDataSetInvalidated();
+	}
+
 	@Override
 	public View getView(int position, View convertView, Context context) {
 		ViewHolder holder;

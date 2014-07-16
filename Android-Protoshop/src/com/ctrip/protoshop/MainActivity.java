@@ -260,7 +260,7 @@ public class MainActivity extends BaseActivity {
 
 							mModels.clear();
 							mModels.addAll(models);
-							mAdapter.notifyDataSetChanged();
+							mAdapter.notifyDataSetChanged(mModels);
 							mLoadingLayout.setVisibility(View.GONE);
 							mPullToRefreshListView.onRefreshComplete();
 
@@ -317,6 +317,7 @@ public class MainActivity extends BaseActivity {
 
 				mModels.clear();
 				mModels.addAll(mLocalModels);
+				mAdapter.notifyDataSetChanged(mModels);
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
