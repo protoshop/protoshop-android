@@ -28,20 +28,8 @@ public class ProgramAdapter extends ProtoshopAdapter<ProgramModel> implements Fi
 
 	public ProgramAdapter(Context context, List<ProgramModel> list) {
 		super(context, list);
-		mObjects=list;
+		mObjects = list;
 		mImageLoader = new ImageLoader(ProtoshopApplication.getInstance().requestQueue, new BitmapCache());
-	}
-
-	@Override
-	public void notifyDataSetChanged() {
-		updateList(mObjects);
-		super.notifyDataSetChanged();
-	}
-
-	@Override
-	public void notifyDataSetInvalidated() {
-		updateList(mObjects);
-		super.notifyDataSetInvalidated();
 	}
 
 	@Override
@@ -159,11 +147,11 @@ public class ProgramAdapter extends ProtoshopAdapter<ProgramModel> implements Fi
 		@SuppressWarnings("unchecked")
 		@Override
 		protected void publishResults(CharSequence constraint, FilterResults results) {
-			mObjects = (List<ProgramModel>) results.values;
-			if (results.count > 0) {
+			List<ProgramModel> resultModels = (List<ProgramModel>) results.values;
+			if (resultModels != null) {
+				mObjects.clear();
+				mObjects.addAll(resultModels);
 				notifyDataSetChanged();
-			} else {
-				notifyDataSetInvalidated();
 			}
 		}
 	}
