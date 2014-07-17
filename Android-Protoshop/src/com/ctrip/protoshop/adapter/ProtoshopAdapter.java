@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 public abstract class ProtoshopAdapter<T> extends BaseAdapter {
-	private Context mContext;
-	private List<T> mList;
+	public Context mContext;
+	public List<T> mList;
 
 	public ProtoshopAdapter(Context context, List<T> list) {
 		mContext = context;

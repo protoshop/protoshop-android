@@ -23,18 +23,15 @@ public class ProgramAdapter extends ProtoshopAdapter<ProgramModel> implements Fi
 
 	private ImageLoader mImageLoader;
 	private List<ProgramModel> mOriginalValues;
-	private List<ProgramModel> mObjects;
 	private ProgramFilter mFilter;
 
 	public ProgramAdapter(Context context, List<ProgramModel> list) {
 		super(context, list);
-		mObjects = list;
 		mImageLoader = new ImageLoader(ProtoshopApplication.getInstance().requestQueue, new BitmapCache());
 	}
 
 	public void notifyDataSetChanged(List<ProgramModel> programModels) {
 		mOriginalValues=null;
-		updateList(programModels);
 		notifyDataSetInvalidated();
 	}
 
@@ -100,7 +97,7 @@ public class ProgramAdapter extends ProtoshopAdapter<ProgramModel> implements Fi
 
 			if (mOriginalValues == null) {
 				synchronized (mLock) {
-					mOriginalValues = new ArrayList<ProgramModel>(mObjects);
+					mOriginalValues = new ArrayList<ProgramModel>(mList);
 				}
 			}
 
@@ -155,8 +152,8 @@ public class ProgramAdapter extends ProtoshopAdapter<ProgramModel> implements Fi
 		protected void publishResults(CharSequence constraint, FilterResults results) {
 			List<ProgramModel> resultModels = (List<ProgramModel>) results.values;
 			if (resultModels != null) {
-				mObjects.clear();
-				mObjects.addAll(resultModels);
+				mList.clear();
+				mList.addAll(resultModels);
 				notifyDataSetChanged();
 			}
 		}
