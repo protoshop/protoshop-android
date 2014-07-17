@@ -35,12 +35,13 @@ import com.ctrip.protoshop.http.OnHttpListener;
 import com.ctrip.protoshop.util.MD5Util;
 import com.ctrip.protoshop.util.ProtoshopLog;
 import com.ctrip.protoshop.util.Util;
+import com.ctrip.protoshop.widget.HttpAsyncLayout;
+import com.ctrip.protoshop.widget.HttpAsyncLayout.OnHttpAsyncListner;
 
 public class LoginActivity extends BaseActivity {
 	private static final int REQUEST_DOMMAIN_CODE = 1111;
 
-	private View mProgressView;
-
+	private HttpAsyncLayout mAsyncLayout;
 	private AutoCompleteTextView mNameView;
 	private EditText mPswView;
 	private TextView mLoginView;
@@ -62,7 +63,7 @@ public class LoginActivity extends BaseActivity {
 	}
 
 	private void initUI() {
-		mProgressView = findViewById(R.id.progress_layout);
+		mAsyncLayout = (HttpAsyncLayout) findViewById(R.id.http_async_layout);
 
 		mNameView = (AutoCompleteTextView) findViewById(R.id.login_name_view);
 		mEmailAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line);
@@ -79,6 +80,32 @@ public class LoginActivity extends BaseActivity {
 	}
 
 	private void addOnListener() {
+		mAsyncLayout.setOnHttpAsyncListner(new OnHttpAsyncListner() {
+
+			@Override
+			public void onSuccessListener(String response) {
+				loginSuccess(response);
+			}
+
+			@Override
+			public void onRefreshListener() {
+			}
+
+			@Override
+			public void onErrorListener(VolleyError error) {
+				ProtoshopLog.e("error", error.toString());
+				Toast.makeText(getApplicationContext(), "网络错误稍后再试!", Toast.LENGTH_SHORT).show();
+				if (error instanceof NoConnectionError && Constans.ENVIRONMENT.equals(Environment.INNERNET)) {
+					new AlertDialog.Builder(LoginActivity.this).setTitle("网络错误").setMessage("请连接DEV!").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					}).show();
+				}
+			}
+		});
 		if (Constans.ENVIRONMENT.isNeedDomain()) {
 			mDomainView.setVisibility(View.VISIBLE);
 			mDomainView.setOnClickListener(new OnClickListener() {
@@ -109,6 +136,34 @@ public class LoginActivity extends BaseActivity {
 		});
 
 		mNameView.addTextChangedListener(mNameWatcher);
+	}
+
+	protected void loginSuccess(String response) {
+		ProtoshopLog.e(response);
+		String resultStr = "登陆失败!";
+
+		try {
+			JSONObject resultObject = new JSONObject(response);
+			String status = "";
+
+			if (resultObject.has("status")) {
+				status = resultObject.getString("status");
+				if ("0".equals(status) && resultObject.has("result")) {
+					resultStr = dealLoginResult(resultObject);
+				} else if ("1".equals(status) && resultObject.has("message")) {
+					resultStr = resultObject.getString("message");
+				} else {
+					resultStr = "服务器错误，请联系开发人员!";
+				}
+			}
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+			resultStr = "服务器返回错误!";
+		}
+
+		Toast.makeText(getApplicationContext(), resultStr, Toast.LENGTH_SHORT).show();
+
 	}
 
 	@Override
@@ -225,66 +280,13 @@ public class LoginActivity extends BaseActivity {
 			Toast.makeText(getApplicationContext(), "请输入密码", Toast.LENGTH_SHORT).show();
 			return;
 		}
-		mProgressView.setVisibility(View.VISIBLE);
 		Util.hideSoftkeyboard(getApplicationContext(), mLoginView);
 
 		HashMap<String, String> postParams = new HashMap<String, String>();
 		postParams.put("email", mNameStr);
 		postParams.put("passwd", MD5Util.getMd5(mPswStr));
 
-		sendPostRequest(Function.LOGIN, postParams, new OnHttpListener() {
-
-			@Override
-			public void onErrorResponse(VolleyError error) {
-				ProtoshopLog.e("error", error.toString());
-				mProgressView.setVisibility(View.GONE);
-				Toast.makeText(getApplicationContext(), "网络错误稍后再试!", Toast.LENGTH_SHORT).show();
-				if (error instanceof NoConnectionError && Constans.ENVIRONMENT.equals(Environment.INNERNET)) {
-					new AlertDialog.Builder(LoginActivity.this).setTitle("网络错误").setMessage("请连接DEV!").setPositiveButton("确定", new DialogInterface.OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.dismiss();
-						}
-					}).show();
-				}
-			}
-
-			@Override
-			public void onResponse(String response) {
-				ProtoshopLog.e(response);
-				mProgressView.setVisibility(View.GONE);
-				String resultStr = "登陆失败!";
-
-				try {
-					JSONObject resultObject = new JSONObject(response);
-					String status = "";
-
-					if (resultObject.has("status")) {
-						status = resultObject.getString("status");
-						if ("0".equals(status) && resultObject.has("result")) {
-							resultStr = dealLoginResult(resultObject);
-						} else if ("1".equals(status) && resultObject.has("message")) {
-							resultStr = resultObject.getString("message");
-						} else {
-							resultStr = "服务器错误，请联系开发人员!";
-						}
-					}
-
-				} catch (JSONException e) {
-					e.printStackTrace();
-					resultStr = "服务器返回错误!";
-				}
-
-				Toast.makeText(getApplicationContext(), resultStr, Toast.LENGTH_SHORT).show();
-
-			}
-
-			@Override
-			public void onHttpStart() {
-
-			}
-		});
+		sendPostRequest(Function.LOGIN, postParams, mAsyncLayout);
 
 	}
 

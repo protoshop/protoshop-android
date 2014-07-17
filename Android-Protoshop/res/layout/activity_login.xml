@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/http_async_layout"
+    xmlns:protoshop="http://schemas.android.com/apk/res/com.ctrip.protoshop"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login_backgroud_shape"
@@ -102,26 +102,11 @@
         android:text="Sign Up for Protoshop"
         android:textColor="@color/blue_3cc2fd" />
 
-    <LinearLayout
-        android:id="@+id/progress_layout"
+    <com.ctrip.protoshop.widget.HttpAsyncLayout
+        android:id="@+id/http_async_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone" >
-
-        <ProgressBar
-            android:id="@+id/progressBar1"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="加载中...."
-            android:textColor="@color/white" />
-    </LinearLayout>
+        protoshop:only_progressbar="true" >
+    </com.ctrip.protoshop.widget.HttpAsyncLayout>
 
 </RelativeLayout>
