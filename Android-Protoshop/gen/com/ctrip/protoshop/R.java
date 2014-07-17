@@ -2332,7 +2332,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int current_psw_view=0x7f060015;
         public static final int delete_search_view=0x7f06002a;
         public static final int disabled=0x7f060000;
-        public static final int domain_btn_view=0x7f060022;
+        public static final int domain_btn_view=0x7f060021;
         public static final int domain_webView=0x7f06001c;
         public static final int edite_layout=0x7f060011;
         public static final int error_refresh_btn=0x7f060051;
@@ -2344,15 +2344,15 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int fl_inner=0x7f06005a;
         public static final int flip=0x7f060008;
         public static final int gridview=0x7f060009;
-        public static final int http_async_layout=0x7f06001d;
+        public static final int http_async_layout=0x7f060023;
         public static final int http_error_tip_view=0x7f06004c;
         public static final int http_progress_tip_view=0x7f06004f;
         public static final int http_refresh_view=0x7f06004d;
         public static final int iconView=0x7f060035;
         public static final int loading_layout=0x7f06002c;
-        public static final int login_btn_view=0x7f060021;
-        public static final int login_name_view=0x7f06001e;
-        public static final int login_psw_view=0x7f060020;
+        public static final int login_btn_view=0x7f060020;
+        public static final int login_name_view=0x7f06001d;
+        public static final int login_psw_view=0x7f06001f;
         public static final int logout_btn=0x7f06003d;
         public static final int manualOnly=0x7f060004;
         public static final int new_psw_view=0x7f060018;
@@ -2393,7 +2393,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int sign_up_back_view=0x7f06003f;
         public static final int sign_up_btn_view=0x7f060042;
         public static final int sign_up_psw_view=0x7f060041;
-        public static final int sign_up_view=0x7f060023;
+        public static final int sign_up_view=0x7f060022;
         public static final int tag=0x7f060037;
         public static final int test_progress=0x7f060046;
         public static final int textView1=0x7f060017;
@@ -2407,7 +2407,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int title_reload_view=0x7f060026;
         public static final int title_setting_view=0x7f060027;
         public static final int title_view=0x7f060025;
-        public static final int view1=0x7f06001f;
+        public static final int view1=0x7f06001e;
         public static final int webview=0x7f06000a;
     }
     public static final class layout {

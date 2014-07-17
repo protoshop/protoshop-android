@@ -1,112 +1,112 @@
-<com.ctrip.protoshop.widget.HttpAsyncLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:protoshop="http://schemas.android.com/apk/res/com.ctrip.protoshop"
-    android:id="@+id/http_async_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    protoshop:only_progressbar="true"
+    android:background="@drawable/login_backgroud_shape"
     tools:context=".LoginActivity" >
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/_30"
+        android:layout_marginTop="@dimen/_80"
+        android:text="Protoshop"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/LinearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/_10"
+        android:layout_marginLeft="@dimen/_10"
+        android:layout_marginRight="@dimen/_10"
+        android:background="@drawable/white_normal_round_shape"
+        android:orientation="vertical" >
+
+        <AutoCompleteTextView
+            android:id="@+id/login_name_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5"
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="@string/login_name_hint"
+            android:padding="@dimen/_3"
+            android:singleLine="true" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_a3a3a3" />
+
+        <EditText
+            android:id="@+id/login_psw_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5"
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="@string/login_psw_hint"
+            android:inputType="textPassword"
+            android:padding="@dimen/_3"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/login_btn_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/LinearLayout1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/_10"
+        android:layout_marginRight="@dimen/_10"
+        android:background="@drawable/orange_backgroud_shape"
+        android:gravity="center"
+        android:padding="@dimen/_10"
+        android:text="Login"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/domain_btn_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_btn_view"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/_10"
+        android:layout_marginRight="@dimen/_10"
+        android:layout_marginTop="@dimen/_10"
+        android:background="@drawable/orange_backgroud_shape"
+        android:gravity="center"
+        android:padding="@dimen/_10"
+        android:text="域账号登录"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/sign_up_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/_50"
+        android:padding="@dimen/_20"
+        android:text="Sign Up for Protoshop"
+        android:textColor="@color/blue_3cc2fd" />
+
+    <com.ctrip.protoshop.widget.HttpAsyncLayout
+        android:id="@+id/http_async_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/login_backgroud_shape" >
+        protoshop:only_progressbar="true" >
+    </com.ctrip.protoshop.widget.HttpAsyncLayout>
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/_30"
-            android:layout_marginTop="@dimen/_80"
-            android:text="Protoshop"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:id="@+id/LinearLayout1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView1"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/_10"
-            android:layout_marginLeft="@dimen/_10"
-            android:layout_marginRight="@dimen/_10"
-            android:background="@drawable/white_normal_round_shape"
-            android:orientation="vertical" >
-
-            <AutoCompleteTextView
-                android:id="@+id/login_name_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_5"
-                android:background="@color/white"
-                android:ems="10"
-                android:hint="@string/login_name_hint"
-                android:padding="@dimen/_3"
-                android:singleLine="true" />
-
-            <View
-                android:id="@+id/view1"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_a3a3a3" />
-
-            <EditText
-                android:id="@+id/login_psw_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_5"
-                android:background="@color/white"
-                android:ems="10"
-                android:hint="@string/login_psw_hint"
-                android:inputType="textPassword"
-                android:padding="@dimen/_3"
-                android:singleLine="true" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/login_btn_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/LinearLayout1"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="@dimen/_10"
-            android:layout_marginRight="@dimen/_10"
-            android:background="@drawable/orange_backgroud_shape"
-            android:gravity="center"
-            android:padding="@dimen/_10"
-            android:text="Login"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/domain_btn_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/login_btn_view"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="@dimen/_10"
-            android:layout_marginRight="@dimen/_10"
-            android:layout_marginTop="@dimen/_10"
-            android:background="@drawable/orange_backgroud_shape"
-            android:gravity="center"
-            android:padding="@dimen/_10"
-            android:text="域账号登录"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/sign_up_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/_50"
-            android:padding="@dimen/_20"
-            android:text="Sign Up for Protoshop"
-            android:textColor="@color/blue_3cc2fd" />
-    </RelativeLayout>
-
-</com.ctrip.protoshop.widget.HttpAsyncLayout>
+</RelativeLayout>
