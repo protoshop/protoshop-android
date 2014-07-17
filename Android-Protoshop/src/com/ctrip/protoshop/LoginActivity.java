@@ -93,17 +93,7 @@ public class LoginActivity extends BaseActivity {
 
 			@Override
 			public void onErrorListener(VolleyError error) {
-				ProtoshopLog.e("error", error.toString());
-				Toast.makeText(getApplicationContext(), "网络错误稍后再试!", Toast.LENGTH_SHORT).show();
-				if (error instanceof NoConnectionError && Constans.ENVIRONMENT.equals(Environment.INNERNET)) {
-					new AlertDialog.Builder(LoginActivity.this).setTitle("网络错误").setMessage("请连接DEV!").setPositiveButton("确定", new DialogInterface.OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.dismiss();
-						}
-					}).show();
-				}
+				loginError(error);
 			}
 		});
 		if (Constans.ENVIRONMENT.isNeedDomain()) {
@@ -166,14 +156,25 @@ public class LoginActivity extends BaseActivity {
 
 	}
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == REQUEST_DOMMAIN_CODE && resultCode == RESULT_OK) {
-			finish();
+	protected void loginError(VolleyError error) {
+		ProtoshopLog.e("error", error.toString());
+		Toast.makeText(getApplicationContext(), "网络错误稍后再试!", Toast.LENGTH_SHORT).show();
+		if (error instanceof NoConnectionError && Constans.ENVIRONMENT.equals(Environment.INNERNET)) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+			builder.setTitle("网络错误");
+			builder.setMessage("请连接DEV!");
+			builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+			});
+			builder.show();
 		}
 	}
 
-	// 邮箱后缀提示
+	// 自动添加邮箱后缀
 	private TextWatcher mNameWatcher = new TextWatcher() {
 
 		@Override
@@ -326,6 +327,13 @@ public class LoginActivity extends BaseActivity {
 		}
 
 		return resultStr;
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == REQUEST_DOMMAIN_CODE && resultCode == RESULT_OK) {
+			finish();
+		}
 	}
 
 	@Override
