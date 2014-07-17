@@ -30,11 +30,31 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
          */
         public static final int content_text=0x7f010014;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int error_layout=0x7f010016;
         /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
          */
         public static final int icon_text=0x7f010013;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int no_data_layout=0x7f010018;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int only_progressbar=0x7f010019;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int progress_layout=0x7f010017;
         /**  BELOW HERE ARE DEPRECEATED. DO NOT USE. 
          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -2293,7 +2313,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class id {
         public static final int LinearLayout1=0x7f06000c;
         public static final int RelativeLayout1=0x7f06000d;
-        public static final int action_settings=0x7f06005b;
+        public static final int action_settings=0x7f060060;
         public static final int anim_confirm_view=0x7f06004a;
         public static final int anim_content_view=0x7f060049;
         public static final int anim_icon_view=0x7f060048;
@@ -2313,16 +2333,20 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int domain_btn_view=0x7f060022;
         public static final int domain_webView=0x7f06001c;
         public static final int edite_layout=0x7f060011;
-        public static final int error_refresh_btn=0x7f06004d;
-        public static final int error_tip_view=0x7f06004c;
+        public static final int error_refresh_btn=0x7f060052;
+        public static final int error_tip_view=0x7f060051;
         public static final int feedback_editText=0x7f06003b;
         public static final int feedback_input_layout=0x7f06003a;
         public static final int feedback_layout=0x7f060036;
         public static final int feedback_send_view=0x7f06003c;
-        public static final int fl_inner=0x7f060056;
+        public static final int fl_inner=0x7f06005b;
         public static final int flip=0x7f060008;
         public static final int gridview=0x7f060009;
         public static final int http_async_layout=0x7f06001d;
+        public static final int http_error_tip_view=0x7f06004c;
+        public static final int http_progressBar=0x7f06004f;
+        public static final int http_progress_tip_view=0x7f060050;
+        public static final int http_refresh_view=0x7f06004d;
         public static final int iconView=0x7f060037;
         public static final int loading_layout=0x7f06002e;
         public static final int login_btn_view=0x7f060021;
@@ -2332,16 +2356,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int manualOnly=0x7f060004;
         public static final int new_psw_view=0x7f060018;
         public static final int nick_name_view=0x7f060033;
-        public static final int program_arrow_view=0x7f060053;
-        public static final int program_comment_view=0x7f06004f;
+        public static final int no_data_tip_view=0x7f06004e;
+        public static final int program_arrow_view=0x7f060058;
+        public static final int program_comment_view=0x7f060054;
         public static final int program_expandableListView=0x7f06002d;
-        public static final int program_icon_view=0x7f060050;
-        public static final int program_module_view=0x7f060055;
-        public static final int program_name_view=0x7f060051;
-        public static final int program_progressBar=0x7f06004e;
+        public static final int program_icon_view=0x7f060055;
+        public static final int program_module_view=0x7f06005a;
+        public static final int program_name_view=0x7f060056;
+        public static final int program_progressBar=0x7f060053;
         public static final int program_search_view=0x7f06002b;
-        public static final int program_secret_view=0x7f060052;
-        public static final int program_view=0x7f060054;
+        public static final int program_secret_view=0x7f060057;
+        public static final int program_view=0x7f060059;
         public static final int progressBar1=0x7f060025;
         public static final int progress_layout=0x7f060024;
         public static final int psw_layout=0x7f060012;
@@ -2349,10 +2374,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int pullFromEnd=0x7f060002;
         public static final int pullFromStart=0x7f060001;
         public static final int pullUpFromBottom=0x7f060006;
-        public static final int pull_to_refresh_image=0x7f060057;
-        public static final int pull_to_refresh_progress=0x7f060058;
-        public static final int pull_to_refresh_sub_text=0x7f06005a;
-        public static final int pull_to_refresh_text=0x7f060059;
+        public static final int pull_to_refresh_image=0x7f06005c;
+        public static final int pull_to_refresh_progress=0x7f06005d;
+        public static final int pull_to_refresh_sub_text=0x7f06005f;
+        public static final int pull_to_refresh_text=0x7f06005e;
         public static final int relativeLayout2=0x7f060016;
         public static final int retype_psw_view=0x7f06001a;
         public static final int rotate=0x7f060007;
@@ -2395,14 +2420,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int activity_splash=0x7f030007;
         public static final int activity_test=0x7f030008;
         public static final int animation_button_layout=0x7f030009;
-        public static final int error_layout=0x7f03000a;
-        public static final int loading_layout=0x7f03000b;
-        public static final int program_item_layout=0x7f03000c;
-        public static final int program_layout=0x7f03000d;
-        public static final int program_module_layout=0x7f03000e;
-        public static final int pull_to_refresh_header_horizontal=0x7f03000f;
-        public static final int pull_to_refresh_header_vertical=0x7f030010;
-        public static final int test=0x7f030011;
+        public static final int default_http_error_layout=0x7f03000a;
+        public static final int default_http_nodata_layout=0x7f03000b;
+        public static final int default_http_progress_layout=0x7f03000c;
+        public static final int error_layout=0x7f03000d;
+        public static final int loading_layout=0x7f03000e;
+        public static final int program_item_layout=0x7f03000f;
+        public static final int program_layout=0x7f030010;
+        public static final int program_module_layout=0x7f030011;
+        public static final int pull_to_refresh_header_horizontal=0x7f030012;
+        public static final int pull_to_refresh_header_vertical=0x7f030013;
+        public static final int test=0x7f030014;
     }
     public static final class menu {
         public static final int domain=0x7f0b0000;
@@ -2605,6 +2633,69 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           @attr name com.ctrip.protoshop:icon_text
         */
         public static final int AnimationButton_icon_text = 0;
+        /** Attributes that can be used with a HttpAsyncLayout.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #HttpAsyncLayout_error_layout com.ctrip.protoshop:error_layout}</code></td><td></td></tr>
+           <tr><td><code>{@link #HttpAsyncLayout_no_data_layout com.ctrip.protoshop:no_data_layout}</code></td><td></td></tr>
+           <tr><td><code>{@link #HttpAsyncLayout_only_progressbar com.ctrip.protoshop:only_progressbar}</code></td><td></td></tr>
+           <tr><td><code>{@link #HttpAsyncLayout_progress_layout com.ctrip.protoshop:progress_layout}</code></td><td></td></tr>
+           </table>
+           @see #HttpAsyncLayout_error_layout
+           @see #HttpAsyncLayout_no_data_layout
+           @see #HttpAsyncLayout_only_progressbar
+           @see #HttpAsyncLayout_progress_layout
+         */
+        public static final int[] HttpAsyncLayout = {
+            0x7f010016, 0x7f010017, 0x7f010018, 0x7f010019
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.ctrip.protoshop.R.attr#error_layout}
+          attribute's value can be found in the {@link #HttpAsyncLayout} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.ctrip.protoshop:error_layout
+        */
+        public static final int HttpAsyncLayout_error_layout = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.ctrip.protoshop.R.attr#no_data_layout}
+          attribute's value can be found in the {@link #HttpAsyncLayout} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.ctrip.protoshop:no_data_layout
+        */
+        public static final int HttpAsyncLayout_no_data_layout = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.ctrip.protoshop.R.attr#only_progressbar}
+          attribute's value can be found in the {@link #HttpAsyncLayout} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.ctrip.protoshop:only_progressbar
+        */
+        public static final int HttpAsyncLayout_only_progressbar = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.ctrip.protoshop.R.attr#progress_layout}
+          attribute's value can be found in the {@link #HttpAsyncLayout} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.ctrip.protoshop:progress_layout
+        */
+        public static final int HttpAsyncLayout_progress_layout = 1;
         /** Attributes that can be used with a PullToRefresh.
            <p>Includes the following attributes:</p>
            <table>

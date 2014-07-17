@@ -1,16 +1,12 @@
 package com.ctrip.protoshop.widget;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
-import com.android.volley.ParseError;
 import com.android.volley.VolleyError;
 import com.ctrip.protoshop.R;
 import com.ctrip.protoshop.http.OnHttpListener;
@@ -18,8 +14,11 @@ import com.ctrip.protoshop.http.OnHttpListener;
 public class HttpAsyncLayout extends FrameLayout implements OnHttpListener, OnClickListener {
 	private OnHttpAsyncListner onHttpAsyncListner;
 
-	private LinearLayout mProgressLayout;
-	private LinearLayout mErrorLayout;
+	private View mProgressView;
+	private View mErrorView;
+	private View mNoDataView;
+
+	private boolean isOnlyProgressbar = false;
 
 	public interface OnHttpAsyncListner {
 		public void onSuccessListener(String response);
@@ -31,37 +30,52 @@ public class HttpAsyncLayout extends FrameLayout implements OnHttpListener, OnCl
 
 	public HttpAsyncLayout(Context context) {
 		super(context);
-		initLayout();
+		initLayout(R.layout.default_http_error_layout, R.layout.default_http_progress_layout, R.layout.default_http_nodata_layout);
 	}
 
 	public HttpAsyncLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		initLayout();
+		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.HttpAsyncLayout);
+		int errorRes = a.getResourceId(R.styleable.HttpAsyncLayout_error_layout, 0);
+		if (errorRes == 0) {
+			errorRes = R.layout.default_http_error_layout;
+		}
+		int progressRes = a.getResourceId(R.styleable.HttpAsyncLayout_progress_layout, 0);
+		if (progressRes == 0) {
+			progressRes = R.layout.default_http_progress_layout;
+		}
+		int nodataRes = a.getResourceId(R.styleable.HttpAsyncLayout_no_data_layout, 0);
+		if (nodataRes == 0) {
+			nodataRes = R.layout.default_http_nodata_layout;
+		}
+
+		isOnlyProgressbar = a.getBoolean(R.styleable.HttpAsyncLayout_only_progressbar, false);
+
+		a.recycle();
+		initLayout(errorRes, progressRes, nodataRes);
 	}
 
-	private void initLayout() {
-		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-
-		mErrorLayout = (LinearLayout) View.inflate(getContext(), R.layout.error_layout, null);
-		mErrorLayout.findViewById(R.id.error_refresh_btn).setOnClickListener(this);
-		mErrorLayout.setVisibility(View.GONE);
-		addView(mErrorLayout, params);
-
-		mProgressLayout = new LinearLayout(getContext());
-		mProgressLayout.setGravity(Gravity.CENTER);
-		ProgressBar progressBar = new ProgressBar(getContext());
-		mProgressLayout.addView(progressBar);
-		mProgressLayout.setVisibility(View.GONE);
-		addView(mProgressLayout, params);
+	private void initLayout(int errorRes, int progressRes, int nodataRes) {
+		mProgressView = View.inflate(getContext(), progressRes, null);
+		addView(mProgressView);
+		mProgressView.setVisibility(View.GONE);
+		mErrorView = View.inflate(getContext(), errorRes, null);
+		addView(mErrorView);
+		mErrorView.setVisibility(View.GONE);
+		mNoDataView = View.inflate(getContext(), nodataRes, null);
+		addView(mNoDataView);
+		mNoDataView.setVisibility(View.GONE);
 	}
 
 	public void showProgress() {
-		mProgressLayout.bringToFront();
-		mProgressLayout.setVisibility(View.VISIBLE);
+		mProgressView.bringToFront();
+		mProgressView.setVisibility(View.VISIBLE);
+		mErrorView.setVisibility(View.GONE);
+		mNoDataView.setVisibility(View.GONE);
 	}
 
 	public void dismissProgress() {
-		mProgressLayout.setVisibility(View.GONE);
+		mProgressView.setVisibility(View.GONE);
 	}
 
 	@Override
@@ -71,8 +85,9 @@ public class HttpAsyncLayout extends FrameLayout implements OnHttpListener, OnCl
 
 	@Override
 	public void onResponse(String response) {
-		mProgressLayout.setVisibility(View.GONE);
-		mErrorLayout.setVisibility(View.GONE);
+		mProgressView.setVisibility(View.GONE);
+		mErrorView.setVisibility(View.GONE);
+		mNoDataView.setVisibility(View.GONE);
 		if (onHttpAsyncListner != null) {
 			onHttpAsyncListner.onSuccessListener(response);
 		}
@@ -80,15 +95,11 @@ public class HttpAsyncLayout extends FrameLayout implements OnHttpListener, OnCl
 
 	@Override
 	public void onErrorResponse(VolleyError error) {
-		mProgressLayout.setVisibility(View.GONE);
-		mErrorLayout.setVisibility(View.VISIBLE);
-		mErrorLayout.bringToFront();
-		if (error instanceof ParseError) {
-			((TextView) mErrorLayout.findViewById(R.id.error_tip_view)).setText(R.string.no_content_text);
-			mErrorLayout.findViewById(R.id.error_refresh_btn).setVisibility(View.GONE);
-		} else {
-			((TextView) mErrorLayout.findViewById(R.id.error_tip_view)).setText(R.string.error_text);
-			mErrorLayout.findViewById(R.id.error_refresh_btn).setVisibility(View.VISIBLE);
+		mProgressView.setVisibility(View.GONE);
+		mNoDataView.setVisibility(View.GONE);
+		if (!isOnlyProgressbar) {
+			mErrorView.setVisibility(View.VISIBLE);
+			mErrorView.bringToFront();
 		}
 		if (onHttpAsyncListner != null) {
 			onHttpAsyncListner.onErrorListener(error);
@@ -96,10 +107,12 @@ public class HttpAsyncLayout extends FrameLayout implements OnHttpListener, OnCl
 	}
 
 	public void showNoDataError() {
-		mProgressLayout.setVisibility(View.GONE);
-		mErrorLayout.setVisibility(View.VISIBLE);
-		mErrorLayout.bringToFront();
-		((TextView) mErrorLayout.findViewById(R.id.error_tip_view)).setText(R.string.no_content_text);
+		mProgressView.setVisibility(View.GONE);
+		mErrorView.setVisibility(View.GONE);
+		if (!isOnlyProgressbar) {
+			mNoDataView.setVisibility(View.VISIBLE);
+			mNoDataView.bringToFront();
+		}
 	}
 
 	public OnHttpAsyncListner getOnHttpAsyncListner() {

@@ -6,5 +6,11 @@
         <attr name="content_text" format="string|reference" />
         <attr name="animation_text" format="string|reference" />
     </declare-styleable>
+    <declare-styleable name="HttpAsyncLayout">
+        <attr name="error_layout" format="reference" />
+        <attr name="progress_layout" format="reference" />
+        <attr name="no_data_layout" format="reference" />
+        <attr name="only_progressbar" format="boolean" />
+    </declare-styleable>
 
 </resources>
