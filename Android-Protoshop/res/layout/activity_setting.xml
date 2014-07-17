@@ -348,6 +348,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_20"
                     android:layout_marginRight="@dimen/_20"
+                    android:layout_marginBottom="@dimen/_20"
                     android:gravity="center_vertical"
                     android:text="@string/setting_text" />
             </LinearLayout>
