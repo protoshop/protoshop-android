@@ -3691,9 +3691,10 @@ containing a value of this type.
         public static final int action_settings=0x7f080014;
         public static final int app_name=0x7f080013;
         public static final int arrow_left_icon=0x7f08002c;
-        public static final int change_psw_title_text=0x7f08004d;
+        public static final int c_psw=0x7f08003c;
+        public static final int change_psw_title_text=0x7f080050;
         public static final int changepsw_url=0x7f08001e;
-        public static final int connect_network=0x7f08003d;
+        public static final int connect_network=0x7f080040;
         public static final int domain_callback_url=0x7f080022;
         public static final int error_refresh_btn_text=0x7f080027;
         public static final int error_text=0x7f080026;
@@ -3711,17 +3712,18 @@ containing a value of this type.
         public static final int fa_times_circle=0x7f08003a;
         public static final int fa_trash_o=0x7f080037;
         public static final int fa_user=0x7f080031;
-        public static final int feed_back_hint_text=0x7f08004b;
+        public static final int feed_back_hint_text=0x7f08004e;
         public static final int feedback_url=0x7f08001f;
         public static final int hello_world=0x7f080015;
         public static final int loading_text=0x7f080025;
-        public static final int login_name_hint=0x7f080040;
-        public static final int login_psw_hint=0x7f080041;
+        public static final int login_name_hint=0x7f080043;
+        public static final int login_psw_hint=0x7f080044;
         public static final int login_url=0x7f08001d;
         public static final int logout_url=0x7f080023;
         public static final int lua_url=0x7f08001b;
+        public static final int n_psw=0x7f08003d;
         public static final int no_content_text=0x7f080028;
-        public static final int parse_error=0x7f08003e;
+        public static final int parse_error=0x7f080041;
         /**  tip 
          */
         public static final int program_list_title=0x7f080024;
@@ -3737,38 +3739,39 @@ containing a value of this type.
         public static final int pull_to_refresh_pull_label=0x7f080000;
         public static final int pull_to_refresh_refreshing_label=0x7f080002;
         public static final int pull_to_refresh_release_label=0x7f080001;
+        public static final int r_psw=0x7f08003e;
         public static final int reload_left_icon=0x7f08002b;
         public static final int reload_right_icon=0x7f08002a;
-        public static final int search_hint=0x7f080042;
+        public static final int search_hint=0x7f080045;
         /**  error tip 
          */
-        public static final int server_error=0x7f08003c;
+        public static final int server_error=0x7f08003f;
         /**  icon-text 
          */
         public static final int setting_icon=0x7f080029;
-        public static final int setting_text=0x7f08004a;
+        public static final int setting_text=0x7f08004d;
         /**  Setting 
          */
         public static final int setting_title_text=0x7f08003b;
-        public static final int sign_up_btn_text=0x7f080047;
-        public static final int sign_up_text=0x7f080045;
-        public static final int sign_up_tip_text=0x7f080046;
+        public static final int sign_up_btn_text=0x7f08004a;
+        public static final int sign_up_text=0x7f080048;
+        public static final int sign_up_tip_text=0x7f080049;
         public static final int sign_up_url=0x7f08001c;
-        public static final int title_activity_change_psw=0x7f08004c;
-        public static final int title_activity_contribute=0x7f08004f;
-        public static final int title_activity_domain=0x7f08004e;
+        public static final int title_activity_change_psw=0x7f08004f;
+        public static final int title_activity_contribute=0x7f080052;
+        public static final int title_activity_domain=0x7f080051;
         /**  other 
          */
-        public static final int title_activity_login=0x7f08003f;
+        public static final int title_activity_login=0x7f080042;
         public static final int title_activity_lua=0x7f080017;
-        public static final int title_activity_one=0x7f080050;
-        public static final int title_activity_register=0x7f080043;
-        public static final int title_activity_setting=0x7f080048;
-        public static final int title_activity_sign_up=0x7f080044;
+        public static final int title_activity_one=0x7f080053;
+        public static final int title_activity_register=0x7f080046;
+        public static final int title_activity_setting=0x7f08004b;
+        public static final int title_activity_sign_up=0x7f080047;
         public static final int title_activity_splash=0x7f080016;
         public static final int title_activity_test=0x7f080018;
         public static final int update_user_info_url=0x7f080021;
-        public static final int user_name_hint_text=0x7f080049;
+        public static final int user_name_hint_text=0x7f08004c;
         public static final int userinfo_url=0x7f080020;
         public static final int zip_url=0x7f08001a;
     }

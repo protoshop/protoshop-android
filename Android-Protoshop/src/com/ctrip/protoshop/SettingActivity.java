@@ -92,13 +92,11 @@ public class SettingActivity extends BaseActivity implements OnClickListener, Te
 		if (item.getItemId() == R.id.ic_action_save) {
 			saveNickName(findViewById(R.id.ic_action_save));
 			return true;
+		} else if (item.getItemId() == android.R.id.home) {
+			finish();
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	@Override
-	public Intent getSupportParentActivityIntent() {
-		return getIntent();
 	}
 
 	@Override

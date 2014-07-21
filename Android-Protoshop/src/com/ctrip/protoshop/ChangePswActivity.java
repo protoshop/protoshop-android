@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
@@ -71,13 +72,11 @@ public class ChangePswActivity extends BaseActivity {
 		if (item.getItemId() == R.id.ic_action_save) {
 			dealSaveChage(findViewById(R.id.ic_action_save));
 			return true;
+		} else if (item.getItemId() == android.R.id.home) {
+			finish();
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	@Override
-	public Intent getSupportParentActivityIntent() {
-		return getIntent();
 	}
 
 	/**

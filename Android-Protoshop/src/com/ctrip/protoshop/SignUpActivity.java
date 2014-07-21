@@ -17,6 +17,7 @@ import android.support.v7.app.ActionBar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -50,8 +51,8 @@ public class SignUpActivity extends BaseActivity implements OnClickListener, OnH
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sign_up);
-		
-		ActionBar actionBar=getSupportActionBar();
+
+		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setTitle("Sign Up");
@@ -70,10 +71,14 @@ public class SignUpActivity extends BaseActivity implements OnClickListener, OnH
 
 		mNameView.addTextChangedListener(this);
 	}
-	
+
 	@Override
-	public Intent getSupportParentActivityIntent() {
-		return getIntent();
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == android.R.id.home) {
+			finish();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	@Override

@@ -50,6 +50,9 @@
 
     <!-- Setting -->
     <string name="setting_title_text">Setting</string>
+    <string name="c_psw">Current Password</string>
+    <string name="n_psw">New Password</string>
+    <string name="r_psw">Re-type Password</string>
     <!-- error tip -->
     <string name="server_error">服务器错误，请联系开发人员!</string>
     <string name="connect_network">请连接网络!</string>
