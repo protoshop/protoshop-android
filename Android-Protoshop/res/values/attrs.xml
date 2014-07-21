@@ -11,6 +11,7 @@
         <attr name="progress_layout" format="reference" />
         <attr name="no_data_layout" format="reference" />
         <attr name="only_progressbar" format="boolean" />
+        <attr name="progress_tip" format="string|reference" />
     </declare-styleable>
 
 </resources>

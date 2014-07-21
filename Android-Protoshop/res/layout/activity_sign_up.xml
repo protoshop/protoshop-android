@@ -1,98 +1,82 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.ctrip.protoshop.widget.HttpAsyncLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.ctrip.protoshop"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/http_async_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:only_progressbar="true"
+    app:progress_tip="注册中..."
     tools:context=".SignUpActivity" >
 
-    <LinearLayout
-        android:id="@+id/LinearLayout1"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="@dimen/_15"
-        android:layout_marginRight="@dimen/_15"
-        android:layout_marginTop="@dimen/_30"
-        android:background="@drawable/white_round_shape"
-        android:orientation="vertical" >
+        android:layout_height="match_parent" >
 
-        <AutoCompleteTextView
-            android:id="@+id/sigin_up_name_view"
+        <LinearLayout
+            android:id="@+id/LinearLayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_5"
-            android:background="@color/white"
-            android:ems="10"
-            android:hint="@string/login_name_hint"
-            android:padding="@dimen/_3"
-            android:singleLine="true" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/_15"
+            android:layout_marginRight="@dimen/_15"
+            android:layout_marginTop="@dimen/_30"
+            android:background="@drawable/white_round_shape"
+            android:orientation="vertical" >
 
-        <View
-            android:id="@+id/view1"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray_a3a3a3" />
+            <AutoCompleteTextView
+                android:id="@+id/sigin_up_name_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5"
+                android:background="@color/white"
+                android:ems="10"
+                android:hint="@string/login_name_hint"
+                android:padding="@dimen/_3"
+                android:singleLine="true" />
 
-        <EditText
-            android:id="@+id/sign_up_psw_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_5"
-            android:background="@color/white"
-            android:ems="10"
-            android:hint="@string/login_psw_hint"
-            android:inputType="textPassword"
-            android:padding="@dimen/_3" />
-    </LinearLayout>
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_a3a3a3" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/LinearLayout1"
-        android:layout_margin="@dimen/_30"
-        android:text="@string/sign_up_tip_text"
-        android:textColor="@color/gray_a3a3a3" />
-
-    <TextView
-        android:id="@+id/sign_up_btn_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView3"
-        android:layout_marginLeft="@dimen/_15"
-        android:layout_marginRight="@dimen/_15"
-        android:background="@drawable/orange_backgroud_shape"
-        android:gravity="center"
-        android:padding="@dimen/_10"
-        android:text="@string/sign_up_btn_text"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
-
-    <LinearLayout
-        android:id="@+id/progress_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/RelativeLayout1"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone" >
-
-        <ProgressBar
-            android:id="@+id/progressBar1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminateDrawable="@drawable/progress_drawable"
-            android:indeterminateDuration="1000"
-            android:progressDrawable="@drawable/progress_icon" />
+            <EditText
+                android:id="@+id/sign_up_psw_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5"
+                android:background="@color/white"
+                android:ems="10"
+                android:hint="@string/login_psw_hint"
+                android:inputType="textPassword"
+                android:padding="@dimen/_3" />
+        </LinearLayout>
 
         <TextView
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="注册中....."
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/black" />
-    </LinearLayout>
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/LinearLayout1"
+            android:layout_margin="@dimen/_30"
+            android:text="@string/sign_up_tip_text"
+            android:textColor="@color/gray_a3a3a3" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/sign_up_btn_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/textView3"
+            android:layout_marginLeft="@dimen/_15"
+            android:layout_marginRight="@dimen/_15"
+            android:background="@drawable/orange_backgroud_shape"
+            android:gravity="center"
+            android:padding="@dimen/_10"
+            android:text="@string/sign_up_btn_text"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+</com.ctrip.protoshop.widget.HttpAsyncLayout>

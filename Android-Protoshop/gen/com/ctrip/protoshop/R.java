@@ -580,6 +580,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int progress_layout=0x7f010085;
+        /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+         */
+        public static final int progress_tip=0x7f010088;
         /**  The prompt to display when the spinner's dialog is shown. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -3406,7 +3411,6 @@ containing a value of this type.
     }
     public static final class id {
         public static final int LinearLayout1=0x7f060054;
-        public static final int RelativeLayout1=0x7f060075;
         public static final int action_bar=0x7f060028;
         public static final int action_bar_activity_content=0x7f060021;
         public static final int action_bar_container=0x7f060027;
@@ -3418,15 +3422,15 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f060022;
         public static final int action_menu_presenter=0x7f060023;
         public static final int action_mode_close_button=0x7f060030;
-        public static final int action_settings=0x7f060092;
+        public static final int action_settings=0x7f060090;
         public static final int activity_chooser_view_content=0x7f060031;
         public static final int always=0x7f060017;
-        public static final int anim_confirm_view=0x7f06007c;
-        public static final int anim_content_view=0x7f06007b;
-        public static final int anim_icon_view=0x7f06007a;
-        public static final int anim_result_view=0x7f06007d;
-        public static final int animationButton1=0x7f060077;
-        public static final int animation_btn_layout=0x7f060079;
+        public static final int anim_confirm_view=0x7f06007a;
+        public static final int anim_content_view=0x7f060079;
+        public static final int anim_icon_view=0x7f060078;
+        public static final int anim_result_view=0x7f06007b;
+        public static final int animationButton1=0x7f060074;
+        public static final int animation_btn_layout=0x7f060077;
         public static final int beginning=0x7f06001d;
         public static final int both=0x7f060003;
         public static final int button1=0x7f06005b;
@@ -3445,27 +3449,27 @@ containing a value of this type.
         public static final int edit_query=0x7f06003c;
         public static final int edite_layout=0x7f060049;
         public static final int end=0x7f06001f;
-        public static final int error_refresh_btn=0x7f060083;
-        public static final int error_tip_view=0x7f060082;
+        public static final int error_refresh_btn=0x7f060081;
+        public static final int error_tip_view=0x7f060080;
         public static final int expand_activities_button=0x7f060032;
         public static final int expanded_menu=0x7f060038;
         public static final int feedback_editText=0x7f060068;
         public static final int feedback_input_layout=0x7f060067;
         public static final int feedback_layout=0x7f060063;
         public static final int feedback_send_view=0x7f060069;
-        public static final int fl_inner=0x7f06008c;
+        public static final int fl_inner=0x7f06008a;
         public static final int flip=0x7f060008;
         public static final int gridview=0x7f060009;
         public static final int home=0x7f060020;
         public static final int homeAsUp=0x7f060011;
         public static final int http_async_layout=0x7f060048;
-        public static final int http_error_tip_view=0x7f06007f;
-        public static final int http_progress_tip_view=0x7f06007e;
-        public static final int http_refresh_view=0x7f060080;
-        public static final int ic_action_refresh=0x7f060094;
-        public static final int ic_action_save=0x7f060091;
-        public static final int ic_action_search=0x7f060093;
-        public static final int ic_action_settings=0x7f060095;
+        public static final int http_error_tip_view=0x7f06007d;
+        public static final int http_progress_tip_view=0x7f06007c;
+        public static final int http_refresh_view=0x7f06007e;
+        public static final int ic_action_refresh=0x7f060092;
+        public static final int ic_action_save=0x7f06008f;
+        public static final int ic_action_search=0x7f060091;
+        public static final int ic_action_settings=0x7f060093;
         public static final int icon=0x7f060036;
         public static final int iconView=0x7f060064;
         public static final int ifRoom=0x7f060016;
@@ -3482,31 +3486,30 @@ containing a value of this type.
         public static final int never=0x7f060015;
         public static final int new_psw_view=0x7f060050;
         public static final int nick_name_view=0x7f060060;
-        public static final int no_data_tip_view=0x7f060081;
+        public static final int no_data_tip_view=0x7f06007f;
         public static final int none=0x7f06001c;
         public static final int normal=0x7f06000c;
-        public static final int program_arrow_view=0x7f060089;
-        public static final int program_comment_view=0x7f060085;
+        public static final int program_arrow_view=0x7f060087;
+        public static final int program_comment_view=0x7f060083;
         public static final int program_expandableListView=0x7f06005c;
-        public static final int program_icon_view=0x7f060086;
-        public static final int program_module_view=0x7f06008b;
-        public static final int program_name_view=0x7f060087;
-        public static final int program_progressBar=0x7f060084;
-        public static final int program_secret_view=0x7f060088;
-        public static final int program_view=0x7f06008a;
-        public static final int progressBar1=0x7f060076;
+        public static final int program_icon_view=0x7f060084;
+        public static final int program_module_view=0x7f060089;
+        public static final int program_name_view=0x7f060085;
+        public static final int program_progressBar=0x7f060082;
+        public static final int program_secret_view=0x7f060086;
+        public static final int program_view=0x7f060088;
+        public static final int progressBar1=0x7f060075;
         public static final int progress_circular=0x7f060024;
         public static final int progress_horizontal=0x7f060025;
-        public static final int progress_layout=0x7f060074;
         public static final int psw_layout=0x7f06004a;
         public static final int pullDownFromTop=0x7f060005;
         public static final int pullFromEnd=0x7f060002;
         public static final int pullFromStart=0x7f060001;
         public static final int pullUpFromBottom=0x7f060006;
-        public static final int pull_to_refresh_image=0x7f06008d;
-        public static final int pull_to_refresh_progress=0x7f06008e;
-        public static final int pull_to_refresh_sub_text=0x7f060090;
-        public static final int pull_to_refresh_text=0x7f06008f;
+        public static final int pull_to_refresh_image=0x7f06008b;
+        public static final int pull_to_refresh_progress=0x7f06008c;
+        public static final int pull_to_refresh_sub_text=0x7f06008e;
+        public static final int pull_to_refresh_text=0x7f06008d;
         public static final int radio=0x7f06003b;
         public static final int relativeLayout2=0x7f06004e;
         public static final int retype_psw_view=0x7f060052;
@@ -3537,7 +3540,7 @@ containing a value of this type.
         public static final int submit_area=0x7f060045;
         public static final int tabMode=0x7f06000e;
         public static final int tag=0x7f060066;
-        public static final int test_progress=0x7f060078;
+        public static final int test_progress=0x7f060076;
         public static final int textView1=0x7f06004f;
         public static final int textView3=0x7f060051;
         public static final int textView4=0x7f06004b;
@@ -4816,14 +4819,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <tr><td><code>{@link #HttpAsyncLayout_no_data_layout com.ctrip.protoshop:no_data_layout}</code></td><td></td></tr>
            <tr><td><code>{@link #HttpAsyncLayout_only_progressbar com.ctrip.protoshop:only_progressbar}</code></td><td></td></tr>
            <tr><td><code>{@link #HttpAsyncLayout_progress_layout com.ctrip.protoshop:progress_layout}</code></td><td></td></tr>
+           <tr><td><code>{@link #HttpAsyncLayout_progress_tip com.ctrip.protoshop:progress_tip}</code></td><td></td></tr>
            </table>
            @see #HttpAsyncLayout_error_layout
            @see #HttpAsyncLayout_no_data_layout
            @see #HttpAsyncLayout_only_progressbar
            @see #HttpAsyncLayout_progress_layout
+           @see #HttpAsyncLayout_progress_tip
          */
         public static final int[] HttpAsyncLayout = {
-            0x7f010084, 0x7f010085, 0x7f010086, 0x7f010087
+            0x7f010084, 0x7f010085, 0x7f010086, 0x7f010087,
+            0x7f010088
         };
         /**
           <p>This symbol is the offset where the {@link com.ctrip.protoshop.R.attr#error_layout}
@@ -4869,6 +4875,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           @attr name com.ctrip.protoshop:progress_layout
         */
         public static final int HttpAsyncLayout_progress_layout = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.ctrip.protoshop.R.attr#progress_tip}
+          attribute's value can be found in the {@link #HttpAsyncLayout} array.
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+          @attr name com.ctrip.protoshop:progress_tip
+        */
+        public static final int HttpAsyncLayout_progress_tip = 4;
         /** Attributes that can be used with a LinearLayoutICS.
            <p>Includes the following attributes:</p>
            <table>

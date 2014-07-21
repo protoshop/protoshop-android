@@ -7,7 +7,7 @@
     android:background="@color/gray_f0f0f0"
     android:orientation="vertical"
     app:only_progressbar="true"
-    app:progress_layout="@layout/change_psw_http_progress_layout"
+    app:progress_tip="加载中..."
     tools:context=".ChangePswActivity" >
 
     <LinearLayout

@@ -2,10 +2,12 @@ package com.ctrip.protoshop.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.ctrip.protoshop.R;
@@ -19,6 +21,7 @@ public class HttpAsyncLayout extends FrameLayout implements OnHttpListener, OnCl
 	private View mNoDataView;
 
 	private boolean isOnlyProgressbar = false;
+	private String progressTip = "";
 
 	public interface OnHttpAsyncListner {
 		public void onSuccessListener(String response);
@@ -43,6 +46,7 @@ public class HttpAsyncLayout extends FrameLayout implements OnHttpListener, OnCl
 		int progressRes = a.getResourceId(R.styleable.HttpAsyncLayout_progress_layout, 0);
 		if (progressRes == 0) {
 			progressRes = R.layout.default_http_progress_layout;
+			progressTip = a.getString(R.styleable.HttpAsyncLayout_progress_tip);
 		}
 		int nodataRes = a.getResourceId(R.styleable.HttpAsyncLayout_no_data_layout, 0);
 		if (nodataRes == 0) {
@@ -57,6 +61,10 @@ public class HttpAsyncLayout extends FrameLayout implements OnHttpListener, OnCl
 
 	private void initLayout(int errorRes, int progressRes, int nodataRes) {
 		mProgressView = View.inflate(getContext(), progressRes, null);
+		TextView tipView = (TextView) mProgressView.findViewById(R.id.http_progress_tip_view);
+		if (tipView != null && !TextUtils.isEmpty(progressTip)) {
+			tipView.setText(progressTip);
+		}
 		addView(mProgressView);
 		mProgressView.setVisibility(View.GONE);
 		mErrorView = View.inflate(getContext(), errorRes, null);
