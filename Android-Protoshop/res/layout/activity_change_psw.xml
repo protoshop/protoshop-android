@@ -1,145 +1,132 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.ctrip.protoshop.widget.HttpAsyncLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout1"
+    xmlns:app="http://schemas.android.com/apk/res/com.ctrip.protoshop"
+    android:id="@+id/http_async_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray_f0f0f0"
     android:orientation="vertical"
+    app:only_progressbar="true"
+    app:progress_layout="@layout/change_psw_http_progress_layout"
     tools:context=".ChangePswActivity" >
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/edite_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_10"
+        android:layout_marginTop="@dimen/_10"
+        android:orientation="vertical" >
 
-        <LinearLayout
-            android:id="@+id/edite_layout"
+        <RelativeLayout
+            android:id="@+id/psw_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_10"
             android:layout_marginTop="@dimen/_10"
-            android:orientation="vertical" >
+            android:background="@drawable/white_gray_line_backgroud" >
 
-            <RelativeLayout
-                android:id="@+id/psw_layout"
+            <com.ctrip.protoshop.widget.IconView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView51"
+                android:layout_alignParentLeft="true"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/_10"
+                android:paddingLeft="@dimen/_15"
+                android:paddingRight="@dimen/_10"
+                android:paddingTop="@dimen/_10"
+                android:text="@string/fa_lock"
+                android:textAppearance="@style/text_icon" />
+
+            <EditText
+                android:id="@+id/current_psw_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_10"
-                android:layout_marginTop="@dimen/_10"
-                android:background="@drawable/white_gray_line_backgroud" >
+                android:layout_alignParentTop="true"
+                android:layout_margin="@dimen/_5"
+                android:layout_toRightOf="@+id/textView4"
+                android:background="@null"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:hint="@string/c_psw"
+                android:inputType="textPassword"
+                android:paddingBottom="@dimen/_5"
+                android:paddingRight="@dimen/_10"
+                android:paddingTop="@dimen/_5"
+                android:singleLine="true" />
+        </RelativeLayout>
 
-                <com.ctrip.protoshop.widget.IconView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/textView51"
-                    android:layout_alignParentLeft="true"
-                    android:gravity="center_vertical"
-                    android:paddingBottom="@dimen/_10"
-                    android:paddingLeft="@dimen/_15"
-                    android:paddingRight="@dimen/_10"
-                    android:paddingTop="@dimen/_10"
-                    android:text="@string/fa_lock"
-                    android:textAppearance="@style/text_icon" />
-
-                <EditText
-                    android:id="@+id/current_psw_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_margin="@dimen/_5"
-                    android:layout_toRightOf="@+id/textView4"
-                    android:background="@null"
-                    android:ems="10"
-                    android:gravity="center_vertical"
-                    android:hint="@string/c_psw"
-                    android:inputType="textPassword"
-                    android:paddingBottom="@dimen/_5"
-                    android:paddingRight="@dimen/_10"
-                    android:paddingTop="@dimen/_5"
-                    android:singleLine="true" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/relativeLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_10"
-                android:layout_marginTop="@dimen/_10"
-                android:background="@drawable/white_gray_line_backgroud" >
-
-                <com.ctrip.protoshop.widget.IconView
-                    android:id="@+id/textView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:gravity="center_vertical"
-                    android:paddingBottom="@dimen/_10"
-                    android:paddingLeft="@dimen/_15"
-                    android:paddingRight="@dimen/_10"
-                    android:paddingTop="@dimen/_10"
-                    android:text="@string/fa_lock"
-                    android:textAppearance="@style/text_icon" />
-
-                <EditText
-                    android:id="@+id/new_psw_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/textView1"
-                    android:background="@drawable/one_line_shape_backgroud"
-                    android:ems="10"
-                    android:gravity="center_vertical"
-                    android:hint="@string/n_psw"
-                    android:inputType="textPassword"
-                    android:paddingBottom="@dimen/_10"
-                    android:paddingRight="@dimen/_10"
-                    android:paddingTop="@dimen/_10"
-                    android:singleLine="true" />
-
-                <com.ctrip.protoshop.widget.IconView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/textView1"
-                    android:gravity="center_vertical"
-                    android:paddingBottom="@dimen/_10"
-                    android:paddingLeft="@dimen/_15"
-                    android:paddingRight="@dimen/_10"
-                    android:paddingTop="@dimen/_10"
-                    android:text="@string/fa_lock"
-                    android:textAppearance="@style/text_icon" />
-
-                <EditText
-                    android:id="@+id/retype_psw_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/new_psw_view"
-                    android:layout_toRightOf="@+id/textView3"
-                    android:background="@null"
-                    android:ems="10"
-                    android:gravity="center_vertical"
-                    android:hint="@string/r_psw"
-                    android:inputType="textPassword"
-                    android:paddingBottom="@dimen/_10"
-                    android:paddingRight="@dimen/_10"
-                    android:paddingTop="@dimen/_10"
-                    android:singleLine="true"
-                    android:textColorHint="@color/gray_a3a3a3" />
-            </RelativeLayout>
-        </LinearLayout>
-
-        <include
-            android:id="@+id/change_psw_loading_view"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            layout="@layout/loading_layout"
-            android:visibility="gone" />
-    </RelativeLayout>
+            android:layout_marginBottom="@dimen/_10"
+            android:layout_marginTop="@dimen/_10"
+            android:background="@drawable/white_gray_line_backgroud" >
 
-</LinearLayout>
+            <com.ctrip.protoshop.widget.IconView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/_10"
+                android:paddingLeft="@dimen/_15"
+                android:paddingRight="@dimen/_10"
+                android:paddingTop="@dimen/_10"
+                android:text="@string/fa_lock"
+                android:textAppearance="@style/text_icon" />
+
+            <EditText
+                android:id="@+id/new_psw_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/textView1"
+                android:background="@drawable/one_line_shape_backgroud"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:hint="@string/n_psw"
+                android:inputType="textPassword"
+                android:paddingBottom="@dimen/_10"
+                android:paddingRight="@dimen/_10"
+                android:paddingTop="@dimen/_10"
+                android:singleLine="true" />
+
+            <com.ctrip.protoshop.widget.IconView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/textView1"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/_10"
+                android:paddingLeft="@dimen/_15"
+                android:paddingRight="@dimen/_10"
+                android:paddingTop="@dimen/_10"
+                android:text="@string/fa_lock"
+                android:textAppearance="@style/text_icon" />
+
+            <EditText
+                android:id="@+id/retype_psw_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/new_psw_view"
+                android:layout_toRightOf="@+id/textView3"
+                android:background="@null"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:hint="@string/r_psw"
+                android:inputType="textPassword"
+                android:paddingBottom="@dimen/_10"
+                android:paddingRight="@dimen/_10"
+                android:paddingTop="@dimen/_10"
+                android:singleLine="true"
+                android:textColorHint="@color/gray_a3a3a3" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</com.ctrip.protoshop.widget.HttpAsyncLayout>
