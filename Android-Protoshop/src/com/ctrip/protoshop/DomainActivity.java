@@ -28,7 +28,7 @@ public class DomainActivity extends BaseActivity {
 		setContentView(R.layout.activity_domain);
 
 		ActionBar actionBar = getSupportActionBar();
-		actionBar.setTitle("域账号登陆");
+		actionBar.setTitle("Domain Login");
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setDisplayShowHomeEnabled(false);
 
