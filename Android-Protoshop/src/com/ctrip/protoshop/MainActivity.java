@@ -17,15 +17,17 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
-import android.text.Editable;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.SearchView.OnQueryTextListener;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,8 +58,7 @@ public class MainActivity extends BaseActivity {
 	private TextView mLoadTipView;
 	private ListView mListView;
 	private PullToRefreshListView mPullToRefreshListView;
-	private EditText mSearchView;
-	private View mDeleteSearchView;
+
 	private List<ProgramModel> mModels;
 	private List<ProgramModel> mLocalModels;
 	private Map<String, ProgramModel> mProgramLoadedMap;
@@ -84,10 +85,6 @@ public class MainActivity extends BaseActivity {
 		}
 	};
 
-	private View mReloadView;
-
-	private View mSettingView;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -105,13 +102,13 @@ public class MainActivity extends BaseActivity {
 
 	private void initUI() {
 
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setDisplayShowHomeEnabled(false);
+
 		mProgramLoadedMap = new HashMap<String, ProgramModel>();
 
 		mLoadingLayout = findViewById(R.id.loading_layout);
 		mLoadTipView = (TextView) mLoadingLayout.findViewById(R.id.program_comment_view);
-
-		mReloadView = findViewById(R.id.title_reload_view);
-		mSettingView = findViewById(R.id.title_setting_view);
 
 		mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.program_expandableListView);
 		mPullToRefreshListView.setMode(Mode.PULL_FROM_START);
@@ -124,51 +121,10 @@ public class MainActivity extends BaseActivity {
 		mAdapter = new ProgramAdapter(this, mModels);
 		mListView.setAdapter(mAdapter);
 
-		mSearchView = (EditText) findViewById(R.id.program_search_view);
-		mDeleteSearchView=findViewById(R.id.delete_search_view);
-
 		addOnListener();
 	}
 
 	private void addOnListener() {
-		mReloadView.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				getProgramsFromService(true);
-			}
-		});
-		mSettingView.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				startActivity(new Intent(getApplicationContext(), SettingActivity.class));
-			}
-		});
-
-		mSearchView.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				mAdapter.getFilter().filter(s);
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-			}
-		});
-		
-		mDeleteSearchView.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				mSearchView.setText("");
-			}
-		});
 
 		mListView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -190,6 +146,47 @@ public class MainActivity extends BaseActivity {
 			}
 		});
 
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		MenuItem searchItem = menu.findItem(R.id.ic_action_search);
+		SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+		searchView.setOnQueryTextListener(new OnQueryTextListener() {
+
+			@Override
+			public boolean onQueryTextSubmit(String arg0) {
+				return false;
+			}
+
+			@Override
+			public boolean onQueryTextChange(String arg0) {
+				mAdapter.getFilter().filter(arg0);
+				return true;
+			}
+		});
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int id = item.getItemId();
+		switch (id) {
+		case R.id.ic_action_search:
+
+			return true;
+		case R.id.ic_action_refresh:
+			getProgramsFromService(true);
+			return true;
+		case R.id.ic_action_settings:
+			startActivity(new Intent(getApplicationContext(), SettingActivity.class));
+			return true;
+
+		default:
+			break;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	/**

@@ -8,47 +8,6 @@
     tools:context=".ChangePswActivity" >
 
     <RelativeLayout
-        android:id="@+id/RelativeLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/blue_014eb6"
-        android:padding="@dimen/_7" >
-
-        <!-- android:text="@string/fa_angle_left" -->
-
-        <com.ctrip.protoshop.widget.IconView
-            android:id="@+id/change_psw_back_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:paddingRight="@dimen/_5"
-            android:text="@string/fa_angle_left"
-            android:textColor="@color/white"
-            android:textSize="30sp" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/change_psw_title_text"
-            android:textColor="@color/white"
-            android:textSize="23sp" />
-
-        <TextView
-            android:id="@+id/change_save_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:padding="@dimen/_5"
-            android:text="Save"
-            android:textAppearance="@style/text_ffffff_20"
-            android:textStyle="bold" />
-    </RelativeLayout>
-
-    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
@@ -62,7 +21,7 @@
 
             <RelativeLayout
                 android:id="@+id/psw_layout"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_10"
                 android:layout_marginTop="@dimen/_10"
@@ -102,7 +61,7 @@
 
             <RelativeLayout
                 android:id="@+id/relativeLayout2"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_10"
                 android:layout_marginTop="@dimen/_10"

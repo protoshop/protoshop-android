@@ -11,9 +11,12 @@ import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.ActionBar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.CookieManager;
@@ -46,8 +49,11 @@ public class SettingActivity extends BaseActivity implements OnClickListener, Te
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_setting);
 
-		/* 返回按钮 */
-		findViewById(R.id.setting_back_view).setOnClickListener(this);
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setTitle("Setting");
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setDisplayShowHomeEnabled(false);
+
 		/* 用户信息相关 */
 		((TextView) findViewById(R.id.show_email_view)).setText(ProtoshopApplication.getInstance().userName);
 		mNickNameView = (EditText) findViewById(R.id.nick_name_view);
@@ -73,25 +79,37 @@ public class SettingActivity extends BaseActivity implements OnClickListener, Te
 		/* 登出按钮 */
 		((AnimationButton) findViewById(R.id.logout_btn)).setOnConfirmLisntener(this);
 
-		/* Save */
-		findViewById(R.id.save_nick_name_btn).setOnClickListener(this);
+	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.setting, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == R.id.ic_action_save) {
+			saveNickName(findViewById(R.id.ic_action_save));
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public Intent getSupportParentActivityIntent() {
+		return getIntent();
 	}
 
 	@Override
 	public void onClick(View v) {
-		if (v.getId() == R.id.setting_back_view) {
-			finish();
-		}
 
-		else if (v.getId() == R.id.psw_layout) {
+		if (v.getId() == R.id.psw_layout) {
 			startActivity(new Intent(getApplicationContext(), ChangePswActivity.class));
 		} else if (v.getId() == R.id.feedback_send_view) {
 			sendFeedback(v);
 		} else if (v.getId() == R.id.feedback_layout) {
 			dealFeedback(v);
-		} else if (v.getId() == R.id.save_nick_name_btn) {
-			saveNickName(v);
 		} else if (v.getId() == R.id.contribute_layout) {
 			dealContribute();
 		}

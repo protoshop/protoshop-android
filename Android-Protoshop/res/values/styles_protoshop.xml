@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     File created by the Android Action Bar Style Generator
+
+     Copyright (C) 2011 The Android Open Source Project
+     Copyright (C) 2012 readyState Software Ltd
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+          http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+
+    <style name="Theme.Protoshop" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionBarItemBackground">@drawable/selectable_background_protoshop</item>
+        <item name="popupMenuStyle">@style/PopupMenu.Protoshop</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView.Protoshop</item>
+        <item name="actionBarTabStyle">@style/ActionBarTabStyle.Protoshop</item>
+        <item name="actionDropDownStyle">@style/DropDownNav.Protoshop</item>
+        <item name="actionBarStyle">@style/ActionBar.Solid.Protoshop</item>
+        <item name="actionModeBackground">@drawable/cab_background_top_protoshop</item>
+        <item name="actionModeSplitBackground">@drawable/cab_background_bottom_protoshop</item>
+        <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Protoshop</item>
+
+        <!-- Light.DarkActionBar specific -->
+        <item name="actionBarWidgetTheme">@style/Theme.Protoshop.Widget</item>
+    </style>
+
+    <style name="NoActionBarTheme" parent="Theme.Protoshop">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="SplashTheme" parent="NoActionBarTheme">
+        <item name="android:windowBackground">@drawable/splash_backgroud_shape</item>
+    </style>
+
+    <style name="ActionBar.Solid.Protoshop" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="background">@drawable/ab_solid_protoshop</item>
+        <item name="backgroundStacked">@drawable/ab_stacked_solid_protoshop</item>
+        <item name="backgroundSplit">@drawable/ab_bottom_solid_protoshop</item>
+        <item name="progressBarStyle">@style/ProgressBar.Protoshop</item>
+    </style>
+
+    <style name="ActionBar.Transparent.Protoshop" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="background">@drawable/ab_transparent_protoshop</item>
+        <item name="progressBarStyle">@style/ProgressBar.Protoshop</item>
+    </style>
+
+    <style name="PopupMenu.Protoshop" parent="@style/Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_protoshop</item>
+    </style>
+
+    <style name="DropDownListView.Protoshop" parent="@style/Widget.AppCompat.ListView.DropDown">
+        <item name="android:listSelector">@drawable/selectable_background_protoshop</item>
+    </style>
+
+    <style name="ActionBarTabStyle.Protoshop" parent="@style/Widget.AppCompat.ActionBar.TabView">
+        <item name="android:background">@drawable/tab_indicator_ab_protoshop</item>
+    </style>
+
+    <style name="DropDownNav.Protoshop" parent="@style/Widget.AppCompat.Spinner.DropDown.ActionBar">
+        <item name="android:background">@drawable/spinner_background_ab_protoshop</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_protoshop</item>
+        <item name="android:dropDownSelector">@drawable/selectable_background_protoshop</item>
+    </style>
+
+    <style name="ProgressBar.Protoshop" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_protoshop</item>
+    </style>
+
+    <style name="ActionButton.CloseMode.Protoshop" parent="@style/Widget.AppCompat.ActionButton.CloseMode">
+        <item name="android:background">@drawable/btn_cab_done_protoshop</item>
+    </style>
+
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
+    <style name="Theme.Protoshop.Widget" parent="@style/Theme.AppCompat">
+        <item name="popupMenuStyle">@style/PopupMenu.Protoshop</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView.Protoshop</item>
+    </style>
+
+</resources>

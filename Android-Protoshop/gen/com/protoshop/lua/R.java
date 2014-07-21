@@ -8,13 +8,13 @@ package com.protoshop.lua;
 
 public final class R {
 	public static final class anim {
-		public static final int push_left_in = 0x7f040001;
-		public static final int push_left_out = 0x7f040002;
-		public static final int push_right_in = 0x7f040003;
-		public static final int push_right_out = 0x7f040004;
+		public static final int push_left_in = 0x7f040007;
+		public static final int push_left_out = 0x7f040008;
+		public static final int push_right_in = 0x7f040009;
+		public static final int push_right_out = 0x7f04000a;
 	}
 	public static final class drawable {
-		public static final int ic_launcher = 0x7f020004;
+		public static final int ic_launcher = 0x7f02006b;
 	}
 	public static final class raw {
 		public static final int command = 0x7f050000;
@@ -25,10 +25,10 @@ public final class R {
 		public static final int test = 0x7f050005;
 	}
 	public static final class string {
-		public static final int app_name = 0x7f080006;
+		public static final int app_name = 0x7f080013;
 	}
 	public static final class style {
-		public static final int AppBaseTheme = 0x7f090000;
-		public static final int AppTheme = 0x7f090001;
+		public static final int AppBaseTheme = 0x7f0c008b;
+		public static final int AppTheme = 0x7f0c008c;
 	}
 }

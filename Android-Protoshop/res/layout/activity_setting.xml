@@ -8,46 +8,6 @@
     android:orientation="vertical"
     tools:context=".SettingActivity" >
 
-    <RelativeLayout
-        android:id="@+id/RelativeLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/blue_014eb6"
-        android:padding="@dimen/_7" >
-
-        <!-- android:text="@string/fa_angle_left" -->
-
-        <com.ctrip.protoshop.widget.IconView
-            android:id="@+id/setting_back_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:paddingRight="@dimen/_5"
-            android:text="@string/fa_angle_left"
-            android:textColor="@color/white"
-            android:textSize="30sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/setting_title_text"
-            android:textColor="@color/white"
-            android:textSize="23sp" />
-
-        <TextView
-            android:id="@+id/save_nick_name_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:padding="@dimen/_5"
-            android:text="Save"
-            android:textAppearance="@style/text_ffffff_20"
-            android:textStyle="bold" />
-    </RelativeLayout>
-
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
@@ -287,10 +247,10 @@
                 android:background="@drawable/white_gray_line_backgroud" >
 
                 <com.ctrip.protoshop.widget.IconView
-                    android:id="@+id/textView4"
+                    android:id="@+id/textView411"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/textView51"
+                    android:layout_alignBaseline="@+id/textView511"
                     android:layout_alignParentLeft="true"
                     android:gravity="center_vertical"
                     android:paddingBottom="@dimen/_10"
@@ -301,11 +261,11 @@
                     android:textAppearance="@style/text_icon" />
 
                 <TextView
-                    android:id="@+id/textView51"
+                    android:id="@+id/textView511"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/textView4"
+                    android:layout_toRightOf="@+id/textView411"
                     android:gravity="center_vertical"
                     android:paddingBottom="@dimen/_10"
                     android:paddingRight="@dimen/_10"
@@ -314,10 +274,10 @@
                     android:textAppearance="@style/text_000000_20" />
 
                 <com.ctrip.protoshop.widget.IconView
-                    android:id="@+id/textView6"
+                    android:id="@+id/textView611"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/textView51"
+                    android:layout_alignBaseline="@+id/textView511"
                     android:layout_alignParentRight="true"
                     android:gravity="center_vertical"
                     android:paddingBottom="@dimen/_10"

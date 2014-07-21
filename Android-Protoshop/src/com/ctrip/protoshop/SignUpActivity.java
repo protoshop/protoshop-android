@@ -3,14 +3,17 @@ package com.ctrip.protoshop;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.ActionBar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -20,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.android.volley.VolleyError;
 import com.ctrip.protoshop.constans.Constans;
 import com.ctrip.protoshop.constans.Function;
@@ -32,7 +36,6 @@ public class SignUpActivity extends BaseActivity implements OnClickListener, OnH
 
 	private View mProgressView;
 
-	private View mBackView;
 	private AutoCompleteTextView mNameView;
 	private EditText mPswView;
 	private View mSignUpView;
@@ -47,15 +50,18 @@ public class SignUpActivity extends BaseActivity implements OnClickListener, OnH
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sign_up);
+		
+		ActionBar actionBar=getSupportActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setDisplayShowHomeEnabled(false);
+		actionBar.setTitle("Sign Up");
 
 		mProgressView = findViewById(R.id.progress_layout);
 
-		mBackView = findViewById(R.id.sign_up_back_view);
 		mNameView = (AutoCompleteTextView) findViewById(R.id.sigin_up_name_view);
 		mPswView = (EditText) findViewById(R.id.sign_up_psw_view);
 		mSignUpView = findViewById(R.id.sign_up_btn_view);
 
-		mBackView.setOnClickListener(this);
 		mSignUpView.setOnClickListener(this);
 
 		mEmailAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line);
@@ -64,12 +70,15 @@ public class SignUpActivity extends BaseActivity implements OnClickListener, OnH
 
 		mNameView.addTextChangedListener(this);
 	}
+	
+	@Override
+	public Intent getSupportParentActivityIntent() {
+		return getIntent();
+	}
 
 	@Override
 	public void onClick(View v) {
-		if (v.equals(mBackView)) {
-			finish();
-		} else if (v.equals(mSignUpView)) {
+		if (v.equals(mSignUpView)) {
 			dealSignUp();
 		}
 	}

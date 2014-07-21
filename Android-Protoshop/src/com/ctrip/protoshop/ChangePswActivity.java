@@ -8,9 +8,11 @@ import org.json.JSONObject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -24,8 +26,6 @@ import com.ctrip.protoshop.util.Util;
 
 public class ChangePswActivity extends BaseActivity {
 
-	private View mBackView;
-	private View mSaveView;
 	private View mProgressView;
 
 	private EditText mCurView;
@@ -46,34 +46,38 @@ public class ChangePswActivity extends BaseActivity {
 	}
 
 	private void initUI() {
-		mBackView = findViewById(R.id.change_psw_back_view);
+
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setTitle("Change Password");
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setDisplayShowHomeEnabled(false);
 
 		mCurView = (EditText) findViewById(R.id.current_psw_view);
 		mNewView = (EditText) findViewById(R.id.new_psw_view);
 		mRepeatView = (EditText) findViewById(R.id.retype_psw_view);
 
-		mSaveView = findViewById(R.id.change_save_btn);
-
 		mProgressView = findViewById(R.id.change_psw_loading_view);
 
-		addOnListenner();
 	}
 
-	private void addOnListenner() {
-		mBackView.setOnClickListener(new OnClickListener() {
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.change_password, menu);
+		return true;
+	}
 
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
-		mSaveView.setOnClickListener(new OnClickListener() {
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == R.id.ic_action_save) {
+			dealSaveChage(findViewById(R.id.ic_action_save));
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
 
-			@Override
-			public void onClick(View v) {
-				dealSaveChage(v);
-			}
-		});
+	@Override
+	public Intent getSupportParentActivityIntent() {
+		return getIntent();
 	}
 
 	/**

@@ -73,5 +73,6 @@
     <string name="change_psw_title_text">Change Password</string>
     <string name="title_activity_domain">DomainActivity</string>
     <string name="title_activity_contribute">ContributeActivity</string>
+    <string name="title_activity_one">OneActivity</string>
 
 </resources>

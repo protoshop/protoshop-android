@@ -2,13 +2,13 @@ package com.ctrip.protoshop;
 
 import java.util.Map;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.ActionBarActivity;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 
@@ -21,7 +21,7 @@ import com.ctrip.protoshop.http.OnHttpListener;
 import com.ctrip.protoshop.util.ProtoshopLog;
 import com.ctrip.protoshop.util.Util;
 
-public class BaseActivity extends Activity {
+public class BaseActivity extends ActionBarActivity {
 	private final static String TAG = BaseActivity.class.getSimpleName();
 	/**
 	 * 登出广播，Setting页面登出后，进入登陆页面。其他页面自动关闭。
