@@ -3463,9 +3463,9 @@ containing a value of this type.
         public static final int home=0x7f060020;
         public static final int homeAsUp=0x7f060011;
         public static final int http_async_layout=0x7f060048;
-        public static final int http_error_tip_view=0x7f06007d;
-        public static final int http_progress_tip_view=0x7f06007c;
-        public static final int http_refresh_view=0x7f06007e;
+        public static final int http_error_tip_view=0x7f06007c;
+        public static final int http_progress_tip_view=0x7f06007f;
+        public static final int http_refresh_view=0x7f06007d;
         public static final int ic_action_refresh=0x7f060092;
         public static final int ic_action_save=0x7f06008f;
         public static final int ic_action_search=0x7f060091;
@@ -3486,7 +3486,7 @@ containing a value of this type.
         public static final int never=0x7f060015;
         public static final int new_psw_view=0x7f060050;
         public static final int nick_name_view=0x7f060060;
-        public static final int no_data_tip_view=0x7f06007f;
+        public static final int no_data_tip_view=0x7f06007e;
         public static final int none=0x7f06001c;
         public static final int normal=0x7f06000c;
         public static final int program_arrow_view=0x7f060087;
@@ -3619,19 +3619,18 @@ containing a value of this type.
         public static final int activity_splash=0x7f03001f;
         public static final int activity_test=0x7f030020;
         public static final int animation_button_layout=0x7f030021;
-        public static final int change_psw_http_progress_layout=0x7f030022;
-        public static final int default_http_error_layout=0x7f030023;
-        public static final int default_http_nodata_layout=0x7f030024;
-        public static final int default_http_progress_layout=0x7f030025;
-        public static final int error_layout=0x7f030026;
-        public static final int loading_layout=0x7f030027;
-        public static final int program_item_layout=0x7f030028;
-        public static final int program_layout=0x7f030029;
-        public static final int program_module_layout=0x7f03002a;
-        public static final int pull_to_refresh_header_horizontal=0x7f03002b;
-        public static final int pull_to_refresh_header_vertical=0x7f03002c;
-        public static final int support_simple_spinner_dropdown_item=0x7f03002d;
-        public static final int test=0x7f03002e;
+        public static final int default_http_error_layout=0x7f030022;
+        public static final int default_http_nodata_layout=0x7f030023;
+        public static final int default_http_progress_layout=0x7f030024;
+        public static final int error_layout=0x7f030025;
+        public static final int loading_layout=0x7f030026;
+        public static final int program_item_layout=0x7f030027;
+        public static final int program_layout=0x7f030028;
+        public static final int program_module_layout=0x7f030029;
+        public static final int pull_to_refresh_header_horizontal=0x7f03002a;
+        public static final int pull_to_refresh_header_vertical=0x7f03002b;
+        public static final int support_simple_spinner_dropdown_item=0x7f03002c;
+        public static final int test=0x7f03002d;
     }
     public static final class menu {
         public static final int change_password=0x7f0d0000;
