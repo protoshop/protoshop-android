@@ -208,7 +208,7 @@ public class MainActivity extends BaseActivity {
 			@Override
 			public void onErrorResponse(VolleyError error) {
 				ProtoshopLog.e(error.toString());
-				Toast.makeText(getApplicationContext(), "刷新失败,请稍后再试!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "列表更新失败,请稍后再试!", Toast.LENGTH_SHORT).show();
 				mLoadingLayout.setVisibility(View.GONE);
 				mSwipeRefreshLayout.setRefreshing(false);
 			}
@@ -254,8 +254,8 @@ public class MainActivity extends BaseActivity {
 							mModels.addAll(models);
 							mAdapter.notifyDataSetChanged(mModels);
 							mLoadingLayout.setVisibility(View.GONE);
-
 							mSwipeRefreshLayout.setRefreshing(false);
+							Toast.makeText(getApplicationContext(), "列表更新成功!", Toast.LENGTH_SHORT).show();
 
 						}
 					} else {
