@@ -120,7 +120,7 @@ public class LuaActivity extends Activity {
 	public boolean onTouchEvent(MotionEvent event) {
 		int action = event.getAction();
 
-		if (action == MotionEvent.ACTION_DOWN) {
+		if (action == MotionEvent.ACTION_POINTER_2_DOWN) {
 			dealTwoPointer();
 			return true;
 		}
