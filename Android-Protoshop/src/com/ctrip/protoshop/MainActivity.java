@@ -107,7 +107,7 @@ public class MainActivity extends BaseActivity {
 		mLoadTipView = (TextView) mLoadingLayout.findViewById(R.id.program_comment_view);
 
 		mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
-		mSwipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_red_light, android.R.color.holo_orange_light);
+		mSwipeRefreshLayout.setColorSchemeResources(R.color.blue_bright, R.color.blue_dark, R.color.blue_bright, R.color.blue_dark);
 
 		mListView = (ListView) findViewById(R.id.program_expandableListView);
 		mModels = new ArrayList<ProgramModel>();
@@ -123,7 +123,7 @@ public class MainActivity extends BaseActivity {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				ProgramModel model = (ProgramModel) mAdapter.getItem(position - 1);
+				ProgramModel model = (ProgramModel) mAdapter.getItem(position);
 				if (model instanceof ProgramModel) {
 					model.state.onItemClick(model);
 				}
@@ -208,6 +208,7 @@ public class MainActivity extends BaseActivity {
 			@Override
 			public void onErrorResponse(VolleyError error) {
 				ProtoshopLog.e(error.toString());
+				Toast.makeText(getApplicationContext(), "刷新失败,请稍后再试!", Toast.LENGTH_SHORT).show();
 				mLoadingLayout.setVisibility(View.GONE);
 				mSwipeRefreshLayout.setRefreshing(false);
 			}

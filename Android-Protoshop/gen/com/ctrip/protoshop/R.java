@@ -1041,7 +1041,7 @@ containing a value of this type.
         public static final int abc_split_action_bar_is_narrow=0x7f090002;
     }
     public static final class color {
-        public static final int abc_search_url_text_holo=0x7f0a001b;
+        public static final int abc_search_url_text_holo=0x7f0a001d;
         public static final int abc_search_url_text_normal=0x7f0a0000;
         public static final int abc_search_url_text_pressed=0x7f0a0002;
         public static final int abc_search_url_text_selected=0x7f0a0001;
@@ -1053,6 +1053,8 @@ containing a value of this type.
         public static final int blue_1ba1eb=0x7f0a000f;
         public static final int blue_3cc2fd=0x7f0a0011;
         public static final int blue_60d3ff=0x7f0a0014;
+        public static final int blue_bright=0x7f0a0016;
+        public static final int blue_dark=0x7f0a0015;
         public static final int gold=0x7f0a0005;
         public static final int gray_9a9a9a=0x7f0a0008;
         public static final int gray_9fa1a3=0x7f0a000c;
@@ -1061,12 +1063,12 @@ containing a value of this type.
         public static final int gray_dddddd=0x7f0a000e;
         public static final int gray_e0e0e0=0x7f0a0009;
         public static final int gray_f0f0f0=0x7f0a000d;
-        public static final int green_59d56e=0x7f0a001a;
-        public static final int orange_ff8400=0x7f0a0015;
-        public static final int orange_ff8a00=0x7f0a0016;
-        public static final int orange_ffd5b8=0x7f0a0017;
-        public static final int red_ae7cff=0x7f0a0018;
-        public static final int red_fc3e39=0x7f0a0019;
+        public static final int green_59d56e=0x7f0a001c;
+        public static final int orange_ff8400=0x7f0a0017;
+        public static final int orange_ff8a00=0x7f0a0018;
+        public static final int orange_ffd5b8=0x7f0a0019;
+        public static final int red_ae7cff=0x7f0a001a;
+        public static final int red_fc3e39=0x7f0a001b;
         public static final int transparent=0x7f0a0006;
         public static final int white=0x7f0a0003;
     }

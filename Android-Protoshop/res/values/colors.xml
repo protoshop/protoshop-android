@@ -19,6 +19,8 @@
     <color name="blue_004db6">#004db6</color>
     <color name="blue_014eb6">#014eb6</color>
     <color name="blue_60d3ff">#60d3ff</color>
+    <color name="blue_dark">#ff0099cc</color>
+    <color name="blue_bright">#ff00ddff</color>
     <color name="orange_ff8400">#ff8400</color>
     <color name="orange_ff8a00">#ff8a00</color>
     <color name="orange_ffd5b8">#ffd5b8</color>
