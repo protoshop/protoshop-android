@@ -47,6 +47,7 @@
     <string name="fa_check">&#xf00c;</string>
     <string name="fa_jpy">&#xf157;</string>
     <string name="fa_times_circle">&#xf057;</string>
+    <string name="fa_home">&#xf015;</string>
 
     <!-- Setting -->
     <string name="setting_title_text">Setting</string>

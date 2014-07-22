@@ -11,6 +11,10 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
+    <style name="AppDialog" parent="android:Theme.Dialog">
+        <item name="android:windowBackground">@color/transparent</item>
+    </style>
+
     <style name="text_f5ca01_18">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">#f5ca01</item>

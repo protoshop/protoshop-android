@@ -14,7 +14,14 @@ public final class R {
 		public static final int push_right_out = 0x7f04000a;
 	}
 	public static final class drawable {
-		public static final int ic_launcher = 0x7f02006b;
+		public static final int ic_launcher = 0x7f02006c;
+	}
+	public static final class id {
+		public static final int cancel = 0x7f060027;
+		public static final int ok = 0x7f060026;
+	}
+	public static final class layout {
+		public static final int back_home_dialog = 0x7f030022;
 	}
 	public static final class raw {
 		public static final int command = 0x7f050000;
@@ -29,6 +36,7 @@ public final class R {
 	}
 	public static final class style {
 		public static final int AppBaseTheme = 0x7f0c008b;
+		public static final int AppDialog = 0x7f0c008d;
 		public static final int AppTheme = 0x7f0c008c;
 	}
 }
