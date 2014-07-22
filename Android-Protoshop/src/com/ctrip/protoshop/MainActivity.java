@@ -2,7 +2,6 @@ package com.ctrip.protoshop;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +17,8 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.SearchView.OnQueryTextListener;
@@ -44,10 +45,6 @@ import com.ctrip.protoshop.interfaces.imp.NormalState;
 import com.ctrip.protoshop.model.ProgramModel;
 import com.ctrip.protoshop.util.ProtoshopLog;
 import com.ctrip.protoshop.util.Util;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 //import com.protoshop.lua.util.ParseJsonUtil;
 
@@ -57,7 +54,7 @@ public class MainActivity extends BaseActivity {
 	private View mLoadingLayout;
 	private TextView mLoadTipView;
 	private ListView mListView;
-	private PullToRefreshListView mPullToRefreshListView;
+	private SwipeRefreshLayout mSwipeRefreshLayout;
 
 	private List<ProgramModel> mModels;
 	private List<ProgramModel> mLocalModels;
@@ -101,22 +98,18 @@ public class MainActivity extends BaseActivity {
 	}
 
 	private void initUI() {
+		mProgramLoadedMap = new HashMap<String, ProgramModel>();
 
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayShowHomeEnabled(false);
 
-		mProgramLoadedMap = new HashMap<String, ProgramModel>();
-
 		mLoadingLayout = findViewById(R.id.loading_layout);
 		mLoadTipView = (TextView) mLoadingLayout.findViewById(R.id.program_comment_view);
 
-		mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.program_expandableListView);
-		mPullToRefreshListView.setMode(Mode.PULL_FROM_START);
-		mPullToRefreshListView.getLoadingLayoutProxy().setPullLabel("下拉刷新");
-		mPullToRefreshListView.getLoadingLayoutProxy().setRefreshingLabel("加载中....");
-		mPullToRefreshListView.getLoadingLayoutProxy().setReleaseLabel("释放刷新");
+		mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+		mSwipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_red_light, android.R.color.holo_orange_light);
 
-		mListView = mPullToRefreshListView.getRefreshableView();
+		mListView = (ListView) findViewById(R.id.program_expandableListView);
 		mModels = new ArrayList<ProgramModel>();
 		mAdapter = new ProgramAdapter(this, mModels);
 		mListView.setAdapter(mAdapter);
@@ -136,11 +129,11 @@ public class MainActivity extends BaseActivity {
 				}
 			}
 		});
-		mPullToRefreshListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
+
+		mSwipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
 
 			@Override
-			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-				// 发送请求，获取项目列表
+			public void onRefresh() {
 				isPullRefresh = true;
 				getProgramsFromService(false);
 			}
@@ -216,6 +209,7 @@ public class MainActivity extends BaseActivity {
 			public void onErrorResponse(VolleyError error) {
 				ProtoshopLog.e(error.toString());
 				mLoadingLayout.setVisibility(View.GONE);
+				mSwipeRefreshLayout.setRefreshing(false);
 			}
 
 			@Override
@@ -259,9 +253,9 @@ public class MainActivity extends BaseActivity {
 							mModels.addAll(models);
 							mAdapter.notifyDataSetChanged(mModels);
 							mLoadingLayout.setVisibility(View.GONE);
-							mPullToRefreshListView.onRefreshComplete();
 
-							mPullToRefreshListView.getLoadingLayoutProxy().setLastUpdatedLabel(Util.getTodayDate(new Date()));
+							mSwipeRefreshLayout.setRefreshing(false);
+
 						}
 					} else {
 						Toast.makeText(getApplicationContext(), R.string.server_error, Toast.LENGTH_SHORT).show();

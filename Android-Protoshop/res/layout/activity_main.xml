@@ -1,27 +1,33 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:tohell="http://schemas.android.com/apk/res/com.ctrip.protoshop"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray_f0f0f0"
     tools:context=".MainActivity" >
 
-    <com.handmark.pulltorefresh.library.PullToRefreshListView
-        android:id="@+id/program_expandableListView"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_15"
-        android:background="@color/white"
-        android:cacheColorHint="@color/transparent"
-        android:divider="@color/gray_e0e0e0"
-        android:dividerHeight="1dp"
-        android:fadingEdge="none"
-        android:fastScrollEnabled="false"
-        android:footerDividersEnabled="false"
-        android:headerDividersEnabled="false"
-        android:listSelector="@color/transparent"
-        android:scrollbars="none"
-        tohell:ptrHeaderTextColor="@color/gold" />
+        android:paddingTop="@dimen/_10"
+        android:background="@color/gray_f0f0f0" >
+
+        <ListView
+            android:id="@+id/program_expandableListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:cacheColorHint="@color/transparent"
+            android:divider="@color/gray_e0e0e0"
+            android:dividerHeight="1dp"
+            android:fadingEdge="none"
+            android:fastScrollEnabled="false"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false"
+            android:listSelector="@color/transparent"
+            android:scrollbars="none" >
+        </ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <include
         android:id="@+id/loading_layout"

@@ -7,7 +7,7 @@
     tools:context=".LoginActivity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/refresh_time_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -22,7 +22,7 @@
         android:id="@+id/LinearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/refresh_time_view"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/_10"
         android:layout_marginLeft="@dimen/_10"

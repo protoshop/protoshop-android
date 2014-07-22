@@ -28,7 +28,7 @@
                 android:background="@drawable/white_gray_line_backgroud" >
 
                 <com.ctrip.protoshop.widget.IconView
-                    android:id="@+id/textView1"
+                    android:id="@+id/refresh_time_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/show_email_view"
@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/textView1"
+                    android:layout_toRightOf="@+id/refresh_time_view"
                     android:background="@drawable/one_line_shape_backgroud"
                     android:gravity="center_vertical"
                     android:paddingBottom="@dimen/_5"
@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/nick_name_view"
                     android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/textView1"
+                    android:layout_below="@+id/refresh_time_view"
                     android:gravity="center_vertical"
                     android:paddingBottom="@dimen/_10"
                     android:paddingLeft="@dimen/_15"
