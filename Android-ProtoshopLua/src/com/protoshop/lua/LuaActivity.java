@@ -7,6 +7,7 @@ import org.keplerproject.luajava.LuaState;
 import org.keplerproject.luajava.LuaStateFactory;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.protoshop.lua.Constant.Constants;
@@ -88,6 +90,7 @@ public class LuaActivity extends Activity {
 
 		IntentFilter filter = new IntentFilter(mScene);
 		LocalBroadcastManager.getInstance(this).registerReceiver(receiver, filter);
+		LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter(Constants.BACK_HOME));
 
 		LuaLog.e("LuaActivity", "out--[onCreate]");
 	}
@@ -112,9 +115,16 @@ public class LuaActivity extends Activity {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		int action = event.getAction();
+
+		if (action == MotionEvent.ACTION_DOWN) {
+			dealTwoPointer();
+			return true;
+		}
+
 		List<View> hotViews = ScenceCache.getInstance().hotMap.get(mScene);
 		if (action == MotionEvent.ACTION_DOWN) {
 
@@ -127,6 +137,27 @@ public class LuaActivity extends Activity {
 			}
 		}
 		return super.onTouchEvent(event);
+	}
+
+	private void dealTwoPointer() {
+		final Dialog dialog = new Dialog(this, R.style.AppDialog);
+		dialog.setContentView(R.layout.back_home_dialog);
+		dialog.findViewById(R.id.ok).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(new Intent(Constants.BACK_HOME));
+				dialog.dismiss();
+			}
+		});
+		dialog.findViewById(R.id.cancel).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				dialog.dismiss();
+			}
+		});
+		dialog.show();
 	}
 
 	@Override
