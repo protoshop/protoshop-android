@@ -5,12 +5,12 @@
     android:background="@color/gray_f0f0f0"
     tools:context=".MainActivity" >
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <uk.co.senab.actionbarpulltorefresh.actionbarcompat.AbcPullToRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="@dimen/_10"
-        android:background="@color/gray_f0f0f0" >
+        android:background="@color/gray_f0f0f0"
+        android:paddingTop="@dimen/_10" >
 
         <ListView
             android:id="@+id/program_expandableListView"
@@ -27,14 +27,6 @@
             android:listSelector="@color/transparent"
             android:scrollbars="none" >
         </ListView>
-    </android.support.v4.widget.SwipeRefreshLayout>
-
-    <include
-        android:id="@+id/loading_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        layout="@layout/loading_layout"
-        android:visibility="gone" />
+    </uk.co.senab.actionbarpulltorefresh.actionbarcompat.AbcPullToRefreshLayout>
 
 </RelativeLayout>

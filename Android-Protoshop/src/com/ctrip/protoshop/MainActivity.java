@@ -10,6 +10,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import uk.co.senab.actionbarpulltorefresh.actionbarcompat.AbcPullToRefreshLayout;
+import uk.co.senab.actionbarpulltorefresh.library.ActionBarPullToRefresh;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -17,8 +19,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.SearchView.OnQueryTextListener;
@@ -30,7 +30,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -51,17 +50,13 @@ import com.ctrip.protoshop.util.Util;
 public class MainActivity extends BaseActivity {
 	private final static String TAG = MainActivity.class.getSimpleName();
 
-	private View mLoadingLayout;
-	private TextView mLoadTipView;
 	private ListView mListView;
-	private SwipeRefreshLayout mSwipeRefreshLayout;
+	private AbcPullToRefreshLayout mSwipeRefreshLayout;
 
 	private List<ProgramModel> mModels;
 	private List<ProgramModel> mLocalModels;
 	private Map<String, ProgramModel> mProgramLoadedMap;
 	private ProgramAdapter mAdapter;
-
-	private boolean isPullRefresh = false;
 
 	// 获取工程入口
 	private IHomeScence mHomeScence;
@@ -103,11 +98,7 @@ public class MainActivity extends BaseActivity {
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayShowHomeEnabled(false);
 
-		mLoadingLayout = findViewById(R.id.loading_layout);
-		mLoadTipView = (TextView) mLoadingLayout.findViewById(R.id.program_comment_view);
-
-		mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
-		mSwipeRefreshLayout.setColorSchemeResources(R.color.blue_bright, R.color.blue_dark, R.color.blue_bright, R.color.blue_dark);
+		mSwipeRefreshLayout = (AbcPullToRefreshLayout) findViewById(R.id.swipe_refresh_layout);
 
 		mListView = (ListView) findViewById(R.id.program_expandableListView);
 		mModels = new ArrayList<ProgramModel>();
@@ -130,14 +121,15 @@ public class MainActivity extends BaseActivity {
 			}
 		});
 
-		mSwipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+		ActionBarPullToRefresh.from(this).allChildrenArePullable().listener(new uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener() {
 
 			@Override
-			public void onRefresh() {
-				isPullRefresh = true;
-				getProgramsFromService(false);
+			public void onRefreshStarted(View view) {
+
+				getProgramsFromService();
+
 			}
-		});
+		}).setup(mSwipeRefreshLayout);
 
 	}
 
@@ -170,7 +162,7 @@ public class MainActivity extends BaseActivity {
 
 			return true;
 		case R.id.ic_action_refresh:
-			getProgramsFromService(true);
+			getProgramsFromService();
 			return true;
 		case R.id.ic_action_settings:
 			startActivity(new Intent(getApplicationContext(), SettingActivity.class));
@@ -187,7 +179,7 @@ public class MainActivity extends BaseActivity {
 	 * 获取项目列表
 	 */
 	private void getPrograms() {
-		getProgramsFromService(true);
+		getProgramsFromService();
 		getProgramsFromLocal();
 	}
 
@@ -195,12 +187,9 @@ public class MainActivity extends BaseActivity {
 	 * 
 	 * 获取服务器最新项目列表.
 	 */
-	private void getProgramsFromService(boolean isNeedTip) {
+	private void getProgramsFromService() {
 		// 发送请求，获取项目列表
-		if (isNeedTip) {
-			mLoadingLayout.setVisibility(View.VISIBLE);
-			mLoadTipView.setText("更新列表中...");
-		}
+
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("token", ProtoshopApplication.getInstance().token);
 		sendGetParamRequest(Function.PROGRAM_LIST, params, new OnHttpListener() {
@@ -209,8 +198,7 @@ public class MainActivity extends BaseActivity {
 			public void onErrorResponse(VolleyError error) {
 				ProtoshopLog.e(error.toString());
 				Toast.makeText(getApplicationContext(), "列表更新失败,请稍后再试!", Toast.LENGTH_SHORT).show();
-				mLoadingLayout.setVisibility(View.GONE);
-				mSwipeRefreshLayout.setRefreshing(false);
+				mSwipeRefreshLayout.setRefreshComplete();
 			}
 
 			@Override
@@ -226,7 +214,6 @@ public class MainActivity extends BaseActivity {
 						if ("1".equals(status) && resultObject.has("code")) {
 							String code = resultObject.getString("code");
 							if ("10002".equals(code) || "10003".equals(code)) {
-								mLoadingLayout.setVisibility(View.GONE);
 								LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcast(new Intent(Constans.LOGOUT));
 								startActivity(new Intent(getApplicationContext(), LoginActivity.class));
 								finish();
@@ -253,8 +240,7 @@ public class MainActivity extends BaseActivity {
 							mModels.clear();
 							mModels.addAll(models);
 							mAdapter.notifyDataSetChanged(mModels);
-							mLoadingLayout.setVisibility(View.GONE);
-							mSwipeRefreshLayout.setRefreshing(false);
+							mSwipeRefreshLayout.setRefreshComplete();
 							Toast.makeText(getApplicationContext(), "列表更新成功!", Toast.LENGTH_SHORT).show();
 
 						}
@@ -271,9 +257,7 @@ public class MainActivity extends BaseActivity {
 
 			@Override
 			public void onHttpStart() {
-				if (!isPullRefresh) {
-					mLoadingLayout.setVisibility(View.VISIBLE);
-				}
+				mSwipeRefreshLayout.setRefreshing(true);
 			}
 		});
 
