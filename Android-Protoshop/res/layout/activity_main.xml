@@ -12,6 +12,22 @@
         android:background="@color/gray_f0f0f0"
         android:paddingTop="@dimen/_10" >
 
+        <LinearLayout
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="您目前还没有项目请到\nhttp://protoshop.io\n创建一个项目吧!"
+                android:textSize="18sp" />
+        </LinearLayout>
+
         <ListView
             android:id="@+id/program_expandableListView"
             android:layout_width="match_parent"

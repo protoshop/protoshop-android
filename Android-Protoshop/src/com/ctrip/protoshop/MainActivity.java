@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import uk.co.senab.actionbarpulltorefresh.actionbarcompat.AbcPullToRefreshLayout;
 import uk.co.senab.actionbarpulltorefresh.library.ActionBarPullToRefresh;
+import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -51,6 +52,7 @@ public class MainActivity extends BaseActivity {
 	private final static String TAG = MainActivity.class.getSimpleName();
 
 	private ListView mListView;
+	private View mEmptyView;
 	private AbcPullToRefreshLayout mSwipeRefreshLayout;
 
 	private List<ProgramModel> mModels;
@@ -105,6 +107,8 @@ public class MainActivity extends BaseActivity {
 		mAdapter = new ProgramAdapter(this, mModels);
 		mListView.setAdapter(mAdapter);
 
+		mEmptyView = findViewById(R.id.empty_view);
+
 		addOnListener();
 	}
 
@@ -121,7 +125,7 @@ public class MainActivity extends BaseActivity {
 			}
 		});
 
-		ActionBarPullToRefresh.from(this).allChildrenArePullable().listener(new uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener() {
+		ActionBarPullToRefresh.from(this).allChildrenArePullable().listener(new OnRefreshListener() {
 
 			@Override
 			public void onRefreshStarted(View view) {
@@ -241,6 +245,14 @@ public class MainActivity extends BaseActivity {
 							mModels.addAll(models);
 							mAdapter.notifyDataSetChanged(mModels);
 							mSwipeRefreshLayout.setRefreshComplete();
+
+							if (mModels.size() == 0) {
+								mEmptyView.setVisibility(View.VISIBLE);
+								mEmptyView.bringToFront();
+							} else {
+								mEmptyView.setVisibility(View.GONE);
+								mListView.bringToFront();
+							}
 							Toast.makeText(getApplicationContext(), "列表更新成功!", Toast.LENGTH_SHORT).show();
 
 						}
