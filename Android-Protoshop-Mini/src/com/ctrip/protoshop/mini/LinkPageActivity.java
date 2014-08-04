@@ -1,13 +1,16 @@
 package com.ctrip.protoshop.mini;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
+
 import com.ctrip.protoshop.mini.adapter.PageAdapter;
 import com.ctrip.protoshop.mini.constants.Constans;
 import com.ctrip.protoshop.mini.model.PageModel;
@@ -16,81 +19,80 @@ import com.ctrip.protoshop.mini.util.ProtoshopLog;
 import com.ctrip.protoshop.mini.wiget.MiniTitleView;
 import com.ctrip.protoshop.mini.wiget.MiniTitleView.OnTitleClikListener;
 
-public class LinkPageActivity extends Activity implements OnItemClickListener {
+public class LinkPageActivity extends ActionBarActivity implements OnItemClickListener {
 
-    private ProjectModel mProjectModel;
-    private GridView mGridView;
-    private PageAdapter mAdapter;
-    private MiniTitleView mTitleView;
+	private ProjectModel mProjectModel;
+	private GridView mGridView;
+	private PageAdapter mAdapter;
+	private MiniTitleView mTitleView;
 
-    private Intent intent;
+	private Intent intent;
 
-    private int mCurPage = 0;
-    private String mLinkPage;
+	private int mCurPage = 0;
+	private String mLinkPage;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_page_link);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_page_link);
 
-        intent = getIntent();
+		intent = getIntent();
 
-        mCurPage = intent.getIntExtra(Constans.LINK_CUR_PAGE, 0);
-        mLinkPage = intent.getStringExtra(Constans.LINK_PAGE_ID);
-        ProtoshopLog.e("LINK:" + mLinkPage);
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setDisplayShowHomeEnabled(false);
+		actionBar.setTitle("链接至");
 
-        mProjectModel = MiniApplication.getInstance().currentProjectModel;
-        mGridView = (GridView) findViewById(R.id.link_gridview);
+		mCurPage = intent.getIntExtra(Constans.LINK_CUR_PAGE, 0);
+		mLinkPage = intent.getStringExtra(Constans.LINK_PAGE_ID);
+		ProtoshopLog.e("LINK:" + mLinkPage);
 
-        for (PageModel model : mProjectModel.scenes) {
-            ProtoshopLog.e(model.id);
-            if (model.id.equals(mLinkPage)) {
-                model.isLinkPage = true;
-            } else {
-                model.isLinkPage = false;
-            }
-        }
+		mProjectModel = MiniApplication.getInstance().currentProjectModel;
+		mGridView = (GridView) findViewById(R.id.link_gridview);
 
-        mAdapter = new PageAdapter(this, mProjectModel);
-        mGridView.setAdapter(mAdapter);
-        mGridView.setOnItemClickListener(this);
-        
-        mTitleView=(MiniTitleView) findViewById(R.id.page_link_title);
-        mTitleView.setOnTitleClikListener(new OnTitleClikListener() {
-            
-            @Override
-            public void onRightClik(View view) {
-            }
-            
-            @Override
-            public void onLeftClik(View view) {
-                finish();
-            }
-            
-            @Override
-            public void onCenterClik(View view) {
-            }
-        });
-    }
+		for (PageModel model : mProjectModel.scenes) {
+			ProtoshopLog.e(model.id);
+			if (model.id.equals(mLinkPage)) {
+				model.isLinkPage = true;
+			} else {
+				model.isLinkPage = false;
+			}
+		}
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (position == mCurPage) {
-            Toast.makeText(getApplicationContext(), "当前页不可选!", Toast.LENGTH_SHORT).show();
-        } else {
-            intent.putExtra(Constans.PAGE_ID, ((PageModel) mAdapter.getItem(position)).id);
-            ProtoshopLog.e("SelectID:" + ((PageModel) mAdapter.getItem(position)).id);
-            setResult(RESULT_OK, intent);
-            finish();
-        }
-    }
+		mAdapter = new PageAdapter(this, mProjectModel);
+		mGridView.setAdapter(mAdapter);
+		mGridView.setOnItemClickListener(this);
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        for (PageModel model : mProjectModel.scenes) {
-            model.isLinkPage = false;
-        }
-        mAdapter.notifyDataSetChanged();
-    }
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int id = item.getItemId();
+		if (id == android.R.id.home) {
+			finish();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		if (position == mCurPage) {
+			Toast.makeText(getApplicationContext(), "当前页不可选!", Toast.LENGTH_SHORT).show();
+		} else {
+			intent.putExtra(Constans.PAGE_ID, ((PageModel) mAdapter.getItem(position)).id);
+			ProtoshopLog.e("SelectID:" + ((PageModel) mAdapter.getItem(position)).id);
+			setResult(RESULT_OK, intent);
+			finish();
+		}
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		for (PageModel model : mProjectModel.scenes) {
+			model.isLinkPage = false;
+		}
+		mAdapter.notifyDataSetChanged();
+	}
 }

@@ -3,13 +3,14 @@ package com.ctrip.protoshop.mini;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
-import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ext.SatelliteMenu;
@@ -29,7 +30,7 @@ import com.ctrip.protoshop.mini.constants.Constans;
 import com.ctrip.protoshop.mini.model.ProjectModel;
 import com.ctrip.protoshop.mini.util.Util;
 
-public class ProjectListActivity extends Activity {
+public class ProjectListActivity extends ActionBarActivity {
 
 	private static int EDITE_CODE = 111;
 
@@ -58,6 +59,11 @@ public class ProjectListActivity extends Activity {
 	 */
 	private void initUI() {
 
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setDisplayShowHomeEnabled(false);
+		actionBar.setTitle("创意列表");
+
 		mAddProjectView = findViewById(R.id.create_new_project_view);
 		mListView = (ListView) findViewById(R.id.project_list_listView);
 
@@ -68,6 +74,16 @@ public class ProjectListActivity extends Activity {
 		mSatelliteMenu.addItems(menuItems);
 
 		addOnListener();
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int id = item.getItemId();
+		if (id == android.R.id.home) {
+			finish();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	/**
@@ -251,29 +267,29 @@ public class ProjectListActivity extends Activity {
 		super.onDestroy();
 	}
 
-//	@Override
-//	public boolean onKeyDown(int keyCode, KeyEvent event) {
-//		if (keyCode == KeyEvent.KEYCODE_BACK) {
-//			if (isFirst) {
-//				Toast.makeText(getApplicationContext(), R.string.exit_text, Toast.LENGTH_SHORT).show();
-//				saveProjectInfo();
-//				new Thread(new Runnable() {
-//
-//					@Override
-//					public void run() {
-//						try {
-//							Thread.sleep(1000);
-//							isFirst = true;
-//						} catch (InterruptedException e) {
-//							e.printStackTrace();
-//						}
-//					}
-//				}).start();
-//				isFirst = false;
-//				return true;
-//			}
-//		}
-//		return super.onKeyDown(keyCode, event);
-//	}
+	// @Override
+	// public boolean onKeyDown(int keyCode, KeyEvent event) {
+	// if (keyCode == KeyEvent.KEYCODE_BACK) {
+	// if (isFirst) {
+	// Toast.makeText(getApplicationContext(), R.string.exit_text, Toast.LENGTH_SHORT).show();
+	// saveProjectInfo();
+	// new Thread(new Runnable() {
+	//
+	// @Override
+	// public void run() {
+	// try {
+	// Thread.sleep(1000);
+	// isFirst = true;
+	// } catch (InterruptedException e) {
+	// e.printStackTrace();
+	// }
+	// }
+	// }).start();
+	// isFirst = false;
+	// return true;
+	// }
+	// }
+	// return super.onKeyDown(keyCode, event);
+	// }
 
 }
