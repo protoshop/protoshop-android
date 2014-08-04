@@ -28,5 +28,6 @@
     <string name="create_project_title">创建工程</string>
     <string name="create_project_msg">请为您的工程起个名字</string>
     <string name="page_text">页</string>
+    <string name="title_activity_one">OneActivity</string>
 
 </resources>
