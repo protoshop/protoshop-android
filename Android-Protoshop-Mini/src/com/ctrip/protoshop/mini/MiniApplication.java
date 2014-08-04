@@ -7,28 +7,21 @@ import com.ctrip.protoshop.mini.model.PageModel;
 import com.ctrip.protoshop.mini.model.ProjectModel;
 import com.protoshop.lua.LuaConfig;
 
-import android.app.Application;
+public class MiniApplication implements LuaConfig {
+	private static MiniApplication instance=new MiniApplication();
+	public ProjectModel currentProjectModel;
+	public PageModel pageModel;
 
-public class MiniApplication extends Application implements LuaConfig{
-    private static MiniApplication instance;
-    public ProjectModel currentProjectModel;
-    public PageModel pageModel;
-    
-    public String cachePath;
-    
-    public List<String> scenes = new ArrayList<String>();
+	public String cachePath;
 
-    public static MiniApplication getInstance() {
-        return instance;
-    }
+	public List<String> scenes = new ArrayList<String>();
 
-    @Override
-    public void onCreate() {
-        instance = this;
-    }
+	public static MiniApplication getInstance() {
+		return instance;
+	}
 
-    @Override
-    public String getFloderPath() {
-        return cachePath;
-    }
+	@Override
+	public String getFloderPath() {
+		return cachePath;
+	}
 }

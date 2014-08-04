@@ -217,7 +217,7 @@ public class EditProjectActivity extends Activity {
      */
     private void gotoGallery() {
         Toast.makeText(getApplicationContext(), "相册", Toast.LENGTH_SHORT).show();
-        File tempFile = new File(Util.getRootFile(), Constans.TEMP_PIC);
+        File tempFile = new File(Util.getRootFile(this), Constans.TEMP_PIC);
         Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
         intent.putExtra("crop", "true");// 截取图片
@@ -234,7 +234,7 @@ public class EditProjectActivity extends Activity {
      */
     private void takePic() {
         Toast.makeText(getApplicationContext(), "照相", Toast.LENGTH_SHORT).show();
-        File tempFile = new File(Util.getRootFile(), Constans.TEMP_PIC);
+        File tempFile = new File(Util.getRootFile(this), Constans.TEMP_PIC);
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.addCategory(Intent.CATEGORY_DEFAULT);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
@@ -246,7 +246,7 @@ public class EditProjectActivity extends Activity {
      * 裁剪图片
      */
     private void cropPic() {
-        File tempFile = new File(Util.getRootFile(), Constans.TEMP_PIC);
+        File tempFile = new File(Util.getRootFile(this), Constans.TEMP_PIC);
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(Uri.fromFile(tempFile), "image/*");
         intent.putExtra("crop", "true");
@@ -265,8 +265,8 @@ public class EditProjectActivity extends Activity {
             PageModel model = new PageModel();
             model.id = Util.getUUID();
             model.name = "页面" + (mProjectModel.scenes.size() + 1);
-            Bitmap bitmap = Util.getBitmap(Util.getRootFile().getAbsolutePath() + File.separator + Constans.TEMP_PIC);
-            model.background = Util.saveBitmap(Util.getLocalProFile(mProjectModel.appID), bitmap);
+            Bitmap bitmap = Util.getBitmap(Util.getRootFile(this).getAbsolutePath() + File.separator + Constans.TEMP_PIC);
+            model.background = Util.saveBitmap(Util.getLocalProFile(this,mProjectModel.appID), bitmap);
             model.order = String.valueOf(mProjectModel.scenes.size());
             mProjectModel.scenes.add(model);
             mAdapter.notifyDataSetChanged();

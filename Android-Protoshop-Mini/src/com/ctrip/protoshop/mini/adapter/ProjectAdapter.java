@@ -39,7 +39,7 @@ public class ProjectAdapter extends MiniAdapter {
         int pageNum = model.scenes == null ? 0 : model.scenes.size();
         holder.pageNumView.setText(pageNum + context.getString(R.string.page_text));
         if (pageNum != 0) {
-            String bitmapPath = Util.getLocalProFile(model.appID).getAbsolutePath() + File.separator
+            String bitmapPath = Util.getLocalProFile(context,model.appID).getAbsolutePath() + File.separator
                 + model.scenes.get(0).background;
             Bitmap bitmap = Util.getBitmap(bitmapPath);
             holder.thumbView.setImageBitmap(ThumbnailUtils.extractThumbnail(bitmap, context.getResources()

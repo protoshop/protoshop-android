@@ -21,7 +21,7 @@ public class SplashActivity extends Activity {
 
         mMiniView = findViewById(R.id.mini_imageView);
         
-        MiniApplication.getInstance().cachePath=Util.getLocalRootFile().getAbsolutePath();
+        MiniApplication.getInstance().cachePath=Util.getLocalRootFile(this).getAbsolutePath();
 
         mTranslateAnimation = new TranslateAnimation(0, 0, 200, 0);
         mTranslateAnimation.setDuration(1000);

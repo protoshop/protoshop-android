@@ -140,7 +140,7 @@ public final class R {
 		public static final int abc_split_action_bar_is_narrow = 0x7f070002;
 	}
 	public static final class color {
-		public static final int abc_search_url_text_holo = 0x7f08001f;
+		public static final int abc_search_url_text_holo = 0x7f080024;
 		public static final int abc_search_url_text_normal = 0x7f080000;
 		public static final int abc_search_url_text_pressed = 0x7f080002;
 		public static final int abc_search_url_text_selected = 0x7f080001;
@@ -256,7 +256,7 @@ public final class R {
 		public static final int abc_textfield_searchview_holo_light = 0x7f02005a;
 		public static final int abc_textfield_searchview_right_holo_dark = 0x7f02005b;
 		public static final int abc_textfield_searchview_right_holo_light = 0x7f02005c;
-		public static final int ic_launcher = 0x7f02006b;
+		public static final int ic_launcher = 0x7f020078;
 	}
 	public static final class id {
 		public static final int action_bar = 0x7f060027;
@@ -273,7 +273,7 @@ public final class R {
 		public static final int activity_chooser_view_content = 0x7f060030;
 		public static final int always = 0x7f06000b;
 		public static final int beginning = 0x7f060011;
-		public static final int cancel = 0x7f060024;
+		public static final int cancel = 0x7f06001b;
 		public static final int checkbox = 0x7f060038;
 		public static final int collapseActionView = 0x7f06000d;
 		public static final int default_activity_button = 0x7f060033;
@@ -295,7 +295,7 @@ public final class R {
 		public static final int never = 0x7f060009;
 		public static final int none = 0x7f060010;
 		public static final int normal = 0x7f060000;
-		public static final int ok = 0x7f060023;
+		public static final int ok = 0x7f06001a;
 		public static final int progress_circular = 0x7f060018;
 		public static final int progress_horizontal = 0x7f060019;
 		public static final int radio = 0x7f06003a;
@@ -350,8 +350,8 @@ public final class R {
 		public static final int abc_search_dropdown_item_icons_2line = 0x7f030015;
 		public static final int abc_search_view = 0x7f030016;
 		public static final int abc_simple_decor = 0x7f030017;
-		public static final int back_home_dialog = 0x7f030022;
-		public static final int support_simple_spinner_dropdown_item = 0x7f03002d;
+		public static final int back_home_dialog = 0x7f030028;
+		public static final int support_simple_spinner_dropdown_item = 0x7f03003c;
 	}
 	public static final class raw {
 		public static final int command = 0x7f050000;
@@ -375,11 +375,11 @@ public final class R {
 		public static final int abc_searchview_description_voice = 0x7f0b0008;
 		public static final int abc_shareactionprovider_share_with = 0x7f0b000c;
 		public static final int abc_shareactionprovider_share_with_application = 0x7f0b000b;
-		public static final int app_name = 0x7f0b0011;
+		public static final int app_name = 0x7f0b000d;
 	}
 	public static final class style {
 		public static final int AppBaseTheme = 0x7f0c008b;
-		public static final int AppDialog = 0x7f0c008f;
+		public static final int AppDialog = 0x7f0c008d;
 		public static final int AppTheme = 0x7f0c008c;
 		public static final int TextAppearance_AppCompat_Base_CompactMenu_Dialog = 0x7f0c0063;
 		public static final int TextAppearance_AppCompat_Base_SearchResult = 0x7f0c006d;

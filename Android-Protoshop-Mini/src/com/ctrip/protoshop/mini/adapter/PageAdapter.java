@@ -56,7 +56,7 @@ public class PageAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         PageModel model = mLocalModel.scenes.get(position);
-        Bitmap bitmap = Util.getBitmap(Util.getLocalProFile(mLocalModel.appID).getAbsolutePath() + File.separator
+        Bitmap bitmap = Util.getBitmap(Util.getLocalProFile(mContext,mLocalModel.appID).getAbsolutePath() + File.separator
             + model.background);
 
         if (model.isEditModel) {

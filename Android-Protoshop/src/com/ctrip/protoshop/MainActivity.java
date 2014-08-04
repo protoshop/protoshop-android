@@ -45,6 +45,7 @@ import com.ctrip.protoshop.interfaces.IHomeScence;
 import com.ctrip.protoshop.interfaces.imp.LoadedState;
 import com.ctrip.protoshop.interfaces.imp.NetHomeScenceImp;
 import com.ctrip.protoshop.interfaces.imp.NormalState;
+import com.ctrip.protoshop.mini.ProjectListActivity;
 import com.ctrip.protoshop.model.ProgramModel;
 import com.ctrip.protoshop.util.ProtoshopLog;
 import com.ctrip.protoshop.util.Util;
@@ -192,7 +193,7 @@ public class MainActivity extends BaseActivity {
 			if (id == R.id.ic_action_settings) {
 				startActivity(new Intent(getApplicationContext(), SettingActivity.class));
 			} else if (id == R.id.ic_action_mini) {
-				Toast.makeText(getApplicationContext(), "MINI", Toast.LENGTH_SHORT).show();
+				startActivity(new Intent(getApplicationContext(), ProjectListActivity.class));
 			}
 		}
 

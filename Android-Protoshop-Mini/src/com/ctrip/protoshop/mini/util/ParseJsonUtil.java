@@ -115,7 +115,7 @@ public class ParseJsonUtil {
             pattern = Pattern.compile("#");
             matcher = pattern.matcher(scenceStr);
             scenceStr = matcher.replaceAll("\\$");
-            Util.saveScence(appID, id + ".lua", scenceStr);
+            Util.saveScence(context,appID, id + ".lua", scenceStr);
         }
 
     }

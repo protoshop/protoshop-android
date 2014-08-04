@@ -68,7 +68,7 @@ public class EditPageActivity extends Activity {
 
         mPanelView = (AbsoluteLayout) findViewById(R.id.edit_panel_view);
         mPanelView.setBackgroundDrawable(new BitmapDrawable(getResources(), Util.getBitmap(Util
-            .getLocalProFile(mProjectModel.appID) + File.separator + mProjectModel.scenes.get(mPageNum).background)));
+            .getLocalProFile(this,mProjectModel.appID) + File.separator + mProjectModel.scenes.get(mPageNum).background)));
 
         mTitleView = (MiniTitleView) findViewById(R.id.edit_page_title);
         mTitleView.updateCenterText(mProjectModel.scenes.get(mPageNum).name);
