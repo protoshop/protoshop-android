@@ -209,6 +209,7 @@ public class MainActivity extends BaseActivity {
 		MenuBuilder menu = new MenuBuilder(this);
 		getMenuInflater().inflate(R.menu.more, menu);
 		MorePopupAdapter adapter = new MorePopupAdapter(this, menu);
+		//mMorePopupWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), BitmapFactory.decodeResource(getResources(), R.drawable.ab_solid_protoshop)));
 		mMorePopupWindow.setWidth(adapter.getWidth());
 		mMorePopupWindow.setAdapter(adapter);
 		mMorePopupWindow.setModal(true);
