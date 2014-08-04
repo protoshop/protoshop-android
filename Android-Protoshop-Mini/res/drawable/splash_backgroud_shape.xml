@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:drawable="@drawable/login_backgroud_shape"/>
+    <item android:top="@dimen/_80">
+        <bitmap android:src="@drawable/splash_icon" android:gravity="top" />
+        
+    </item>
+
+</layer-list>

@@ -1,0 +1,41 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:sat="http://schemas.android.com/apk/res/com.ctrip.protoshop.mini"
+    xmlns:title="http://schemas.android.com/apk/res/com.ctrip.protoshop.mini"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditProjectActivity" >
+
+    <com.ctrip.protoshop.mini.wiget.MiniTitleView
+        android:id="@+id/edit_project_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        title:center_text="项目名称"
+        title:left_text="返回" />
+
+    <com.ctrip.protoshop.mini.wiget.DragGridView
+        android:id="@+id/project_page_gridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_project_title"
+        android:listSelector="@null"
+        android:numColumns="3" >
+    </com.ctrip.protoshop.mini.wiget.DragGridView>
+
+    <android.view.ext.SatelliteMenu
+        android:id="@+id/project_setting_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="@dimen/_5"
+        sat:closeOnClick="true"
+        sat:expandDuration="500"
+        sat:mainImage="@drawable/add"
+        sat:satelliteDistance="@dimen/_100"
+        sat:totalSpacingDegree="90" />
+
+</RelativeLayout>

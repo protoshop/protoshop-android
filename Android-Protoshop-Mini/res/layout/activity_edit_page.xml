@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:sat="http://schemas.android.com/apk/res/com.ctrip.protoshop.mini"
+    xmlns:title="http://schemas.android.com/apk/res/com.ctrip.protoshop.mini"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditPageActivity" >
+
+    <com.ctrip.protoshop.mini.wiget.MiniTitleView
+        android:id="@+id/edit_page_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        title:left_text="返回"
+        title:center_text="页面名称" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/edit_page_title"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <AbsoluteLayout
+            android:id="@+id/edit_panel_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true" >
+        </AbsoluteLayout>
+    </LinearLayout>
+
+    <android.view.ext.SatelliteMenu
+        android:id="@+id/page_setting_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="@dimen/_5"
+        sat:closeOnClick="true"
+        sat:expandDuration="500"
+        sat:mainImage="@drawable/add"
+        sat:satelliteDistance="@dimen/_80"
+        sat:totalSpacingDegree="90" />
+
+</RelativeLayout>

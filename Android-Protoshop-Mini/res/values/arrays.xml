@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="select_pic_items">
+        <item>相册</item>
+        <item>拍照</item>
+        <item>取消</item>
+    </string-array>
+
+</resources>

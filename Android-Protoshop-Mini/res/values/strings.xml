@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ProtoshopMini</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_text">创意列表</string>
+    <string name="title_activity_editor">EditorActivity</string>
+    <string name="title_activity_editor_page">EditorPageActivity</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_link">LinkActivity</string>
+    <string name="title_activity_lua">LuaActivity</string>
+
+    <!-- tip text -->
+    <string name="tip_text">提示</string>
+    <string name="empty_tip_text">点击添加新创意</string>
+    <string name="select_pic_text">选择图片</string>
+    <string name="tool_text">工具</string>
+    <string name="jump_text">跳转</string>
+    <string name="cancel_text">取消</string>
+    <string name="jump_tip_text">链接至</string>
+    <string name="ok_text">确定</string>
+    <string name="delete_tip_text">您确定要删除项目:</string>
+    <string name="exit_text">再按一次就退出了!</string>
+    <string name="select_pic_text">选择图片</string>
+
+    <!-- add project -->
+    <string name="create_project_title">创建工程</string>
+    <string name="create_project_msg">请为您的工程起个名字</string>
+    <string name="page_text">页</string>
+
+</resources>

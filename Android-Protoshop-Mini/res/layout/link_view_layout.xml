@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <ImageView
+        android:id="@+id/link_delete_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:adjustViewBounds="true"
+        android:maxHeight="@dimen/pop_height"
+        android:src="@drawable/hotspots_toolbar_btn_delete_normal" />
+
+    <TextView
+        android:id="@+id/link_link_view"
+        android:layout_width="80dp"
+        android:layout_height="@dimen/pop_height"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/link_delete_view"
+        android:background="@drawable/hotspots_toolbar_btn_linkto_normal"
+        android:gravity="top|center_horizontal"
+        android:paddingTop="3dp"
+        android:text="链接至"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp" />
+
+</RelativeLayout>
