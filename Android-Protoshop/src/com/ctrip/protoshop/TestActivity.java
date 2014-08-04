@@ -1,51 +1,38 @@
 package com.ctrip.protoshop;
 
-import java.util.regex.Pattern;
-import org.apache.http.util.EncodingUtils;
-import org.keplerproject.luajava.LuaState;
-import org.keplerproject.luajava.LuaStateFactory;
-import android.app.Activity;
+import java.lang.reflect.Field;
+
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.widget.TextView;
-import com.ctrip.protoshop.util.Util;
-import com.protoshop.lua.util.LuaLog;
+import android.view.Menu;
+import android.view.ViewConfiguration;
 
-public class TestActivity extends Activity {
+public class TestActivity extends BaseActivity {
 
-    private LuaState mLuaState;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.test);
+		getOverflowMenu();
+	}
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        LuaLog.e("LuaActivity", "into--[onCreate]");
-        ProtoshopApplication.getInstance().cachePath = Util.getUserRootFile().getAbsolutePath();
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.test, menu);
+		return true;
+	}
 
-        String luaStr = com.ctrip.protoshop.util.Util.readStream(getResources().openRawResource(R.raw.command));
+	private void getOverflowMenu() {
 
-        luaStr = EncodingUtils.getString(luaStr.getBytes(), "UTF-8");
-        System.out.println(luaStr);
-
-        if (TextUtils.isEmpty(luaStr)) {
-            TextView textView = new TextView(this);
-            textView.setText("Lua解析错误!");
-            setContentView(textView);
-            return;
-        }
-
-        LuaLog.e(luaStr);
-
-        try {
-            mLuaState = LuaStateFactory.newLuaState();
-            mLuaState.LdoString(luaStr);
-            mLuaState.getField(LuaState.LUA_GLOBALSINDEX, "onCreate");
-            mLuaState.pushJavaObject(this);
-            mLuaState.call(1, 0);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        LuaLog.e("LuaActivity", "out--[onCreate]");
-
-    }
+		try {
+			ViewConfiguration config = ViewConfiguration.get(this);
+			Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+			if (menuKeyField != null) {
+				menuKeyField.setAccessible(true);
+				menuKeyField.setBoolean(config, false);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }
