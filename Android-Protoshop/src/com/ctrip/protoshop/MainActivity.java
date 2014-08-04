@@ -200,6 +200,7 @@ public class MainActivity extends BaseActivity {
 
 	/**
 	 * 显示更多菜单
+	 * 
 	 * @param view
 	 */
 	private void showMoreMenu(View view) {
@@ -253,45 +254,9 @@ public class MainActivity extends BaseActivity {
 					if (resultObject.has("status")) {
 						status = resultObject.getString("status");
 						if ("1".equals(status) && resultObject.has("code")) {
-							String code = resultObject.getString("code");
-							if ("10002".equals(code) || "10003".equals(code)) {
-								LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcast(new Intent(Constans.LOGOUT));
-								startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-								finish();
-								Toast.makeText(getApplicationContext(), "请重新登陆!", Toast.LENGTH_SHORT).show();
-							}
-
+							relogin(resultObject);
 						} else if ("0".equals(status) && resultObject.has("result")) {
-							List<ProgramModel> models = parseResult(resultObject);
-
-							// 服务器获取的列表中是否有本地缓存，如果有本地缓存，并且editTime相同，不用刷新。否则刷新。服务器没有，本地有，默认本地删除。
-							for (ProgramModel programModel : models) {
-								if (mProgramLoadedMap.containsKey(programModel.appID)) {
-									if (programModel.editTime.equals(mProgramLoadedMap.get(programModel.appID).editTime)) {
-										programModel.home_scence = mProgramLoadedMap.get(programModel.appID).home_scence;
-										programModel.state = new LoadedState(MainActivity.this);
-									} else {
-										programModel.state = new NormalState(MainActivity.this, mAdapter, mHomeScence, mProgramLoadedMap);
-									}
-								} else {
-									programModel.state = new NormalState(MainActivity.this, mAdapter, mHomeScence, mProgramLoadedMap);
-								}
-							}
-
-							mModels.clear();
-							mModels.addAll(models);
-							mAdapter.notifyDataSetChanged(mModels);
-							mSwipeRefreshLayout.setRefreshComplete();
-
-							if (mModels.size() == 0) {
-								mEmptyView.setVisibility(View.VISIBLE);
-								mEmptyView.bringToFront();
-							} else {
-								mEmptyView.setVisibility(View.GONE);
-								mListView.bringToFront();
-							}
-							Toast.makeText(getApplicationContext(), "列表更新成功!", Toast.LENGTH_SHORT).show();
-
+							dealNormalResult(resultObject);
 						}
 					} else {
 						Toast.makeText(getApplicationContext(), R.string.server_error, Toast.LENGTH_SHORT).show();
@@ -301,6 +266,68 @@ public class MainActivity extends BaseActivity {
 					e.printStackTrace();
 					Toast.makeText(getApplicationContext(), R.string.server_error, Toast.LENGTH_SHORT).show();
 					return;
+				}
+			}
+
+			/**
+			 * @param resultObject
+			 * @throws JSONException
+			 */
+			private void dealNormalResult(JSONObject resultObject) throws JSONException {
+				List<ProgramModel> models = parseResult(resultObject);
+
+				// 服务器获取的列表中是否有本地缓存，如果有本地缓存，并且editTime相同，不用刷新。否则刷新。服务器没有，本地有，默认本地删除。
+				for (ProgramModel programModel : models) {
+					compareResult(programModel);
+				}
+
+				mModels.clear();
+				mModels.addAll(models);
+				mAdapter.notifyDataSetChanged(mModels);
+				mSwipeRefreshLayout.setRefreshComplete();
+
+				if (mModels.size() == 0) {
+					mEmptyView.setVisibility(View.VISIBLE);
+					mEmptyView.bringToFront();
+				} else {
+					mEmptyView.setVisibility(View.GONE);
+					mListView.bringToFront();
+				}
+				Toast.makeText(getApplicationContext(), "列表更新成功!", Toast.LENGTH_SHORT).show();
+			}
+
+			/**
+			 * 比较返回结果
+			 * 
+			 * @param programModel
+			 */
+			private void compareResult(ProgramModel programModel) {
+				String appID = programModel.appID;
+				if (mProgramLoadedMap.containsKey(appID)) {
+					if (programModel.editTime.equals(mProgramLoadedMap.get(appID).editTime)) {
+						programModel.home_scence = mProgramLoadedMap.get(appID).home_scence;
+						programModel.state = new LoadedState(MainActivity.this);
+					} else {
+						programModel.state = new NormalState(MainActivity.this, mAdapter, mHomeScence, mProgramLoadedMap);
+					}
+				} else {
+					programModel.state = new NormalState(MainActivity.this, mAdapter, mHomeScence, mProgramLoadedMap);
+				}
+			}
+
+			/**
+			 * 重新登录
+			 * 
+			 * @param resultObject
+			 * @throws JSONException
+			 */
+			private void relogin(JSONObject resultObject) throws JSONException {
+				String code = resultObject.getString("code");
+				if ("10002".equals(code) || "10003".equals(code)) {
+					LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcast(new Intent(Constans.LOGOUT));
+					startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+					finish();
+					Toast.makeText(getApplicationContext(), "请重新登陆!", Toast.LENGTH_SHORT).show();
 				}
 			}
 
