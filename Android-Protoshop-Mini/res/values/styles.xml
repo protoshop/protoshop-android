@@ -37,4 +37,9 @@
         <item name="android:textColor">#cccccc</item>
     </style>
 
+    <style name="text_ffffff_20">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
 </resources>

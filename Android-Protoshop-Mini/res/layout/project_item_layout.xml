@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/_5" >
+    android:layout_height="wrap_content"
+    android:background="@drawable/white_gray_line_backgroud" >
 
     <ImageView
         android:id="@+id/project_icon_view"
@@ -10,25 +10,43 @@
         android:layout_height="@dimen/_50"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/_2"
+        android:padding="@dimen/_5"
         android:src="@drawable/ic_launcher" />
 
-    <TextView
-        android:id="@+id/project_name_view"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/project_page_num_view"
+        android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/project_icon_view"
-        android:text="TextView"
-        android:textAppearance="@style/text_20_000000" />
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/project_name_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textAppearance="@style/text_20_000000" />
+
+        <TextView
+            android:id="@+id/project_page_num_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textAppearance="@style/text_16_cccccc" />
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/project_page_num_view"
+        android:id="@+id/project_item_confirm_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/project_icon_view"
-        android:layout_toRightOf="@+id/project_icon_view"
-        android:text="TextView"
-        android:textAppearance="@style/text_16_cccccc" />
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/project_icon_view"
+        android:background="@color/red_fc3e39"
+        android:paddingLeft="@dimen/_10"
+        android:paddingRight="@dimen/_10"
+        android:text="DELETE"
+        android:textAppearance="@style/text_ffffff_20"
+        android:visibility="visible" />
 
 </RelativeLayout>

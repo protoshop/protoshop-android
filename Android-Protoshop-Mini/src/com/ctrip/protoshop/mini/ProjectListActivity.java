@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -73,6 +77,9 @@ public class ProjectListActivity extends BaseActivity {
 		mSatelliteMenu.addItems(menuItems);
 
 		addOnListener();
+
+		LocalBroadcastManager.getInstance(this).registerReceiver(deleteReceiver, new IntentFilter("delete item"));
+		LocalBroadcastManager.getInstance(this).registerReceiver(onItemClickReceiver, new IntentFilter("on item click"));
 	}
 
 	@Override
@@ -128,6 +135,24 @@ public class ProjectListActivity extends BaseActivity {
 			}
 		});
 	}
+
+	private BroadcastReceiver deleteReceiver = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			int position = intent.getIntExtra("position", -1);
+			dealDeleteProgject(mProjectModels.get(position));
+		}
+	};
+	BroadcastReceiver onItemClickReceiver = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			int position = intent.getIntExtra("position", -1);
+			MiniApplication.getInstance().currentProjectModel = mProjectModels.get(position);
+			startActivityForResult(new Intent(getApplicationContext(), EditProjectActivity.class), EDITE_CODE);
+		}
+	};
 
 	/**
 	 * 
@@ -263,6 +288,8 @@ public class ProjectListActivity extends BaseActivity {
 	@Override
 	protected void onDestroy() {
 		saveProjectInfo();
+		LocalBroadcastManager.getInstance(this).unregisterReceiver(deleteReceiver);
+		LocalBroadcastManager.getInstance(this).unregisterReceiver(onItemClickReceiver);
 		super.onDestroy();
 	}
 
