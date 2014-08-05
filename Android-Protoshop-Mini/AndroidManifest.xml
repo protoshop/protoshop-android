@@ -52,10 +52,6 @@
             android:name="com.protoshop.lua.LuaActivity"
             android:screenOrientation="portrait" >
         </activity>
-        <activity
-            android:name=".OneActivity"
-            android:label="@string/title_activity_one" >
-        </activity>
     </application>
 
 </manifest>

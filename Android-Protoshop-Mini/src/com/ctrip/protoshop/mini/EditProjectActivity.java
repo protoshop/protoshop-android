@@ -37,7 +37,7 @@ import com.ctrip.protoshop.mini.wiget.DragGridView;
 import com.ctrip.protoshop.mini.wiget.DragGridView.OnChanageListener;
 import com.protoshop.lua.LuaActivity;
 
-public class EditProjectActivity extends ActionBarActivity {
+public class EditProjectActivity extends BaseActivity {
 	private final static int FROM_GALLERY = 211;
 	private final static int FROM_CAMARE = 212;
 	private final static int CROP_PIC = 213;

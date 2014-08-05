@@ -3,7 +3,6 @@ package com.ctrip.protoshop.mini;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,9 +16,8 @@ import com.ctrip.protoshop.mini.model.PageModel;
 import com.ctrip.protoshop.mini.model.ProjectModel;
 import com.ctrip.protoshop.mini.util.ProtoshopLog;
 import com.ctrip.protoshop.mini.wiget.MiniTitleView;
-import com.ctrip.protoshop.mini.wiget.MiniTitleView.OnTitleClikListener;
 
-public class LinkPageActivity extends ActionBarActivity implements OnItemClickListener {
+public class LinkPageActivity extends BaseActivity implements OnItemClickListener {
 
 	private ProjectModel mProjectModel;
 	private GridView mGridView;

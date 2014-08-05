@@ -33,7 +33,7 @@ import com.ctrip.protoshop.mini.wiget.LinkView.OnLinkListener;
 import com.protoshop.lua.LuaActivity;
 
 @SuppressWarnings("deprecation")
-public class EditPageActivity extends ActionBarActivity {
+public class EditPageActivity extends BaseActivity {
 
 	private static int LINK_REQUEST_CODE = 311;
 	private final static int LINK_CODE = 312;

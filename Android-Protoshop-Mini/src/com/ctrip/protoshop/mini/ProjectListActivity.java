@@ -8,9 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,7 +29,7 @@ import com.ctrip.protoshop.mini.constants.Constans;
 import com.ctrip.protoshop.mini.model.ProjectModel;
 import com.ctrip.protoshop.mini.util.Util;
 
-public class ProjectListActivity extends ActionBarActivity {
+public class ProjectListActivity extends BaseActivity {
 
 	private static int EDITE_CODE = 111;
 
@@ -76,22 +74,12 @@ public class ProjectListActivity extends ActionBarActivity {
 
 		addOnListener();
 	}
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.one, menu);
-		return true;
-	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 		if (id == android.R.id.home) {
 			finish();
-			return true;
-		} else if (id == R.id.action_settings) {
-			Intent intent=new Intent("Settings");
-			intent.addCategory("android.intent.category.DEFAULT");
-			startActivity(intent);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
