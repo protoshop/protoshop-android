@@ -8,23 +8,17 @@
     <ListView
         android:id="@+id/project_list_listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@null"
-        android:dividerHeight="0dp" >
+        android:layout_height="match_parent" >
     </ListView>
 
-    <android.view.ext.SatelliteMenu
+    <ImageView
         android:id="@+id/project_setting_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_margin="@dimen/_5"
-        sat:closeOnClick="true"
-        sat:expandDuration="500"
-        sat:mainImage="@drawable/add"
-        sat:satelliteDistance="@dimen/_80"
-        sat:totalSpacingDegree="90" />
+        android:src="@drawable/add" />
 
     <ImageView
         android:id="@+id/create_new_project_view"

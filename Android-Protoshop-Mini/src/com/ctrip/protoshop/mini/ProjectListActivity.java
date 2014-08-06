@@ -12,14 +12,15 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ext.SatelliteMenu;
-import android.view.ext.SatelliteMenu.SateliteClickedListener;
-import android.view.ext.SatelliteMenuItem;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -33,14 +34,12 @@ public class ProjectListActivity extends BaseActivity {
 
 	private static int EDITE_CODE = 111;
 
-	private static int STATE_ADD_ID = 112;
-	private static int STATE_ICON_ID = 113;
-
 	private ListView mListView;
 	private BaseAdapter mAdapter;
 	private List<ProjectModel> mProjectModels;
 
-	private SatelliteMenu mSatelliteMenu;
+	private ImageView mAddView;
+	private RotateAnimation mAddAnimation;
 	private View mAddProjectView;
 
 	@Override
@@ -66,12 +65,9 @@ public class ProjectListActivity extends BaseActivity {
 		mAddProjectView = findViewById(R.id.create_new_project_view);
 		mListView = (ListView) findViewById(R.id.project_list_listView);
 
-		mSatelliteMenu = (SatelliteMenu) findViewById(R.id.project_setting_view);
-		ArrayList<SatelliteMenuItem> menuItems = new ArrayList<SatelliteMenuItem>();
-		menuItems.add(new SatelliteMenuItem(STATE_ICON_ID, R.drawable.ic_launcher));
-		menuItems.add(new SatelliteMenuItem(STATE_ADD_ID, R.drawable.add));
-		mSatelliteMenu.addItems(menuItems);
-
+		mAddView = (ImageView) findViewById(R.id.project_setting_view);
+		mAddAnimation = new RotateAnimation(0f, 360f, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+		mAddAnimation.setDuration(300);
 		addOnListener();
 	}
 
@@ -120,28 +116,30 @@ public class ProjectListActivity extends BaseActivity {
 		});
 
 		// 菜单点击
-		mSatelliteMenu.setOnItemClickedListener(new SateliteClickedListener() {
+		mAddView.setOnClickListener(new OnClickListener() {
 
 			@Override
-			public void eventOccured(int id) {
-				responseOnStateItemListener(id);
+			public void onClick(View v) {
+				mAddView.startAnimation(mAddAnimation);
 			}
 		});
-	}
 
-	/**
-	 * 
-	 * 菜单点击事件.
-	 * 
-	 * @param id
-	 *            菜单项ID
-	 */
-	protected void responseOnStateItemListener(int id) {
-		if (id == STATE_ADD_ID) {
-			addProject();
-		} else if (id == STATE_ICON_ID) {
-			Toast.makeText(this, "Hello,This is a Icon!", Toast.LENGTH_SHORT).show();
-		}
+		mAddAnimation.setAnimationListener(new AnimationListener() {
+
+			@Override
+			public void onAnimationStart(Animation animation) {
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+			}
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				addProject();
+			}
+		});
+
 	}
 
 	/**
@@ -161,11 +159,11 @@ public class ProjectListActivity extends BaseActivity {
 		}
 
 		if (mProjectModels.size() == 0) {
-			mSatelliteMenu.setVisibility(View.GONE);
+			mAddView.setVisibility(View.GONE);
 			mAddProjectView.setVisibility(View.VISIBLE);
 		} else {
 			mAddProjectView.setVisibility(View.GONE);
-			mSatelliteMenu.setVisibility(View.VISIBLE);
+			mAddView.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -176,8 +174,10 @@ public class ProjectListActivity extends BaseActivity {
 	 * @param projectModel
 	 */
 	private void showDeleteDialog(final ProjectModel projectModel) {
-		new AlertDialog.Builder(this).setTitle(R.string.tip_text).setIcon(android.R.drawable.ic_dialog_alert).setMessage(getString(R.string.delete_tip_text) + projectModel.appName + "?")
-				.setPositiveButton(R.string.ok_text, new DialogInterface.OnClickListener() {
+		new AlertDialog.Builder(this).setTitle(R.string.tip_text)
+		.setIcon(android.R.drawable.ic_dialog_alert)
+		.setMessage(getString(R.string.delete_tip_text) + projectModel.appName + "?")
+		.setPositiveButton(R.string.ok_text, new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -219,32 +219,34 @@ public class ProjectListActivity extends BaseActivity {
 	 */
 	private void addProject() {
 		View view = View.inflate(getApplicationContext(), R.layout.edite_layout, null);
-		final EditText editText = (EditText) view.findViewById(R.id.editText1);
+		final EditText editText = (EditText) view.findViewById(R.id.project_name_edit);
 
-		new AlertDialog.Builder(this).setTitle(R.string.create_project_title).setMessage(R.string.create_project_msg).setView(view)
-				.setPositiveButton(R.string.ok_text, new DialogInterface.OnClickListener() {
+		new AlertDialog.Builder(this)
+		.setTitle(R.string.create_project_title)
+		.setView(view)
+		.setPositiveButton(R.string.ok_text, new DialogInterface.OnClickListener() {
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-						Toast.makeText(getApplicationContext(), editText.getText().toString(), Toast.LENGTH_LONG).show();
-						ProjectModel model = new ProjectModel();
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				Toast.makeText(getApplicationContext(), editText.getText().toString(), Toast.LENGTH_LONG).show();
+				ProjectModel model = new ProjectModel();
 
-						model.appID = Util.getUUID();
-						model.appName = editText.getText().toString();
+				model.appID = Util.getUUID();
+				model.appName = editText.getText().toString();
 
-						mProjectModels.add(model);
-						mAddProjectView.setVisibility(View.GONE);
-						mAdapter.notifyDataSetChanged();
-						mSatelliteMenu.setVisibility(View.VISIBLE);
-					}
-				}).setNegativeButton(R.string.cancel_text, new DialogInterface.OnClickListener() {
+				mProjectModels.add(model);
+				mAddProjectView.setVisibility(View.GONE);
+				mAdapter.notifyDataSetChanged();
+				mAddView.setVisibility(View.VISIBLE);
+			}
+		}).setNegativeButton(R.string.cancel_text, new DialogInterface.OnClickListener() {
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-				}).show();
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		}).show();
 	}
 
 	/**
@@ -265,30 +267,5 @@ public class ProjectListActivity extends BaseActivity {
 		saveProjectInfo();
 		super.onDestroy();
 	}
-
-	// @Override
-	// public boolean onKeyDown(int keyCode, KeyEvent event) {
-	// if (keyCode == KeyEvent.KEYCODE_BACK) {
-	// if (isFirst) {
-	// Toast.makeText(getApplicationContext(), R.string.exit_text, Toast.LENGTH_SHORT).show();
-	// saveProjectInfo();
-	// new Thread(new Runnable() {
-	//
-	// @Override
-	// public void run() {
-	// try {
-	// Thread.sleep(1000);
-	// isFirst = true;
-	// } catch (InterruptedException e) {
-	// e.printStackTrace();
-	// }
-	// }
-	// }).start();
-	// isFirst = false;
-	// return true;
-	// }
-	// }
-	// return super.onKeyDown(keyCode, event);
-	// }
 
 }
