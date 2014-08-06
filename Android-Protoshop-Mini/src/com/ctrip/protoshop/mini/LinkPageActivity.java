@@ -15,14 +15,12 @@ import com.ctrip.protoshop.mini.constants.Constans;
 import com.ctrip.protoshop.mini.model.PageModel;
 import com.ctrip.protoshop.mini.model.ProjectModel;
 import com.ctrip.protoshop.mini.util.ProtoshopLog;
-import com.ctrip.protoshop.mini.wiget.MiniTitleView;
 
 public class LinkPageActivity extends BaseActivity implements OnItemClickListener {
 
 	private ProjectModel mProjectModel;
 	private GridView mGridView;
 	private PageAdapter mAdapter;
-	private MiniTitleView mTitleView;
 
 	private Intent intent;
 

@@ -8,12 +8,14 @@
 
     <ImageView
         android:id="@+id/page_thumb_view"
-        android:layout_width="@dimen/_75"
-        android:layout_height="@dimen/_100"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
         android:layout_marginBottom="@dimen/_5"
-        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:background="@drawable/gray_circle_line_backgroud"
         android:src="@drawable/ic_launcher" />
 
     <ImageView

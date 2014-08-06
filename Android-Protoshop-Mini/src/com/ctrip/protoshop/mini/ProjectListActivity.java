@@ -18,7 +18,6 @@ import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -35,7 +34,7 @@ public class ProjectListActivity extends BaseActivity {
 	private static int EDITE_CODE = 111;
 
 	private ListView mListView;
-	private BaseAdapter mAdapter;
+	private ProjectAdapter mAdapter;
 	private List<ProjectModel> mProjectModels;
 
 	private ImageView mAddView;

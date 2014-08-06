@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray_fafafa"
     tools:context=".LinkPageActivity" >
 
     <GridView
@@ -9,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/page_link_title"
-        android:numColumns="3" >
+        android:numColumns="3"
+        android:scrollbars="none" >
     </GridView>
 
 </RelativeLayout>

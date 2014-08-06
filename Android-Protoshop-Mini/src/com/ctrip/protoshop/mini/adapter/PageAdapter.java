@@ -15,87 +15,87 @@ import com.ctrip.protoshop.mini.model.ProjectModel;
 import com.ctrip.protoshop.mini.util.Util;
 
 public class PageAdapter extends BaseAdapter {
-    private ProjectModel mLocalModel;
-    private Context mContext;
+	private ProjectModel mLocalModel;
+	private Context mContext;
 
-    public PageAdapter(Context context, ProjectModel model) {
-        mLocalModel = model;
-        mContext = context;
-    }
+	public PageAdapter(Context context, ProjectModel model) {
+		mLocalModel = model;
+		mContext = context;
 
-    @Override
-    public int getCount() {
-        return mLocalModel.scenes != null ? mLocalModel.scenes.size() : 0;
-    }
+	}
 
-    @Override
-    public Object getItem(int position) {
+	@Override
+	public int getCount() {
+		return mLocalModel.scenes != null ? mLocalModel.scenes.size() : 0;
+	}
 
-        return mLocalModel.scenes != null ? mLocalModel.scenes.get(position) : null;
-    }
+	@Override
+	public Object getItem(int position) {
 
-    @Override
-    public long getItemId(int position) {
+		return mLocalModel.scenes != null ? mLocalModel.scenes.get(position) : null;
+	}
 
-        return position;
-    }
+	@Override
+	public long getItemId(int position) {
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
-        if (convertView == null) {
-            holder = new ViewHolder();
-            convertView = View.inflate(mContext, R.layout.page_item_layout, null);
-            holder.deleteView = (ImageView) convertView.findViewById(R.id.page_delete_view);
-            holder.thumbnailView = (ImageView) convertView.findViewById(R.id.page_thumb_view);
-            holder.nameView = (TextView) convertView.findViewById(R.id.page_name_view);
-            holder.linkView = (ImageView) convertView.findViewById(R.id.page_link_view);
-            convertView.setTag(holder);
+		return position;
+	}
 
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
-        PageModel model = mLocalModel.scenes.get(position);
-        Bitmap bitmap = Util.getBitmap(Util.getLocalProFile(mContext,mLocalModel.appID).getAbsolutePath() + File.separator
-            + model.background);
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		ViewHolder holder;
+		if (convertView == null) {
+			holder = new ViewHolder();
+			convertView = View.inflate(mContext, R.layout.page_item_layout, null);
+			holder.deleteView = (ImageView) convertView.findViewById(R.id.page_delete_view);
+			holder.thumbnailView = (ImageView) convertView.findViewById(R.id.page_thumb_view);
+			holder.nameView = (TextView) convertView.findViewById(R.id.page_name_view);
+			holder.linkView = (ImageView) convertView.findViewById(R.id.page_link_view);
+			convertView.setTag(holder);
 
-        if (model.isEditModel) {
-            holder.deleteView.setVisibility(View.VISIBLE);
-            holder.deleteView.setOnClickListener(new DeleteListener(position));
-        } else {
-            holder.deleteView.setVisibility(View.GONE);
-        }
+		} else {
+			holder = (ViewHolder) convertView.getTag();
+		}
+		PageModel model = mLocalModel.scenes.get(position);
+		Bitmap bitmap = Util.getBitmap(Util.getLocalProFile(mContext, mLocalModel.appID).getAbsolutePath() + File.separator + model.background);
 
-        if (model.isLinkPage) {
-            holder.linkView.setVisibility(View.VISIBLE);
-        } else {
-            holder.linkView.setVisibility(View.GONE);
-        }
+		if (model.isEditModel) {
+			holder.deleteView.setVisibility(View.VISIBLE);
+			holder.deleteView.setOnClickListener(new DeleteListener(position));
+		} else {
+			holder.deleteView.setVisibility(View.GONE);
+		}
 
-        holder.thumbnailView.setImageBitmap(bitmap);
-        holder.nameView.setText(model.name);
-        return convertView;
-    }
+		if (model.isLinkPage) {
+			holder.linkView.setVisibility(View.VISIBLE);
+		} else {
+			holder.linkView.setVisibility(View.GONE);
+		}
 
-    static class ViewHolder {
-        ImageView deleteView;
-        ImageView thumbnailView;
-        TextView nameView;
-        ImageView linkView;
-    }
+		holder.thumbnailView.setImageBitmap(bitmap);
+		holder.nameView.setText(model.name);
+		return convertView;
+	}
 
-    class DeleteListener implements OnClickListener {
-        int position;
+	static class ViewHolder {
+		ImageView deleteView;
+		ImageView thumbnailView;
+		TextView nameView;
+		ImageView linkView;
+	}
 
-        public DeleteListener(int position) {
-            this.position = position;
-        }
+	class DeleteListener implements OnClickListener {
+		int position;
 
-        @Override
-        public void onClick(View v) {
-            mLocalModel.scenes.remove(position);
-            notifyDataSetChanged();
-        }
+		public DeleteListener(int position) {
+			this.position = position;
+		}
 
-    }
+		@Override
+		public void onClick(View v) {
+			mLocalModel.scenes.remove(position);
+			notifyDataSetChanged();
+		}
+
+	}
 }
