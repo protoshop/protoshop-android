@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray_fafafa"
+        android:cacheColorHint="@android:color/transparent"
         android:listSelector="@drawable/item_backgroud_selector"
         android:scrollbars="none" >
     </ListView>
