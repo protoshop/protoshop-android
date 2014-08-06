@@ -65,6 +65,12 @@ public class EditProjectActivity extends BaseActivity {
 		actionBar.setTitle(mProjectModel.appName);
 
 		mSettingView = (SatelliteMenu) findViewById(R.id.project_setting_view);
+		mSettingView.setMainImage(R.drawable.add);
+		mSettingView.setCloseItemsOnClick(true);
+		mSettingView.setExpandDuration(500);
+		mSettingView.setSatelliteDistance(getResources().getDimensionPixelSize(R.dimen._100));
+		mSettingView.setTotalSpacingDegree(90);
+
 		ArrayList<SatelliteMenuItem> items = new ArrayList<SatelliteMenuItem>();
 		items.add(new SatelliteMenuItem(DISPLASY, R.drawable.display));
 		items.add(new SatelliteMenuItem(TAKE_PIC, R.drawable.camera));

@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.ext.SatelliteMenu;
@@ -77,6 +76,11 @@ public class EditPageActivity extends BaseActivity {
 				+ mProjectModel.scenes.get(mPageNum).background)));
 
 		mSatelliteMenu = (SatelliteMenu) findViewById(R.id.page_setting_view);
+		mSatelliteMenu.setMainImage(R.drawable.add);
+		mSatelliteMenu.setCloseItemsOnClick(true);
+		mSatelliteMenu.setExpandDuration(500);
+		mSatelliteMenu.setSatelliteDistance(getResources().getDimensionPixelSize(R.dimen._100));
+		mSatelliteMenu.setTotalSpacingDegree(90);
 		ArrayList<SatelliteMenuItem> items = new ArrayList<SatelliteMenuItem>();
 		items.add(new SatelliteMenuItem(DISPLAY_CODE, R.drawable.display));
 		items.add(new SatelliteMenuItem(LINK_CODE, R.drawable.link));

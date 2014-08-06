@@ -21,10 +21,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_margin="@dimen/_5"
-        sat:closeOnClick="true"
-        sat:expandDuration="500"
-        sat:mainImage="@drawable/add"
-        sat:satelliteDistance="@dimen/_100"
-        sat:totalSpacingDegree="90" />
+         />
 
 </RelativeLayout>
