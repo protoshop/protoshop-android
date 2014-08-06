@@ -4,13 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.AlertDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -77,7 +73,6 @@ public class ProjectListActivity extends BaseActivity {
 		mSatelliteMenu.addItems(menuItems);
 
 		addOnListener();
-		LocalBroadcastManager.getInstance(this).registerReceiver(deleteItemReceiver, new IntentFilter("delete item"));
 	}
 
 	@Override
@@ -89,15 +84,6 @@ public class ProjectListActivity extends BaseActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
-	BroadcastReceiver deleteItemReceiver = new BroadcastReceiver() {
-
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			int position = intent.getIntExtra("position", -1);
-			dealDeleteProgject(mProjectModels.get(position));
-		}
-	};
 
 	/**
 	 * 
@@ -118,11 +104,6 @@ public class ProjectListActivity extends BaseActivity {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				if (mProjectModels.get(position).isDelete) {
-					mProjectModels.get(position).isDelete = false;
-					mAdapter.notifyDataSetChanged();
-					return;
-				}
 				MiniApplication.getInstance().currentProjectModel = mProjectModels.get(position);
 				startActivityForResult(new Intent(getApplicationContext(), EditProjectActivity.class), EDITE_CODE);
 			}
@@ -133,13 +114,8 @@ public class ProjectListActivity extends BaseActivity {
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-				// showDeleteDialog(mProjectModels.get(position));
-				if (!mProjectModels.get(position).isDelete) {
-					mProjectModels.get(position).isDelete = true;
-					mAdapter.notifyDataSetChanged();
-					return true;
-				}
-				return false;
+				showDeleteDialog(mProjectModels.get(position));
+				return true;
 			}
 		});
 
@@ -287,7 +263,6 @@ public class ProjectListActivity extends BaseActivity {
 	@Override
 	protected void onDestroy() {
 		saveProjectInfo();
-		LocalBroadcastManager.getInstance(this).unregisterReceiver(deleteItemReceiver);
 		super.onDestroy();
 	}
 
