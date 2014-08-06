@@ -124,6 +124,7 @@ public class ProjectListActivity extends BaseActivity {
 			}
 		});
 
+		// 点击动画
 		mAddAnimation.setAnimationListener(new AnimationListener() {
 
 			@Override
@@ -174,10 +175,8 @@ public class ProjectListActivity extends BaseActivity {
 	 * @param projectModel
 	 */
 	private void showDeleteDialog(final ProjectModel projectModel) {
-		new AlertDialog.Builder(this).setTitle(R.string.tip_text)
-		.setIcon(android.R.drawable.ic_dialog_alert)
-		.setMessage(getString(R.string.delete_tip_text) + projectModel.appName + "?")
-		.setPositiveButton(R.string.ok_text, new DialogInterface.OnClickListener() {
+		new AlertDialog.Builder(this).setTitle(R.string.tip_text).setIcon(android.R.drawable.ic_dialog_alert).setMessage(getString(R.string.delete_tip_text) + projectModel.appName + "?")
+				.setPositiveButton(R.string.ok_text, new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -221,10 +220,7 @@ public class ProjectListActivity extends BaseActivity {
 		View view = View.inflate(getApplicationContext(), R.layout.edite_layout, null);
 		final EditText editText = (EditText) view.findViewById(R.id.project_name_edit);
 
-		new AlertDialog.Builder(this)
-		.setTitle(R.string.create_project_title)
-		.setView(view)
-		.setPositiveButton(R.string.ok_text, new DialogInterface.OnClickListener() {
+		new AlertDialog.Builder(this).setTitle(R.string.create_project_title).setView(view).setPositiveButton(R.string.ok_text, new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
