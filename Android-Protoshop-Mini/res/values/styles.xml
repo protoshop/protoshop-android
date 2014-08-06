@@ -3,9 +3,7 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="android:Theme.Light.NoTitleBar"></style>
 
-    <style name="SplashTheme" parent="@style/AppTheme">
-        <item name="android:windowBackground">@drawable/splash_backgroud_shape</item>
-    </style>
+    
 
     <style name="text_20_ffffff">
         <item name="android:textSize">20sp</item>

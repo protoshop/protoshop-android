@@ -77,9 +77,7 @@ public class ProjectListActivity extends BaseActivity {
 		mSatelliteMenu.addItems(menuItems);
 
 		addOnListener();
-
-		LocalBroadcastManager.getInstance(this).registerReceiver(deleteReceiver, new IntentFilter("delete item"));
-		LocalBroadcastManager.getInstance(this).registerReceiver(onItemClickReceiver, new IntentFilter("on item click"));
+		LocalBroadcastManager.getInstance(this).registerReceiver(deleteItemReceiver, new IntentFilter("delete item"));
 	}
 
 	@Override
@@ -91,6 +89,15 @@ public class ProjectListActivity extends BaseActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+	BroadcastReceiver deleteItemReceiver = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			int position = intent.getIntExtra("position", -1);
+			dealDeleteProgject(mProjectModels.get(position));
+		}
+	};
 
 	/**
 	 * 
@@ -111,6 +118,11 @@ public class ProjectListActivity extends BaseActivity {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				if (mProjectModels.get(position).isDelete) {
+					mProjectModels.get(position).isDelete = false;
+					mAdapter.notifyDataSetChanged();
+					return;
+				}
 				MiniApplication.getInstance().currentProjectModel = mProjectModels.get(position);
 				startActivityForResult(new Intent(getApplicationContext(), EditProjectActivity.class), EDITE_CODE);
 			}
@@ -121,8 +133,13 @@ public class ProjectListActivity extends BaseActivity {
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-				showDeleteDialog(mProjectModels.get(position));
-				return true;
+				// showDeleteDialog(mProjectModels.get(position));
+				if (!mProjectModels.get(position).isDelete) {
+					mProjectModels.get(position).isDelete = true;
+					mAdapter.notifyDataSetChanged();
+					return true;
+				}
+				return false;
 			}
 		});
 
@@ -135,24 +152,6 @@ public class ProjectListActivity extends BaseActivity {
 			}
 		});
 	}
-
-	private BroadcastReceiver deleteReceiver = new BroadcastReceiver() {
-
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			int position = intent.getIntExtra("position", -1);
-			dealDeleteProgject(mProjectModels.get(position));
-		}
-	};
-	BroadcastReceiver onItemClickReceiver = new BroadcastReceiver() {
-
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			int position = intent.getIntExtra("position", -1);
-			MiniApplication.getInstance().currentProjectModel = mProjectModels.get(position);
-			startActivityForResult(new Intent(getApplicationContext(), EditProjectActivity.class), EDITE_CODE);
-		}
-	};
 
 	/**
 	 * 
@@ -288,8 +287,7 @@ public class ProjectListActivity extends BaseActivity {
 	@Override
 	protected void onDestroy() {
 		saveProjectInfo();
-		LocalBroadcastManager.getInstance(this).unregisterReceiver(deleteReceiver);
-		LocalBroadcastManager.getInstance(this).unregisterReceiver(onItemClickReceiver);
+		LocalBroadcastManager.getInstance(this).unregisterReceiver(deleteItemReceiver);
 		super.onDestroy();
 	}
 

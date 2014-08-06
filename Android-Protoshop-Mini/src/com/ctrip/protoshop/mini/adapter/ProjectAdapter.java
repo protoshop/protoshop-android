@@ -8,10 +8,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
 import android.support.v4.content.LocalBroadcastManager;
-import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,9 +24,9 @@ public class ProjectAdapter extends MiniAdapter {
 	}
 
 	@Override
-	public View getView(final int position, View convertView, final Context context) {
+	public View getView(final int position, View convertView, Context context) {
 
-		final ViewHolder holder;
+		ViewHolder holder;
 		if (convertView == null) {
 			holder = new ViewHolder();
 			convertView = View.inflate(context, R.layout.project_item_layout, null);
@@ -36,13 +34,10 @@ public class ProjectAdapter extends MiniAdapter {
 			holder.nameView = (TextView) convertView.findViewById(R.id.project_name_view);
 			holder.pageNumView = (TextView) convertView.findViewById(R.id.project_page_num_view);
 			holder.deleteView = (TextView) convertView.findViewById(R.id.project_item_confirm_view);
-			holder.deleteView.setVisibility(View.GONE);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-
-		holder.deleteView.setGravity(Gravity.CENTER_VERTICAL);
 
 		ProjectModel model = (ProjectModel) getItem(position);
 
@@ -58,39 +53,21 @@ public class ProjectAdapter extends MiniAdapter {
 			holder.thumbView.setImageResource(R.drawable.ic_launcher);
 		}
 
-		holder.deleteView.setOnClickListener(new OnClickListener() {
+		if (model.isDelete) {
+			holder.deleteView.setVisibility(View.VISIBLE);
+			holder.deleteView.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent("delete item");
-				intent.putExtra("position", position);
-				LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
-				holder.deleteView.setVisibility(View.GONE);
-			}
-		});
-
-		convertView.setOnLongClickListener(new OnLongClickListener() {
-
-			@Override
-			public boolean onLongClick(View v) {
-				holder.deleteView.setVisibility(View.VISIBLE);
-				holder.deleteView.setGravity(Gravity.CENTER_VERTICAL);
-				return true;
-			}
-		});
-		convertView.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				if (holder.deleteView.getVisibility() == View.GONE) {
-					Intent intent = new Intent("on item click");
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent("delete item");
 					intent.putExtra("position", position);
-					LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
-				} else {
-					holder.deleteView.setVisibility(View.GONE);
+					LocalBroadcastManager.getInstance(v.getContext()).sendBroadcast(intent);
 				}
-			}
-		});
+			});
+		} else {
+			holder.deleteView.setVisibility(View.GONE);
+			holder.deleteView.setOnClickListener(null);
+		}
 
 		return convertView;
 	}

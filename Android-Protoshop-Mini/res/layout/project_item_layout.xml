@@ -35,18 +35,24 @@
             android:textAppearance="@style/text_16_cccccc" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/project_item_confirm_view"
+    <LinearLayout
+        android:id="@+id/project_item_delete_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/project_icon_view"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/project_icon_view"
         android:background="@color/red_fc3e39"
-        android:paddingLeft="@dimen/_10"
-        android:paddingRight="@dimen/_10"
-        android:text="DELETE"
-        android:textAppearance="@style/text_ffffff_20"
-        android:visibility="visible" />
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/project_item_confirm_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/_10"
+            android:paddingRight="@dimen/_10"
+            android:text="DELETE"
+            android:textAppearance="@style/text_ffffff_20" />
+    </LinearLayout>
 
 </RelativeLayout>
