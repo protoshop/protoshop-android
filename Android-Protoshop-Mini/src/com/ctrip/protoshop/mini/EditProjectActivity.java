@@ -23,6 +23,7 @@ import android.view.ext.SatelliteMenuItem;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.GridView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -32,8 +33,6 @@ import com.ctrip.protoshop.mini.model.PageModel;
 import com.ctrip.protoshop.mini.model.ProjectModel;
 import com.ctrip.protoshop.mini.util.ParseJsonUtil;
 import com.ctrip.protoshop.mini.util.Util;
-import com.ctrip.protoshop.mini.wiget.DragGridView;
-import com.ctrip.protoshop.mini.wiget.DragGridView.OnChanageListener;
 import com.protoshop.lua.LuaActivity;
 
 public class EditProjectActivity extends BaseActivity {
@@ -45,7 +44,7 @@ public class EditProjectActivity extends BaseActivity {
 	private final static int DISPLASY = 215;
 
 	private SatelliteMenu mSettingView;
-	private DragGridView mGridView;
+	private GridView mGridView;
 	private PageAdapter mAdapter;
 
 	private ProjectModel mProjectModel;
@@ -76,7 +75,7 @@ public class EditProjectActivity extends BaseActivity {
 		items.add(new SatelliteMenuItem(TAKE_PIC, R.drawable.camera));
 		mSettingView.addItems(items);
 
-		mGridView = (DragGridView) findViewById(R.id.project_page_gridView);
+		mGridView = (GridView) findViewById(R.id.project_page_gridView);
 		if (mProjectModel.scenes == null) {
 			mProjectModel.scenes = new ArrayList<PageModel>();
 		}
@@ -138,27 +137,10 @@ public class EditProjectActivity extends BaseActivity {
 				for (PageModel model : mProjectModel.scenes) {
 					model.isEditModel = true;
 				}
-				mGridView.setDragModel(true);
 				mAdapter.notifyDataSetChanged();
 				return true;
 			}
 		});
-		// 拖拽
-		mGridView.setOnChangeListener(new OnChanageListener() {
-
-			@Override
-			public void onChange(int form, int to) {
-
-				PageModel fromModel = mProjectModel.scenes.get(form);
-				PageModel toModel = mProjectModel.scenes.get(to);
-
-				mProjectModel.scenes.set(form, toModel);
-				mProjectModel.scenes.set(to, fromModel);
-
-				mAdapter.notifyDataSetChanged();
-			}
-		});
-
 	}
 
 	/**
@@ -283,7 +265,6 @@ public class EditProjectActivity extends BaseActivity {
 			model.isEditModel = false;
 		}
 		mAdapter.notifyDataSetChanged();
-		mGridView.setDragModel(false);
 	}
 
 	private void finishEditor() {
@@ -295,7 +276,7 @@ public class EditProjectActivity extends BaseActivity {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 
-			if (mGridView.isDragModel()) {
+			if (mProjectModel.scenes.get(0).isEditModel) {
 				editFinish();
 			} else {
 				finishEditor();

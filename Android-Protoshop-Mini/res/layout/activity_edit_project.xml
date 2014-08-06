@@ -5,14 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".EditProjectActivity" >
 
-    <com.ctrip.protoshop.mini.wiget.DragGridView
+    <GridView
         android:id="@+id/project_page_gridView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edit_project_title"
         android:listSelector="@null"
         android:numColumns="3" >
-    </com.ctrip.protoshop.mini.wiget.DragGridView>
+    </GridView>
 
     <android.view.ext.SatelliteMenu
         android:id="@+id/project_setting_view"
@@ -20,7 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_margin="@dimen/_5"
-         />
+        android:layout_margin="@dimen/_5" />
 
 </RelativeLayout>
