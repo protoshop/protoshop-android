@@ -22,18 +22,6 @@
         tohell:icon_text="@string/fa_circle" >
     </com.ctrip.protoshop.widget.AnimationButton>
 
-    <ProgressBar
-        android:id="@+id/progressBar1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminateDrawable="@drawable/progress_drawable"
-        android:indeterminateDuration="1000"
-        android:progressDrawable="@drawable/progress_icon" />
-
-    <ImageView
-        android:id="@+id/test_progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/progress_icon" />
+    
 
 </LinearLayout>

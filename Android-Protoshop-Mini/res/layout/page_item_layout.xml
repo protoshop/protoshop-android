@@ -33,7 +33,7 @@
         android:layout_alignBottom="@+id/page_thumb_view"
         android:layout_alignRight="@+id/page_thumb_view"
         android:layout_margin="@dimen/_5"
-        android:src="@drawable/check_icon" />
+        android:src="@drawable/icon_selected" />
 
     <TextView
         android:id="@+id/page_name_view"

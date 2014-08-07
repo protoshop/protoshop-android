@@ -91,18 +91,18 @@ public final class R {
 		public static final int progressBarPadding = 0x7f010036;
 		public static final int progressBarStyle = 0x7f010034;
 		public static final int prompt = 0x7f010051;
-		public static final int ptrHeaderBackground = 0x7f010078;
-		public static final int ptrHeaderHeight = 0x7f010079;
-		public static final int ptrHeaderStyle = 0x7f010077;
-		public static final int ptrHeaderTitleTextAppearance = 0x7f01007a;
-		public static final int ptrProgressBarColor = 0x7f01007b;
-		public static final int ptrProgressBarHeight = 0x7f01007d;
-		public static final int ptrProgressBarStyle = 0x7f01007c;
-		public static final int ptrPullText = 0x7f01007e;
-		public static final int ptrRefreshingText = 0x7f01007f;
-		public static final int ptrReleaseText = 0x7f010080;
-		public static final int ptrSmoothProgressBarStyle = 0x7f010081;
-		public static final int ptrViewDelegateClass = 0x7f010076;
+		public static final int ptrHeaderBackground = 0x7f010075;
+		public static final int ptrHeaderHeight = 0x7f010076;
+		public static final int ptrHeaderStyle = 0x7f010074;
+		public static final int ptrHeaderTitleTextAppearance = 0x7f010077;
+		public static final int ptrProgressBarColor = 0x7f010078;
+		public static final int ptrProgressBarHeight = 0x7f01007a;
+		public static final int ptrProgressBarStyle = 0x7f010079;
+		public static final int ptrPullText = 0x7f01007b;
+		public static final int ptrRefreshingText = 0x7f01007c;
+		public static final int ptrReleaseText = 0x7f01007d;
+		public static final int ptrSmoothProgressBarStyle = 0x7f01007e;
+		public static final int ptrViewDelegateClass = 0x7f010073;
 		public static final int queryHint = 0x7f01005b;
 		public static final int searchDropdownBackground = 0x7f01005c;
 		public static final int searchResultListItemHeight = 0x7f010065;
@@ -118,22 +118,22 @@ public final class R {
 		public static final int selectableItemBackground = 0x7f010019;
 		public static final int showAsAction = 0x7f01004d;
 		public static final int showDividers = 0x7f010055;
-		public static final int spbStyle = 0x7f010082;
-		public static final int spb_background = 0x7f01008f;
-		public static final int spb_color = 0x7f010083;
-		public static final int spb_colors = 0x7f01008d;
-		public static final int spb_generate_background_with_colors = 0x7f010090;
-		public static final int spb_gradients = 0x7f010091;
-		public static final int spb_interpolator = 0x7f01008a;
-		public static final int spb_mirror_mode = 0x7f01008c;
-		public static final int spb_progressiveStart_activated = 0x7f01008e;
-		public static final int spb_progressiveStart_speed = 0x7f010088;
-		public static final int spb_progressiveStop_speed = 0x7f010089;
-		public static final int spb_reversed = 0x7f01008b;
-		public static final int spb_sections_count = 0x7f010086;
-		public static final int spb_speed = 0x7f010087;
-		public static final int spb_stroke_separator_length = 0x7f010085;
-		public static final int spb_stroke_width = 0x7f010084;
+		public static final int spbStyle = 0x7f01007f;
+		public static final int spb_background = 0x7f01008c;
+		public static final int spb_color = 0x7f010080;
+		public static final int spb_colors = 0x7f01008a;
+		public static final int spb_generate_background_with_colors = 0x7f01008d;
+		public static final int spb_gradients = 0x7f01008e;
+		public static final int spb_interpolator = 0x7f010087;
+		public static final int spb_mirror_mode = 0x7f010089;
+		public static final int spb_progressiveStart_activated = 0x7f01008b;
+		public static final int spb_progressiveStart_speed = 0x7f010085;
+		public static final int spb_progressiveStop_speed = 0x7f010086;
+		public static final int spb_reversed = 0x7f010088;
+		public static final int spb_sections_count = 0x7f010083;
+		public static final int spb_speed = 0x7f010084;
+		public static final int spb_stroke_separator_length = 0x7f010082;
+		public static final int spb_stroke_width = 0x7f010081;
 		public static final int spinnerDropDownItemStyle = 0x7f010058;
 		public static final int spinnerMode = 0x7f010052;
 		public static final int spinnerStyle = 0x7f010057;
@@ -290,7 +290,7 @@ public final class R {
 		public static final int abc_textfield_searchview_holo_light = 0x7f02005a;
 		public static final int abc_textfield_searchview_right_holo_dark = 0x7f02005b;
 		public static final int abc_textfield_searchview_right_holo_light = 0x7f02005c;
-		public static final int ic_launcher = 0x7f02007a;
+		public static final int ic_launcher = 0x7f020076;
 	}
 	public static final class id {
 		public static final int action_bar = 0x7f060027;
@@ -393,8 +393,8 @@ public final class R {
 		public static final int abc_search_dropdown_item_icons_2line = 0x7f030015;
 		public static final int abc_search_view = 0x7f030016;
 		public static final int abc_simple_decor = 0x7f030017;
-		public static final int default_header = 0x7f03002a;
-		public static final int support_simple_spinner_dropdown_item = 0x7f03003d;
+		public static final int default_header = 0x7f030028;
+		public static final int support_simple_spinner_dropdown_item = 0x7f03003b;
 	}
 	public static final class string {
 		public static final int abc_action_bar_home_description = 0x7f0b0001;
@@ -644,7 +644,7 @@ public final class R {
 		public static final int MenuView_android_preserveIconSpacing = 7;
 		public static final int MenuView_android_verticalDivider = 3;
 		public static final int MenuView_android_windowAnimationStyle = 0;
-		public static final int[] PullToRefreshHeader = { 0x7f010078, 0x7f010079, 0x7f01007a, 0x7f01007b, 0x7f01007c, 0x7f01007d, 0x7f01007e, 0x7f01007f, 0x7f010080, 0x7f010081 };
+		public static final int[] PullToRefreshHeader = { 0x7f010075, 0x7f010076, 0x7f010077, 0x7f010078, 0x7f010079, 0x7f01007a, 0x7f01007b, 0x7f01007c, 0x7f01007d, 0x7f01007e };
 		public static final int PullToRefreshHeader_ptrHeaderBackground = 0;
 		public static final int PullToRefreshHeader_ptrHeaderHeight = 1;
 		public static final int PullToRefreshHeader_ptrHeaderTitleTextAppearance = 2;
@@ -655,7 +655,7 @@ public final class R {
 		public static final int PullToRefreshHeader_ptrRefreshingText = 7;
 		public static final int PullToRefreshHeader_ptrReleaseText = 8;
 		public static final int PullToRefreshHeader_ptrSmoothProgressBarStyle = 9;
-		public static final int[] PullToRefreshView = { 0x7f010076 };
+		public static final int[] PullToRefreshView = { 0x7f010073 };
 		public static final int PullToRefreshView_ptrViewDelegateClass = 0;
 		public static final int[] SearchView = { 0x0101011f, 0x01010220, 0x01010264, 0x7f01005a, 0x7f01005b };
 		public static final int SearchView_android_imeOptions = 2;
@@ -663,7 +663,7 @@ public final class R {
 		public static final int SearchView_android_maxWidth = 0;
 		public static final int SearchView_iconifiedByDefault = 3;
 		public static final int SearchView_queryHint = 4;
-		public static final int[] SmoothProgressBar = { 0x7f010082, 0x7f010083, 0x7f010084, 0x7f010085, 0x7f010086, 0x7f010087, 0x7f010088, 0x7f010089, 0x7f01008a, 0x7f01008b, 0x7f01008c, 0x7f01008d, 0x7f01008e, 0x7f01008f, 0x7f010090, 0x7f010091 };
+		public static final int[] SmoothProgressBar = { 0x7f01007f, 0x7f010080, 0x7f010081, 0x7f010082, 0x7f010083, 0x7f010084, 0x7f010085, 0x7f010086, 0x7f010087, 0x7f010088, 0x7f010089, 0x7f01008a, 0x7f01008b, 0x7f01008c, 0x7f01008d, 0x7f01008e };
 		public static final int SmoothProgressBar_spbStyle = 0;
 		public static final int SmoothProgressBar_spb_background = 13;
 		public static final int SmoothProgressBar_spb_color = 1;

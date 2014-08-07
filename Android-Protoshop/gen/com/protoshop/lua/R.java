@@ -14,10 +14,10 @@ public final class R {
 		public static final int abc_slide_in_top = 0x7f040003;
 		public static final int abc_slide_out_bottom = 0x7f040004;
 		public static final int abc_slide_out_top = 0x7f040005;
-		public static final int push_left_in = 0x7f040009;
-		public static final int push_left_out = 0x7f04000a;
-		public static final int push_right_in = 0x7f04000b;
-		public static final int push_right_out = 0x7f04000c;
+		public static final int push_left_in = 0x7f040008;
+		public static final int push_left_out = 0x7f040009;
+		public static final int push_right_in = 0x7f04000a;
+		public static final int push_right_out = 0x7f04000b;
 	}
 	public static final class attr {
 		public static final int actionBarDivider = 0x7f01000f;
@@ -256,7 +256,7 @@ public final class R {
 		public static final int abc_textfield_searchview_holo_light = 0x7f02005a;
 		public static final int abc_textfield_searchview_right_holo_dark = 0x7f02005b;
 		public static final int abc_textfield_searchview_right_holo_light = 0x7f02005c;
-		public static final int ic_launcher = 0x7f02007a;
+		public static final int ic_launcher = 0x7f020076;
 	}
 	public static final class id {
 		public static final int action_bar = 0x7f060027;
@@ -350,8 +350,8 @@ public final class R {
 		public static final int abc_search_dropdown_item_icons_2line = 0x7f030015;
 		public static final int abc_search_view = 0x7f030016;
 		public static final int abc_simple_decor = 0x7f030017;
-		public static final int back_home_dialog = 0x7f030029;
-		public static final int support_simple_spinner_dropdown_item = 0x7f03003d;
+		public static final int back_home_dialog = 0x7f030027;
+		public static final int support_simple_spinner_dropdown_item = 0x7f03003b;
 	}
 	public static final class raw {
 		public static final int command = 0x7f050000;

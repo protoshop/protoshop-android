@@ -23,13 +23,13 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_margin="@dimen/_5"
-        android:src="@drawable/add" />
+        android:src="@drawable/icon_add" />
 
     <ImageView
         android:id="@+id/create_new_project_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:src="@drawable/add" />
+        android:src="@drawable/icon_add" />
 
 </RelativeLayout>

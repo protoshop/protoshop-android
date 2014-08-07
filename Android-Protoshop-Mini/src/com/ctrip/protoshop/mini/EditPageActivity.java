@@ -77,7 +77,7 @@ public class EditPageActivity extends BaseActivity {
 				+ mProjectModel.scenes.get(mPageNum).background)));
 
 		mSatelliteMenu = (SatelliteMenu) findViewById(R.id.page_setting_view);
-		mSatelliteMenu.setMainImage(R.drawable.add);
+		mSatelliteMenu.setMainImage(R.drawable.icon_add);
 		mSatelliteMenu.setCloseItemsOnClick(true);
 		mSatelliteMenu.setExpandDuration(500);
 		mSatelliteMenu.setSatelliteDistance(getResources().getDimensionPixelSize(R.dimen._100));
