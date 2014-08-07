@@ -26,6 +26,7 @@ public class LinkPageActivity extends BaseActivity implements OnItemClickListene
 
 	private int mCurPage = 0;
 	private String mLinkPage;
+	private int mSelectedPage = -1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +47,15 @@ public class LinkPageActivity extends BaseActivity implements OnItemClickListene
 		mProjectModel = MiniApplication.getInstance().currentProjectModel;
 		mGridView = (GridView) findViewById(R.id.link_gridview);
 
-		for (PageModel model : mProjectModel.scenes) {
-			ProtoshopLog.e(model.id);
+		for (int i = 0; i < mProjectModel.scenes.size(); i++) {
+			PageModel model = mProjectModel.scenes.get(i);
 			if (model.id.equals(mLinkPage)) {
 				model.isLinkPage = true;
+				mSelectedPage = i;
 			} else {
 				model.isLinkPage = false;
 			}
+
 		}
 
 		mAdapter = new PageAdapter(this, mProjectModel);
@@ -65,6 +68,10 @@ public class LinkPageActivity extends BaseActivity implements OnItemClickListene
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 		if (id == android.R.id.home) {
+			if (mSelectedPage != -1) {
+				intent.putExtra(Constans.PAGE_ID, ((PageModel) mAdapter.getItem(mSelectedPage)).id);
+				setResult(RESULT_OK, intent);
+			}
 			finish();
 			return true;
 		}
@@ -76,10 +83,20 @@ public class LinkPageActivity extends BaseActivity implements OnItemClickListene
 		if (position == mCurPage) {
 			Toast.makeText(getApplicationContext(), "当前页不可选!", Toast.LENGTH_SHORT).show();
 		} else {
-			intent.putExtra(Constans.PAGE_ID, ((PageModel) mAdapter.getItem(position)).id);
-			ProtoshopLog.e("SelectID:" + ((PageModel) mAdapter.getItem(position)).id);
-			setResult(RESULT_OK, intent);
-			finish();
+
+			if (mSelectedPage == position) {
+				return;
+			}
+
+			if (mSelectedPage != -1) {
+				PageModel model = (PageModel) mAdapter.getItem(mSelectedPage);
+				model.isLinkPage = false;
+			}
+			PageModel model = (PageModel) mAdapter.getItem(position);
+			model.isLinkPage = true;
+			mSelectedPage = position;
+
+			mAdapter.notifyDataSetChanged();
 		}
 	}
 
