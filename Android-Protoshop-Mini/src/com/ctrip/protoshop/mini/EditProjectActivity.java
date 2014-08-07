@@ -6,8 +6,6 @@ import java.util.ArrayList;
 
 import org.json.JSONException;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -115,11 +113,13 @@ public class EditProjectActivity extends BaseActivity {
 					displayProject();
 					break;
 				case CAMARA:
-					selectPic();
+					takePic();
 					break;
 				case PHOTO:
+					gotoGallery();
 					break;
 				case NOTE:
+					editPages();
 					break;
 				default:
 					break;
@@ -147,10 +147,7 @@ public class EditProjectActivity extends BaseActivity {
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-				for (PageModel model : mProjectModel.scenes) {
-					model.isEditModel = true;
-				}
-				mAdapter.notifyDataSetChanged();
+				editPages();
 				return true;
 			}
 		});
@@ -181,33 +178,33 @@ public class EditProjectActivity extends BaseActivity {
 	/**
 	 * 选择图片.
 	 */
-	private void selectPic() {
-		String[] itemsStr = getResources().getStringArray(R.array.select_pic_items);
-
-		new AlertDialog.Builder(this).setTitle(R.string.select_pic_text).setItems(itemsStr, new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				switch (which) {
-				case 0:
-					gotoGallery();
-					dialog.dismiss();
-					break;
-				case 1:
-					dialog.dismiss();
-					takePic();
-					break;
-				case 2:
-					dialog.dismiss();
-					break;
-
-				default:
-					break;
-				}
-			}
-
-		}).show();
-	}
+//	private void selectPic() {
+//		String[] itemsStr = getResources().getStringArray(R.array.select_pic_items);
+//
+//		new AlertDialog.Builder(this).setTitle(R.string.select_pic_text).setItems(itemsStr, new DialogInterface.OnClickListener() {
+//
+//			@Override
+//			public void onClick(DialogInterface dialog, int which) {
+//				switch (which) {
+//				case 0:
+//					gotoGallery();
+//					dialog.dismiss();
+//					break;
+//				case 1:
+//					dialog.dismiss();
+//					takePic();
+//					break;
+//				case 2:
+//					dialog.dismiss();
+//					break;
+//
+//				default:
+//					break;
+//				}
+//			}
+//
+//		}).show();
+//	}
 
 	/**
 	 * 
@@ -297,6 +294,16 @@ public class EditProjectActivity extends BaseActivity {
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);
+	}
+
+	/**
+	 * 
+	 */
+	private void editPages() {
+		for (PageModel model : mProjectModel.scenes) {
+			model.isEditModel = true;
+		}
+		mAdapter.notifyDataSetChanged();
 	}
 
 }
