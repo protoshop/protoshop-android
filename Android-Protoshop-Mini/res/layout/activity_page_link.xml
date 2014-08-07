@@ -14,4 +14,49 @@
         android:scrollbars="none" >
     </GridView>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/link_bttom_backgroud"
+        android:padding="@dimen/_8" >
+
+        <ImageView
+            android:id="@+id/none_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/icon_none" />
+
+        <ImageView
+            android:id="@+id/push_left_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/icon_push_left" />
+
+        <ImageView
+            android:id="@+id/push_right_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/icon_push_right" />
+
+        <ImageView
+            android:id="@+id/push_down_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/icon_push_down" />
+
+        <ImageView
+            android:id="@+id/push_up_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/icon_push_up" />
+    </LinearLayout>
+
 </RelativeLayout>
