@@ -24,7 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:src="@android:drawable/ic_delete" />
+        android:layout_margin="@dimen/_5"
+        android:src="@drawable/icon_delete" />
 
     <ImageView
         android:id="@+id/page_link_view"
@@ -41,8 +42,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/page_thumb_view"
         android:layout_alignRight="@+id/page_thumb_view"
-        android:gravity="center"
         android:layout_below="@+id/page_thumb_view"
+        android:gravity="center"
         android:text="TextView" />
 
 </RelativeLayout>

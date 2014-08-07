@@ -20,14 +20,17 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:background="@drawable/link_bttom_backgroud"
-        android:padding="@dimen/_8" >
+        android:background="@drawable/link_bttom_backgroud" >
 
         <ImageView
             android:id="@+id/none_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:paddingBottom="@dimen/_8"
+            android:paddingLeft="@dimen/_5"
+            android:paddingRight="@dimen/_4"
+            android:paddingTop="@dimen/_8"
             android:src="@drawable/icon_none" />
 
         <ImageView
@@ -35,6 +38,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:paddingBottom="@dimen/_8"
+            android:paddingLeft="@dimen/_4"
+            android:paddingRight="@dimen/_4"
+            android:paddingTop="@dimen/_8"
             android:src="@drawable/icon_push_left" />
 
         <ImageView
@@ -42,6 +49,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:paddingBottom="@dimen/_8"
+            android:paddingLeft="@dimen/_4"
+            android:paddingRight="@dimen/_4"
+            android:paddingTop="@dimen/_8"
             android:src="@drawable/icon_push_right" />
 
         <ImageView
@@ -49,6 +60,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:paddingBottom="@dimen/_8"
+            android:paddingLeft="@dimen/_4"
+            android:paddingRight="@dimen/_4"
+            android:paddingTop="@dimen/_8"
             android:src="@drawable/icon_push_down" />
 
         <ImageView
@@ -56,6 +71,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:paddingBottom="@dimen/_8"
+            android:paddingLeft="@dimen/_4"
+            android:paddingRight="@dimen/_5"
+            android:paddingTop="@dimen/_8"
             android:src="@drawable/icon_push_up" />
     </LinearLayout>
 

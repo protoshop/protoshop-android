@@ -350,8 +350,8 @@ public final class R {
 		public static final int abc_search_dropdown_item_icons_2line = 0x7f030015;
 		public static final int abc_search_view = 0x7f030016;
 		public static final int abc_simple_decor = 0x7f030017;
-		public static final int back_home_dialog = 0x7f030027;
-		public static final int support_simple_spinner_dropdown_item = 0x7f03003b;
+		public static final int back_home_dialog = 0x7f030026;
+		public static final int support_simple_spinner_dropdown_item = 0x7f03003a;
 	}
 	public static final class raw {
 		public static final int command = 0x7f050000;
