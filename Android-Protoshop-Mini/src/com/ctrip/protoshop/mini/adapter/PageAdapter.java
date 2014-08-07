@@ -50,7 +50,7 @@ public class PageAdapter extends BaseAdapter {
 			holder.deleteView = (ImageView) convertView.findViewById(R.id.page_delete_view);
 			holder.thumbnailView = (ImageView) convertView.findViewById(R.id.page_thumb_view);
 			holder.nameView = (TextView) convertView.findViewById(R.id.page_name_view);
-			holder.linkView = (ImageView) convertView.findViewById(R.id.page_link_view);
+			holder.linkView =  convertView.findViewById(R.id.selected_contaner);
 			convertView.setTag(holder);
 
 		} else {
@@ -81,7 +81,7 @@ public class PageAdapter extends BaseAdapter {
 		ImageView deleteView;
 		ImageView thumbnailView;
 		TextView nameView;
-		ImageView linkView;
+		View linkView;
 	}
 
 	class DeleteListener implements OnClickListener {

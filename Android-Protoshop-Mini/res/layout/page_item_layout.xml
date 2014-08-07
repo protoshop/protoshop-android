@@ -27,14 +27,25 @@
         android:layout_margin="@dimen/_5"
         android:src="@drawable/icon_delete" />
 
-    <ImageView
-        android:id="@+id/page_link_view"
+    <LinearLayout
+        android:id="@+id/selected_contaner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/page_thumb_view"
+        android:layout_alignLeft="@+id/page_thumb_view"
         android:layout_alignRight="@+id/page_thumb_view"
-        android:layout_margin="@dimen/_5"
-        android:src="@drawable/icon_selected" />
+        android:layout_alignTop="@+id/page_thumb_view"
+        android:background="@drawable/selected_backgroud"
+        android:gravity="bottom|right"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/page_link_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5"
+            android:src="@drawable/icon_selected" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/page_name_view"
