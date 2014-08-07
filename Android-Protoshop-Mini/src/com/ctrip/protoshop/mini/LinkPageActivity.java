@@ -88,14 +88,19 @@ public class LinkPageActivity extends BaseActivity implements OnItemClickListene
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 		if (id == android.R.id.home) {
-			if (mSelectedPage != -1) {
-				intent.putExtra(Constans.PAGE_ID, ((PageModel) mAdapter.getItem(mSelectedPage)).id);
-				setResult(RESULT_OK, intent);
-			}
 			finish();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void finish() {
+		if (mSelectedPage != -1) {
+			intent.putExtra(Constans.PAGE_ID, ((PageModel) mAdapter.getItem(mSelectedPage)).id);
+			setResult(RESULT_OK, intent);
+		}
+		super.finish();
 	}
 
 	@Override
@@ -126,6 +131,7 @@ public class LinkPageActivity extends BaseActivity implements OnItemClickListene
 		for (PageModel model : mProjectModel.scenes) {
 			model.isLinkPage = false;
 		}
-		mAdapter.notifyDataSetChanged();
+		//mAdapter.notifyDataSetChanged();
+		finish();
 	}
 }
