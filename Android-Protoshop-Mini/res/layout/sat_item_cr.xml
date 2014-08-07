@@ -2,8 +2,8 @@
 <ImageView 
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/sat_item"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="@dimen/_35"
+    android:layout_height="@dimen/_35"
     android:src="@drawable/sat_item" 
     android:visibility="gone"
     android:layout_gravity="bottom|left"    

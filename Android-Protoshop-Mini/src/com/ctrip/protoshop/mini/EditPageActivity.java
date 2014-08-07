@@ -18,6 +18,7 @@ import android.view.ext.SatelliteMenu;
 import android.view.ext.SatelliteMenu.SateliteClickedListener;
 import android.view.ext.SatelliteMenuItem;
 import android.widget.AbsoluteLayout;
+import android.widget.AbsoluteLayout.LayoutParams;
 
 import com.alibaba.fastjson.JSON;
 import com.ctrip.protoshop.mini.constants.Constans;
@@ -82,8 +83,8 @@ public class EditPageActivity extends BaseActivity {
 		mSatelliteMenu.setSatelliteDistance(getResources().getDimensionPixelSize(R.dimen._100));
 		mSatelliteMenu.setTotalSpacingDegree(90);
 		ArrayList<SatelliteMenuItem> items = new ArrayList<SatelliteMenuItem>();
-		items.add(new SatelliteMenuItem(DISPLAY_CODE, R.drawable.display));
-		items.add(new SatelliteMenuItem(LINK_CODE, R.drawable.link));
+		items.add(new SatelliteMenuItem(DISPLAY_CODE, R.drawable.icon_play));
+		items.add(new SatelliteMenuItem(LINK_CODE, R.drawable.icon_link));
 		mSatelliteMenu.addItems(items);
 
 		initLinkView();
@@ -118,15 +119,7 @@ public class EditPageActivity extends BaseActivity {
 
 				@Override
 				public void onLink(LinkModel model) {
-					Intent intent = new Intent(getApplicationContext(), LinkPageActivity.class);
-
-					if (model.actions.size() > 0) {
-						intent.putExtra(Constans.LINK_PAGE_ID, model.actions.get(0).target);
-					}
-
-					intent.putExtra(Constans.LINK_CUR_PAGE, mPageNum);
-					intent.putExtra(Constans.LINK_VIEW_ID, model.id);
-					startActivityForResult(intent, LINK_REQUEST_CODE);
+					startLinke(model);
 				}
 
 				@Override
@@ -176,6 +169,7 @@ public class EditPageActivity extends BaseActivity {
 	}
 
 	private void saveEditResult() {
+		
 		finish();
 	}
 
@@ -195,10 +189,7 @@ public class EditPageActivity extends BaseActivity {
 
 			@Override
 			public void onLink(LinkModel model) {
-				Intent intent = new Intent(getApplicationContext(), LinkPageActivity.class);
-				intent.putExtra(Constans.LINK_VIEW_ID, model.id);
-				intent.putExtra(Constans.LINK_CUR_PAGE, mPageNum);
-				startActivityForResult(intent, LINK_REQUEST_CODE);
+				startLinke(model);
 			}
 
 			@Override
@@ -209,9 +200,28 @@ public class EditPageActivity extends BaseActivity {
 		});
 
 		mLinkViewMap.put(model.id, linkView);
-
 		mPanelView.addView(linkView);
+		AbsoluteLayout.LayoutParams params = (LayoutParams) linkView.getLayoutParams();
+		model.width = String.valueOf(params.width);
+		model.height = String.valueOf(params.height);
+		model.posX = String.valueOf(params.x);
+		model.posY = String.valueOf(params.y);
 		Log.e("", "out--[addLinkView]");
+	}
+
+	/**
+	 * @param model
+	 */
+	private void startLinke(LinkModel model) {
+		Intent intent = new Intent(getApplicationContext(), LinkPageActivity.class);
+
+		if (model.actions.size() > 0) {
+			intent.putExtra(Constans.LINK_PAGE_ID, model.actions.get(0).target);
+		}
+
+		intent.putExtra(Constans.LINK_CUR_PAGE, mPageNum);
+		intent.putExtra(Constans.LINK_VIEW_ID, model.id);
+		startActivityForResult(intent, LINK_REQUEST_CODE);
 	}
 
 	@Override

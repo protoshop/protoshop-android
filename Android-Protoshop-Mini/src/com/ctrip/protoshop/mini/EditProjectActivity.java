@@ -40,8 +40,10 @@ public class EditProjectActivity extends BaseActivity {
 	private final static int FROM_CAMARE = 212;
 	private final static int CROP_PIC = 213;
 
-	private final static int TAKE_PIC = 214;
-	private final static int DISPLASY = 215;
+	private final static int DISPLASY = 214;
+	private final static int PHOTO = 215;
+	private final static int CAMARA = 216;
+	private final static int NOTE = 217;
 
 	private SatelliteMenu mSettingView;
 	private GridView mGridView;
@@ -71,8 +73,10 @@ public class EditProjectActivity extends BaseActivity {
 		mSettingView.setTotalSpacingDegree(90);
 
 		ArrayList<SatelliteMenuItem> items = new ArrayList<SatelliteMenuItem>();
-		items.add(new SatelliteMenuItem(DISPLASY, R.drawable.display));
-		items.add(new SatelliteMenuItem(TAKE_PIC, R.drawable.camera));
+		items.add(new SatelliteMenuItem(DISPLASY, R.drawable.icon_play));
+		items.add(new SatelliteMenuItem(NOTE, R.drawable.icon_note));
+		items.add(new SatelliteMenuItem(CAMARA, R.drawable.icon_camera));
+		items.add(new SatelliteMenuItem(PHOTO, R.drawable.icon_photo));
 		mSettingView.addItems(items);
 
 		mGridView = (GridView) findViewById(R.id.project_page_gridView);
@@ -90,8 +94,7 @@ public class EditProjectActivity extends BaseActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 		if (id == android.R.id.home) {
-			setResult(RESULT_OK);
-			finish();
+			finishEditor();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -107,11 +110,21 @@ public class EditProjectActivity extends BaseActivity {
 
 			@Override
 			public void eventOccured(int id) {
-				if (id == DISPLASY) {
+				switch (id) {
+				case DISPLASY:
 					displayProject();
-				} else if (id == TAKE_PIC) {
+					break;
+				case CAMARA:
 					selectPic();
+					break;
+				case PHOTO:
+					break;
+				case NOTE:
+					break;
+				default:
+					break;
 				}
+
 			}
 		});
 

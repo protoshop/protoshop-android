@@ -22,292 +22,289 @@ import com.ctrip.protoshop.mini.util.ProtoshopLog;
 @SuppressLint("ViewConstructor")
 @SuppressWarnings("deprecation")
 public class LinkView extends View {
-    private static int RADIUS = 30;
-    private static int DEFAUT_WIDTH = 100;
-    private static int DEFAUT_HEIGH = 100;
+	private static int RADIUS = 30;
+	private static int DEFAUT_WIDTH = 100;
+	private static int DEFAUT_HEIGH = 100;
 
-    private NinePatchDrawable mUnlinkSelectDrawable;
-    private NinePatchDrawable mUnLinkNormalDrawable;
-    private NinePatchDrawable mLinkNormalDrawable;
-    private NinePatchDrawable mLinkSelectDrawable;
+	private NinePatchDrawable mUnlinkSelectDrawable;
+	private NinePatchDrawable mUnLinkNormalDrawable;
+	private NinePatchDrawable mLinkNormalDrawable;
+	private NinePatchDrawable mLinkSelectDrawable;
 
-    private Rect ltRect = new Rect();
-    private Rect rtRect = new Rect();
-    private Rect lbRect = new Rect();
-    private Rect rbRect = new Rect();
+	private Rect ltRect = new Rect();
+	private Rect rtRect = new Rect();
+	private Rect lbRect = new Rect();
+	private Rect rbRect = new Rect();
 
-    private PopupWindow mLinkPopupWindow;
-    private int mPopupWindowHeight;
-    private View mDeleteView;
-    private View mLinkView;
+	private PopupWindow mLinkPopupWindow;
+	private int mPopupWindowHeight;
+	private View mDeleteView;
+	private View mLinkView;
 
-    private LinkModel mLinkModel;
-    private LinkViewState mState=LinkViewState.UNLINK_SELECT;
+	private LinkModel mLinkModel;
+	private LinkViewState mState = LinkViewState.UNLINK_SELECT;
 
-    private OnLinkListener onLinkListener;
+	private OnLinkListener onLinkListener;
 
-    public interface OnLinkListener {
-        public void onLink(LinkModel linkModel);
+	public interface OnLinkListener {
+		public void onLink(LinkModel linkModel);
 
-        public void onCancel(LinkModel linkModel);
-    }
+		public void onCancel(LinkModel linkModel);
+	}
 
-    public LinkView(Context context, LinkModel linkModel) {
-        super(context);
+	public LinkView(Context context, LinkModel linkModel) {
+		super(context);
 
-        mLinkModel = linkModel;
+		mLinkModel = linkModel;
 
-        initLinkView(context);
-        initPopupWindow(context);
-    }
+		initLinkView(context);
+		initPopupWindow(context);
+	}
 
-    private void initPopupWindow(Context context) {
-        mPopupWindowHeight = getResources().getDimensionPixelSize(R.dimen.pop_height);
+	private void initPopupWindow(Context context) {
+		mPopupWindowHeight = getResources().getDimensionPixelSize(R.dimen.pop_height);
 
-        View contentView = inflate(context, R.layout.link_view_layout, null);
-        mDeleteView = contentView.findViewById(R.id.link_delete_view);
-        mLinkView = contentView.findViewById(R.id.link_link_view);
+		View contentView = inflate(context, R.layout.link_view_layout, null);
+		mDeleteView = contentView.findViewById(R.id.link_delete_view);
+		mLinkView = contentView.findViewById(R.id.link_link_view);
 
-        mLinkPopupWindow = new PopupWindow(context);
-        mLinkPopupWindow.setContentView(contentView);
-        mLinkPopupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
-        mLinkPopupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-        mLinkPopupWindow.setBackgroundDrawable(null);
+		mLinkPopupWindow = new PopupWindow(context);
+		mLinkPopupWindow.setContentView(contentView);
+		mLinkPopupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+		mLinkPopupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+		mLinkPopupWindow.setBackgroundDrawable(null);
 
-        addOnListener();
-    }
+		addOnListener();
+	}
 
-    private void addOnListener() {
-        getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+	private void addOnListener() {
+		getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 
-            @Override
-            public void onGlobalLayout() {
-                if (mState == LinkViewState.LINK_SELECT || mState == LinkViewState.UNLINK_SELECT) {
-                    showPopuWindow(LinkView.this);
-                } else {
-                    mLinkPopupWindow.dismiss();
-                }
-                getViewTreeObserver().removeGlobalOnLayoutListener(this);
-            }
-        });
+			@Override
+			public void onGlobalLayout() {
+				if (mState == LinkViewState.LINK_SELECT || mState == LinkViewState.UNLINK_SELECT) {
+					showPopuWindow(LinkView.this);
+				} else {
+					mLinkPopupWindow.dismiss();
+				}
+				getViewTreeObserver().removeGlobalOnLayoutListener(this);
+			}
+		});
 
-        setOnFocusChangeListener(new OnFocusChangeListener() {
+		setOnFocusChangeListener(new OnFocusChangeListener() {
 
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    ProtoshopLog.e("into-[onFocusChange]:" + hasFocus);
-                    showPopuWindow(LinkView.this);
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if (hasFocus) {
+					ProtoshopLog.e("into-[onFocusChange]:" + hasFocus);
+					showPopuWindow(LinkView.this);
 
-                    if (mState == LinkViewState.LINK_NORMAL) {
-                        mState = LinkViewState.LINK_SELECT;
-                        setBackgroundDrawable(mLinkSelectDrawable);
-                    } else if (mState == LinkViewState.UNLINK_NORMAL) {
-                        mState = LinkViewState.UNLINK_SELECT;
-                        setBackgroundDrawable(mUnlinkSelectDrawable);
-                    }
+					if (mState == LinkViewState.LINK_NORMAL) {
+						mState = LinkViewState.LINK_SELECT;
+						setBackgroundDrawable(mLinkSelectDrawable);
+					} else if (mState == LinkViewState.UNLINK_NORMAL) {
+						mState = LinkViewState.UNLINK_SELECT;
+						setBackgroundDrawable(mUnlinkSelectDrawable);
+					}
 
-                } else {
-                    ProtoshopLog.e("into-[onFocusChange]:" + hasFocus);
-                    mLinkPopupWindow.dismiss();
-                    if (mState == LinkViewState.LINK_SELECT) {
-                        mState = LinkViewState.LINK_NORMAL;
-                        setBackgroundDrawable(mLinkNormalDrawable);
-                    } else if (mState == LinkViewState.UNLINK_SELECT) {
-                        mState = LinkViewState.UNLINK_NORMAL;
-                        setBackgroundDrawable(mUnLinkNormalDrawable);
-                    }
+				} else {
+					ProtoshopLog.e("into-[onFocusChange]:" + hasFocus);
+					mLinkPopupWindow.dismiss();
+					if (mState == LinkViewState.LINK_SELECT) {
+						mState = LinkViewState.LINK_NORMAL;
+						setBackgroundDrawable(mLinkNormalDrawable);
+					} else if (mState == LinkViewState.UNLINK_SELECT) {
+						mState = LinkViewState.UNLINK_NORMAL;
+						setBackgroundDrawable(mUnLinkNormalDrawable);
+					}
 
-                }
-            }
-        });
+				}
+			}
+		});
 
-        mDeleteView.setOnClickListener(new OnClickListener() {
+		mDeleteView.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                onLinkListener.onCancel(mLinkModel);
-                ViewGroup group = (ViewGroup) getParent();
-                if (group != null) {
-                    mLinkPopupWindow.dismiss();
-                    group.removeView(LinkView.this);
-                }
-            }
-        });
+			@Override
+			public void onClick(View v) {
+				onLinkListener.onCancel(mLinkModel);
+				ViewGroup group = (ViewGroup) getParent();
+				if (group != null) {
+					mLinkPopupWindow.dismiss();
+					group.removeView(LinkView.this);
+				}
+			}
+		});
 
-        mLinkView.setOnClickListener(new OnClickListener() {
+		mLinkView.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                onLinkListener.onLink(mLinkModel);
-            }
-        });
-    }
+			@Override
+			public void onClick(View v) {
+				onLinkListener.onLink(mLinkModel);
+			}
+		});
+	}
 
-    private void initLinkView(Context context) {
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.hotspots_red_select);
-        mUnlinkSelectDrawable = new NinePatchDrawable(getResources(), bitmap, bitmap.getNinePatchChunk(), new Rect(0,
-            0, 0, 0), "UnLinkSelect");
+	private void initLinkView(Context context) {
+		Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.hotspots_red_select);
+		mUnlinkSelectDrawable = new NinePatchDrawable(getResources(), bitmap, bitmap.getNinePatchChunk(), new Rect(0, 0, 0, 0), "UnLinkSelect");
 
-        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.hotspots_red_unselect);
-        mUnLinkNormalDrawable = new NinePatchDrawable(getResources(), bitmap, bitmap.getNinePatchChunk(), new Rect(0,
-            0, 0, 0), "LinkNormal");
+		bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.hotspots_red_unselect);
+		mUnLinkNormalDrawable = new NinePatchDrawable(getResources(), bitmap, bitmap.getNinePatchChunk(), new Rect(0, 0, 0, 0), "LinkNormal");
 
-        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.hotspots_blue_unselect);
-        mLinkNormalDrawable = new NinePatchDrawable(getResources(), bitmap, bitmap.getNinePatchChunk(), new Rect(0, 0,
-            0, 0), "LinkNormal");
+		bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.hotspots_blue_unselect);
+		mLinkNormalDrawable = new NinePatchDrawable(getResources(), bitmap, bitmap.getNinePatchChunk(), new Rect(0, 0, 0, 0), "LinkNormal");
 
-        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.hotspots_blue_select);
-        mLinkSelectDrawable = new NinePatchDrawable(getResources(), bitmap, bitmap.getNinePatchChunk(), new Rect(0, 0,
-            0, 0), "LinkNormal");
+		bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.hotspots_blue_select);
+		mLinkSelectDrawable = new NinePatchDrawable(getResources(), bitmap, bitmap.getNinePatchChunk(), new Rect(0, 0, 0, 0), "LinkNormal");
 
-        AbsoluteLayout.LayoutParams params = new LayoutParams(DEFAUT_WIDTH, DEFAUT_HEIGH, 100, 200);
-        setLayoutParams(params);
-        setBackgroundDrawable(mUnlinkSelectDrawable);
-    }
+		AbsoluteLayout.LayoutParams params = new LayoutParams(DEFAUT_WIDTH, DEFAUT_HEIGH, 100, 200);
+		setLayoutParams(params);
+		setBackgroundDrawable(mUnlinkSelectDrawable);
 
-    private void resetRect(Rect rect, int centerX, int centerY) {
-        int left = centerX - RADIUS;
-        int top = centerY - RADIUS;
-        int right = centerX + RADIUS;
-        int bottom = centerY + RADIUS;
+	}
 
-        rect.set(left, top, right, bottom);
-    }
+	private void resetRect(Rect rect, int centerX, int centerY) {
+		int left = centerX - RADIUS;
+		int top = centerY - RADIUS;
+		int right = centerX + RADIUS;
+		int bottom = centerY + RADIUS;
 
-    private void showPopuWindow(View anchor) {
-        int[] point = new int[2];
-        getLocationOnScreen(point);
-        mLinkPopupWindow.showAtLocation(anchor, Gravity.NO_GRAVITY, point[0], point[1] - mPopupWindowHeight);
-    }
+		rect.set(left, top, right, bottom);
+	}
 
-    public void updateLinkViewState(LinkViewState state) {
-        mState = state;
-        switch (state) {
-        case UNLINK_NORMAL:
-            mLinkPopupWindow.dismiss();
-            setBackgroundDrawable(mUnLinkNormalDrawable);
-            break;
-        case UNLINK_SELECT:
-            showPopuWindow(this);
-            setBackgroundDrawable(mUnlinkSelectDrawable);
-            break;
-        case LINK_NORMAL:
-            mLinkPopupWindow.dismiss();
-            setBackgroundDrawable(mLinkNormalDrawable);
-            break;
-        case LINK_SELECT:
-            showPopuWindow(this);
-            setBackgroundDrawable(mLinkSelectDrawable);
-            break;
+	private void showPopuWindow(View anchor) {
+		int[] point = new int[2];
+		getLocationOnScreen(point);
+		mLinkPopupWindow.showAtLocation(anchor, Gravity.NO_GRAVITY, point[0], point[1] - mPopupWindowHeight);
+	}
 
-        default:
-            break;
-        }
-    }
+	public void updateLinkViewState(LinkViewState state) {
+		mState = state;
+		switch (state) {
+		case UNLINK_NORMAL:
+			mLinkPopupWindow.dismiss();
+			setBackgroundDrawable(mUnLinkNormalDrawable);
+			break;
+		case UNLINK_SELECT:
+			showPopuWindow(this);
+			setBackgroundDrawable(mUnlinkSelectDrawable);
+			break;
+		case LINK_NORMAL:
+			mLinkPopupWindow.dismiss();
+			setBackgroundDrawable(mLinkNormalDrawable);
+			break;
+		case LINK_SELECT:
+			showPopuWindow(this);
+			setBackgroundDrawable(mLinkSelectDrawable);
+			break;
 
-    private void updateRects() {
-        Rect rect = new Rect();
-        getLocalVisibleRect(rect);
+		default:
+			break;
+		}
+	}
 
-        resetRect(ltRect, rect.left, rect.top);
-        resetRect(rtRect, rect.right, rect.top);
-        resetRect(rbRect, rect.right, rect.bottom);
-        resetRect(lbRect, rect.left, rect.bottom);
-    }
+	private void updateRects() {
+		Rect rect = new Rect();
+		getLocalVisibleRect(rect);
 
-    int lastX, lastY;
+		resetRect(ltRect, rect.left, rect.top);
+		resetRect(rtRect, rect.right, rect.top);
+		resetRect(rbRect, rect.right, rect.bottom);
+		resetRect(lbRect, rect.left, rect.bottom);
+	}
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
+	int lastX, lastY;
 
-        setFocusableInTouchMode(true);
-        requestFocusFromTouch();
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
 
-        int action = event.getAction();
-        switch (action) {
-        case MotionEvent.ACTION_DOWN:
-            mLinkPopupWindow.dismiss();
+		setFocusableInTouchMode(true);
+		requestFocusFromTouch();
 
-            lastX = (int) event.getX();
-            lastY = (int) event.getY();
-            return true;
-        case MotionEvent.ACTION_MOVE:
+		int action = event.getAction();
+		switch (action) {
+		case MotionEvent.ACTION_DOWN:
+			mLinkPopupWindow.dismiss();
 
-            updateRects();
+			lastX = (int) event.getX();
+			lastY = (int) event.getY();
+			return true;
+		case MotionEvent.ACTION_MOVE:
 
-            int pointX = (int) event.getX();
-            int pointY = (int) event.getY();
+			updateRects();
 
-            int dx = (int) (pointX - lastX);
-            int dy = (int) (pointY - lastY);
+			int pointX = (int) event.getX();
+			int pointY = (int) event.getY();
 
-            AbsoluteLayout.LayoutParams params = (LayoutParams) getLayoutParams();
-            if (params == null) {
-                params = new LayoutParams(DEFAUT_WIDTH, DEFAUT_HEIGH, 0, 0);
-            }
+			int dx = (int) (pointX - lastX);
+			int dy = (int) (pointY - lastY);
 
-            if (ltRect.contains(pointX, pointY)) {
-                params.x += dx;
-                params.y += dy;
-                params.width -= dx;
-                params.height -= dy;
-            } else if (rbRect.contains(pointX, pointY)) {
+			AbsoluteLayout.LayoutParams params = (LayoutParams) getLayoutParams();
+			if (params == null) {
+				params = new LayoutParams(DEFAUT_WIDTH, DEFAUT_HEIGH, 0, 0);
+			}
 
-                lastX = pointX;
-                lastY = pointY;
+			if (ltRect.contains(pointX, pointY)) {
+				params.x += dx;
+				params.y += dy;
+				params.width -= dx;
+				params.height -= dy;
+			} else if (rbRect.contains(pointX, pointY)) {
 
-                params.width += dx;
-                params.height += dy;
-            } else if (lbRect.contains(pointX, pointY)) {
-                lastY = pointY;
+				lastX = pointX;
+				lastY = pointY;
 
-                params.x += dx;
-                params.width -= dx;
-                params.height += dy;
+				params.width += dx;
+				params.height += dy;
+			} else if (lbRect.contains(pointX, pointY)) {
+				lastY = pointY;
 
-            } else if (rtRect.contains(pointX, pointY)) {
-                lastX = pointX;
+				params.x += dx;
+				params.width -= dx;
+				params.height += dy;
 
-                params.y += dy;
-                params.width += dx;
-                params.height -= dy;
-            } else {
-                params.x += dx;
-                params.y += dy;
-            }
+			} else if (rtRect.contains(pointX, pointY)) {
+				lastX = pointX;
 
-            setLayoutParams(params);
-            requestLayout();
-            return true;
-        case MotionEvent.ACTION_UP:
-            showPopuWindow(this);
-            params = (LayoutParams) getLayoutParams();
-            mLinkModel.height = String.valueOf(params.height);
-            mLinkModel.width = String.valueOf(params.width);
-            mLinkModel.posX = String.valueOf(params.x);
-            mLinkModel.posY = String.valueOf(params.y);
-            return true;
-        default:
-            break;
-        }
-        return super.onTouchEvent(event);
-    }
+				params.y += dy;
+				params.width += dx;
+				params.height -= dy;
+			} else {
+				params.x += dx;
+				params.y += dy;
+			}
 
-    public OnLinkListener getOnLinkListener() {
-        return onLinkListener;
-    }
+			setLayoutParams(params);
+			requestLayout();
+			return true;
+		case MotionEvent.ACTION_UP:
+			showPopuWindow(this);
+			params = (LayoutParams) getLayoutParams();
+			mLinkModel.height = String.valueOf(params.height);
+			mLinkModel.width = String.valueOf(params.width);
+			mLinkModel.posX = String.valueOf(params.x);
+			mLinkModel.posY = String.valueOf(params.y);
+			return true;
+		default:
+			break;
+		}
+		return super.onTouchEvent(event);
+	}
 
-    public void setOnLinkListener(OnLinkListener onLinkListener) {
-        this.onLinkListener = onLinkListener;
-    }
+	public OnLinkListener getOnLinkListener() {
+		return onLinkListener;
+	}
 
-    public LinkModel getLinkModel() {
-        return mLinkModel;
-    }
+	public void setOnLinkListener(OnLinkListener onLinkListener) {
+		this.onLinkListener = onLinkListener;
+	}
 
-    public void setLinkModel(LinkModel mLinkModel) {
-        this.mLinkModel = mLinkModel;
-    }
+	public LinkModel getLinkModel() {
+		return mLinkModel;
+	}
+
+	public void setLinkModel(LinkModel mLinkModel) {
+		this.mLinkModel = mLinkModel;
+	}
 
 }
