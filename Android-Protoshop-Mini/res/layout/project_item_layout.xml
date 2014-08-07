@@ -30,6 +30,6 @@
         android:layout_alignBottom="@+id/project_icon_view"
         android:layout_toRightOf="@+id/project_icon_view"
         android:text="TextView"
-        android:textAppearance="@style/text_16_cccccc" />
+        android:textAppearance="@style/text_14_cccccc" />
 
 </RelativeLayout>
