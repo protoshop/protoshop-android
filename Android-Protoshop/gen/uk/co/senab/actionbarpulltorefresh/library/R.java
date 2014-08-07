@@ -169,12 +169,12 @@ public final class R {
 		public static final int spb_default_reversed = 0x7f070006;
 	}
 	public static final class color {
-		public static final int abc_search_url_text_holo = 0x7f080024;
+		public static final int abc_search_url_text_holo = 0x7f080025;
 		public static final int abc_search_url_text_normal = 0x7f080000;
 		public static final int abc_search_url_text_pressed = 0x7f080002;
 		public static final int abc_search_url_text_selected = 0x7f080001;
-		public static final int default_progress_bar_color = 0x7f080020;
-		public static final int spb_default_color = 0x7f080021;
+		public static final int default_progress_bar_color = 0x7f080021;
+		public static final int spb_default_color = 0x7f080022;
 	}
 	public static final class dimen {
 		public static final int abc_action_bar_default_height = 0x7f090002;
@@ -198,9 +198,9 @@ public final class R {
 		public static final int dialog_fixed_height_minor = 0x7f090014;
 		public static final int dialog_fixed_width_major = 0x7f090011;
 		public static final int dialog_fixed_width_minor = 0x7f090012;
-		public static final int ptr_progress_bar_stroke_width = 0x7f09033d;
-		public static final int spb_default_stroke_separator_length = 0x7f09033b;
-		public static final int spb_default_stroke_width = 0x7f09033c;
+		public static final int ptr_progress_bar_stroke_width = 0x7f090212;
+		public static final int spb_default_stroke_separator_length = 0x7f090210;
+		public static final int spb_default_stroke_width = 0x7f090211;
 	}
 	public static final class drawable {
 		public static final int abc_ab_bottom_solid_dark_holo = 0x7f020006;
@@ -290,7 +290,7 @@ public final class R {
 		public static final int abc_textfield_searchview_holo_light = 0x7f02005a;
 		public static final int abc_textfield_searchview_right_holo_dark = 0x7f02005b;
 		public static final int abc_textfield_searchview_right_holo_light = 0x7f02005c;
-		public static final int ic_launcher = 0x7f020078;
+		public static final int ic_launcher = 0x7f02007a;
 	}
 	public static final class id {
 		public static final int action_bar = 0x7f060027;
@@ -393,8 +393,8 @@ public final class R {
 		public static final int abc_search_dropdown_item_icons_2line = 0x7f030015;
 		public static final int abc_search_view = 0x7f030016;
 		public static final int abc_simple_decor = 0x7f030017;
-		public static final int default_header = 0x7f030029;
-		public static final int support_simple_spinner_dropdown_item = 0x7f03003c;
+		public static final int default_header = 0x7f03002a;
+		public static final int support_simple_spinner_dropdown_item = 0x7f03003d;
 	}
 	public static final class string {
 		public static final int abc_action_bar_home_description = 0x7f0b0001;
@@ -411,15 +411,15 @@ public final class R {
 		public static final int abc_shareactionprovider_share_with = 0x7f0b000c;
 		public static final int abc_shareactionprovider_share_with_application = 0x7f0b000b;
 		public static final int app_name = 0x7f0b000d;
-		public static final int pull_to_refresh_pull_label = 0x7f0b0025;
-		public static final int pull_to_refresh_refreshing_label = 0x7f0b0027;
-		public static final int pull_to_refresh_release_label = 0x7f0b0026;
-		public static final int spb_default_speed = 0x7f0b0024;
+		public static final int pull_to_refresh_pull_label = 0x7f0b0026;
+		public static final int pull_to_refresh_refreshing_label = 0x7f0b0028;
+		public static final int pull_to_refresh_release_label = 0x7f0b0027;
+		public static final int spb_default_speed = 0x7f0b0025;
 	}
 	public static final class style {
 		public static final int AppBaseTheme = 0x7f0c008b;
 		public static final int AppTheme = 0x7f0c008c;
-		public static final int SmoothProgressBar = 0x7f0c0096;
+		public static final int SmoothProgressBar = 0x7f0c0097;
 		public static final int TextAppearance_AppCompat_Base_CompactMenu_Dialog = 0x7f0c0063;
 		public static final int TextAppearance_AppCompat_Base_SearchResult = 0x7f0c006d;
 		public static final int TextAppearance_AppCompat_Base_SearchResult_Subtitle = 0x7f0c006f;
@@ -481,7 +481,7 @@ public final class R {
 		public static final int Theme_Base_AppCompat_Light_DialogWhenLarge = 0x7f0c0086;
 		public static final int Theme_Base_AppCompat_Light_DialogWhenLarge_Base = 0x7f0c008a;
 		public static final int Theme_Base_Light = 0x7f0c007f;
-		public static final int Theme_SmoothProgressBarDefaults = 0x7f0c0095;
+		public static final int Theme_SmoothProgressBarDefaults = 0x7f0c0096;
 		public static final int Widget_AppCompat_ActionBar = 0x7f0c0000;
 		public static final int Widget_AppCompat_ActionBar_Solid = 0x7f0c0002;
 		public static final int Widget_AppCompat_ActionBar_TabBar = 0x7f0c0011;

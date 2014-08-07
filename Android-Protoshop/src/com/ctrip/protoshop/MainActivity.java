@@ -21,8 +21,6 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.internal.view.menu.MenuBuilder;
-import android.support.v7.internal.widget.ListPopupWindow;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.SearchView.OnQueryTextListener;
 import android.text.TextUtils;
@@ -36,7 +34,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.ctrip.protoshop.adapter.MorePopupAdapter;
 import com.ctrip.protoshop.adapter.ProgramAdapter;
 import com.ctrip.protoshop.constans.Constans;
 import com.ctrip.protoshop.constans.Function;
@@ -63,9 +60,6 @@ public class MainActivity extends BaseActivity {
 	private List<ProgramModel> mLocalModels;
 	private Map<String, ProgramModel> mProgramLoadedMap;
 	private ProgramAdapter mAdapter;
-
-	// 更多菜单
-	private ListPopupWindow mMorePopupWindow;
 
 	// 获取工程入口
 	private IHomeScence mHomeScence;
@@ -172,50 +166,17 @@ public class MainActivity extends BaseActivity {
 		case R.id.ic_action_search:
 
 			return true;
-		case R.id.ic_action_refresh:
-			getProgramsFromService();
+		case R.id.ic_action_local:
+			startActivity(new Intent(getApplicationContext(), ProjectListActivity.class));
 			return true;
-		case R.id.ic_action_overflow:
-			showMoreMenu(findViewById(id));
+		case R.id.ic_action_settings:
+			startActivity(new Intent(getApplicationContext(), SettingActivity.class));
 			return true;
 
 		default:
 			break;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	private OnItemClickListener moreMenuListener = new OnItemClickListener() {
-
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			mMorePopupWindow.dismiss();
-			if (id == R.id.ic_action_settings) {
-				startActivity(new Intent(getApplicationContext(), SettingActivity.class));
-			} else if (id == R.id.ic_action_mini) {
-				startActivity(new Intent(getApplicationContext(), ProjectListActivity.class));
-			}
-		}
-
-	};
-
-	/**
-	 * 显示更多菜单
-	 * 
-	 * @param view
-	 */
-	private void showMoreMenu(View view) {
-		mMorePopupWindow = new ListPopupWindow(this);
-		MenuBuilder menu = new MenuBuilder(this);
-		getMenuInflater().inflate(R.menu.more, menu);
-		MorePopupAdapter adapter = new MorePopupAdapter(this, menu);
-		//mMorePopupWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), BitmapFactory.decodeResource(getResources(), R.drawable.ab_solid_protoshop)));
-		mMorePopupWindow.setWidth(adapter.getWidth());
-		mMorePopupWindow.setAdapter(adapter);
-		mMorePopupWindow.setModal(true);
-		mMorePopupWindow.setAnchorView(view);
-		mMorePopupWindow.setOnItemClickListener(moreMenuListener);
-		mMorePopupWindow.show();
 	}
 
 	/**
