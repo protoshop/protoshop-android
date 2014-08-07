@@ -169,7 +169,7 @@ public class EditPageActivity extends BaseActivity {
 	}
 
 	private void saveEditResult() {
-		
+
 		finish();
 	}
 
@@ -217,10 +217,12 @@ public class EditPageActivity extends BaseActivity {
 
 		if (model.actions.size() > 0) {
 			intent.putExtra(Constans.LINK_PAGE_ID, model.actions.get(0).target);
+			intent.putExtra(Constans.ANIM_TYPE, model.actions.get(0).animationType);
 		}
 
 		intent.putExtra(Constans.LINK_CUR_PAGE, mPageNum);
 		intent.putExtra(Constans.LINK_VIEW_ID, model.id);
+
 		startActivityForResult(intent, LINK_REQUEST_CODE);
 	}
 
@@ -231,6 +233,7 @@ public class EditPageActivity extends BaseActivity {
 			mLinkViewMap.get(id).updateLinkViewState(LinkViewState.LINK_NORMAL);
 			ActionModel actionModel = new ActionModel();
 			actionModel.target = data.getStringExtra(Constans.PAGE_ID);
+			actionModel.animationType = String.valueOf(data.getIntExtra(Constans.ANIM_TYPE, 0));
 			if (mLinkViewMap.get(id).getLinkModel().actions == null) {
 				mLinkViewMap.get(id).getLinkModel().actions = new ArrayList<ActionModel>();
 			}

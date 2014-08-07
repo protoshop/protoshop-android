@@ -3,6 +3,7 @@ package com.ctrip.protoshop.mini;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,14 +22,14 @@ public class LinkPageActivity extends BaseActivity implements OnItemClickListene
 
 	private GridView mGridView;
 	private PageAdapter mAdapter;
-	private ImageView[] mAniTypeViews = new ImageView[5];
+	private ImageView[] mAnimTypeViews = new ImageView[5];
 
 	private ProjectModel mProjectModel;
 	private Intent intent;
 	private int mCurPage = 0;
 	private String mLinkPage;
 	private int mSelectedPage = -1;
-	private int mAniType = 0;
+	private int mAnimType = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,10 @@ public class LinkPageActivity extends BaseActivity implements OnItemClickListene
 		intent = getIntent();
 		mCurPage = intent.getIntExtra(Constans.LINK_CUR_PAGE, 0);
 		mLinkPage = intent.getStringExtra(Constans.LINK_PAGE_ID);
+		String type = intent.getStringExtra(Constans.ANIM_TYPE);
+		if (!TextUtils.isEmpty(type)) {
+			mAnimType = Integer.parseInt(type);
+		}
 
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
@@ -62,25 +67,25 @@ public class LinkPageActivity extends BaseActivity implements OnItemClickListene
 		mGridView.setAdapter(mAdapter);
 		mGridView.setOnItemClickListener(this);
 
-		int[] aniTypeIDs = { R.id.none_view, R.id.push_down_view, R.id.push_up_view, R.id.push_left_view, R.id.push_right_view };
-		for (int i = 0; i < aniTypeIDs.length; i++) {
-			mAniTypeViews[i] = (ImageView) findViewById(aniTypeIDs[i]);
-			mAniTypeViews[i].setTag(i);
-			mAniTypeViews[i].setOnClickListener(new OnClickListener() {
+		int[] animTypeIDs = { R.id.none_view, R.id.push_down_view, R.id.push_up_view, R.id.push_left_view, R.id.push_right_view };
+		for (int i = 0; i < animTypeIDs.length; i++) {
+			mAnimTypeViews[i] = (ImageView) findViewById(animTypeIDs[i]);
+			mAnimTypeViews[i].setTag(i);
+			mAnimTypeViews[i].setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
 					int type = (Integer) v.getTag();
-					if (type == mAniType) {
+					if (type == mAnimType) {
 						return;
 					}
-					mAniTypeViews[mAniType].setSelected(false);
+					mAnimTypeViews[mAnimType].setSelected(false);
 					v.setSelected(true);
-					mAniType = type;
+					mAnimType = type;
 				}
 			});
 		}
-		mAniTypeViews[mAniType].setSelected(true);
+		mAnimTypeViews[mAnimType].setSelected(true);
 
 	}
 
@@ -98,6 +103,7 @@ public class LinkPageActivity extends BaseActivity implements OnItemClickListene
 	public void finish() {
 		if (mSelectedPage != -1) {
 			intent.putExtra(Constans.PAGE_ID, ((PageModel) mAdapter.getItem(mSelectedPage)).id);
+			intent.putExtra(Constans.ANIM_TYPE, mAnimType);
 			setResult(RESULT_OK, intent);
 		}
 		super.finish();
@@ -131,7 +137,7 @@ public class LinkPageActivity extends BaseActivity implements OnItemClickListene
 		for (PageModel model : mProjectModel.scenes) {
 			model.isLinkPage = false;
 		}
-		//mAdapter.notifyDataSetChanged();
+		// mAdapter.notifyDataSetChanged();
 		finish();
 	}
 }
