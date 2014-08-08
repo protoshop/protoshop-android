@@ -67,7 +67,7 @@ public class LinkPageActivity extends BaseActivity implements OnItemClickListene
 		mGridView.setAdapter(mAdapter);
 		mGridView.setOnItemClickListener(this);
 
-		int[] animTypeIDs = { R.id.none_view, R.id.push_down_view, R.id.push_up_view, R.id.push_left_view, R.id.push_right_view };
+		int[] animTypeIDs = { R.id.none_view, R.id.push_left_view, R.id.push_right_view, R.id.push_down_view, R.id.push_up_view };
 		for (int i = 0; i < animTypeIDs.length; i++) {
 			mAnimTypeViews[i] = (ImageView) findViewById(animTypeIDs[i]);
 			mAnimTypeViews[i].setTag(i);
