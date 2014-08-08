@@ -290,7 +290,7 @@ public final class R {
 		public static final int abc_textfield_searchview_holo_light = 0x7f02005a;
 		public static final int abc_textfield_searchview_right_holo_dark = 0x7f02005b;
 		public static final int abc_textfield_searchview_right_holo_light = 0x7f02005c;
-		public static final int ic_launcher = 0x7f020076;
+		public static final int ic_launcher = 0x7f020077;
 	}
 	public static final class id {
 		public static final int action_bar = 0x7f060027;
