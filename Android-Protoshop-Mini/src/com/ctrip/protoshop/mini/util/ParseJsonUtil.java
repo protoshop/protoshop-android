@@ -92,6 +92,12 @@ public class ParseJsonUtil {
                     pattern = Pattern.compile("#target");
                     matcher = pattern.matcher(actionStr);
                     actionStr = matcher.replaceAll(target);
+                    
+                    String animType = actionObject.getString("animType");
+                    pattern = Pattern.compile("#animType");
+                    matcher = pattern.matcher(actionStr);
+                    actionStr = matcher.replaceAll(animType);
+
 
                     pattern = Pattern.compile("#setAction");
                     matcher = pattern.matcher(elementStr);
