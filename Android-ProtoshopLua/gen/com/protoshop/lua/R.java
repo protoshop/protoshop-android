@@ -15,10 +15,14 @@ public final class R {
         public static int abc_slide_in_top=0x7f040003;
         public static int abc_slide_out_bottom=0x7f040004;
         public static int abc_slide_out_top=0x7f040005;
-        public static int push_left_in=0x7f040006;
-        public static int push_left_out=0x7f040007;
-        public static int push_right_in=0x7f040008;
-        public static int push_right_out=0x7f040009;
+        public static int push_down_in=0x7f040006;
+        public static int push_down_out=0x7f040007;
+        public static int push_left_in=0x7f040008;
+        public static int push_left_out=0x7f040009;
+        public static int push_right_in=0x7f04000a;
+        public static int push_right_out=0x7f04000b;
+        public static int push_up_in=0x7f04000c;
+        public static int push_up_out=0x7f04000d;
     }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 
@@ -1320,14 +1324,16 @@ containing a value of this type.
         public static int TextAppearance_AppCompat_Widget_PopupMenu_Small=0x7f0c002f;
         public static int TextAppearance_Widget_AppCompat_Base_ExpandedMenu_Item=0x7f0c0062;
         public static int TextAppearance_Widget_AppCompat_ExpandedMenu_Item=0x7f0c0028;
-        /**  Themes in the "Theme.AppCompat" family will contain an action bar by default.
+        /** 
+         Themes in the "Theme.AppCompat" family will contain an action bar by default.
          If Holo themes are available on the current platform version they will be used.
          A limited Holo-styled action bar will be provided on platform versions older
          than 3.0. (API 11)
 
          These theme declarations contain any version-independent specification. Items
          that need to vary based on platform version should be defined in the corresponding
-         "Theme.Base" theme. 
+         "Theme.Base" theme.
+    
  Platform-independent theme providing an action bar in a dark-themed activity. 
          */
         public static int Theme_AppCompat=0x7f0c0077;

@@ -35,6 +35,8 @@ public class LuaActivity extends Activity {
 	private String mScene;
 	// Scene 所在工程ID。
 	private String mAppID;
+	// 动画类型
+	private String mAnimType;
 
 	// Finish 广播
 	private BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -55,6 +57,7 @@ public class LuaActivity extends Activity {
 
 		mScene = intent.getStringExtra(Constants.SCENE);
 		mAppID = intent.getStringExtra(Constants.APPID);
+		mAnimType = intent.getStringExtra(Constants.ANIM_TYPE);
 
 		if (TextUtils.isEmpty(mScene)) {
 			showError("数据解析错误!\n请清除缓存重新下载!");
@@ -171,9 +174,8 @@ public class LuaActivity extends Activity {
 		}
 	}
 
-	// 重写startActivity。查看要启动的Scene是否在缓存中，如果存在判断为返回,Scene上Activity被finish。
-	@Override
-	public void startActivity(Intent intent) {
+	// 查看要启动的Scene是否在缓存中，如果存在判断为返回,Scene上Activity被finish。
+	public void startActivity(String animType, Intent intent) {
 		String scenceId = intent.getStringExtra(Constants.SCENE);
 		if (ScenceCache.getInstance().scences.contains(scenceId)) {
 			List<String> scences = ScenceCache.getInstance().scences;
@@ -184,8 +186,35 @@ public class LuaActivity extends Activity {
 		} else {
 			ScenceCache.getInstance().scences.add(scenceId);
 			super.startActivity(intent);
-			overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+			overridePendingTransition(getInAnim(animType), getOutAnim(animType));
 		}
+
+	}
+
+	private int getInAnim(String animType) {
+		if ("1".equals(animType)) {
+			return R.anim.push_left_in;
+		} else if ("2".equals(animType)) {
+			return R.anim.push_right_in;
+		} else if ("3".equals(animType)) {
+			return R.anim.push_down_in;
+		} else if ("4".equals(animType)) {
+			return R.anim.push_up_in;
+		}
+		return 0;
+	}
+
+	private int getOutAnim(String animType) {
+		if ("1".equals(animType)) {
+			return R.anim.push_left_out;
+		} else if ("2".equals(animType)) {
+			return R.anim.push_right_out;
+		} else if ("3".equals(animType)) {
+			return R.anim.push_down_out;
+		} else if ("4".equals(animType)) {
+			return R.anim.push_up_out;
+		}
+		return 0;
 	}
 
 	@Override
@@ -193,6 +222,8 @@ public class LuaActivity extends Activity {
 		super.finish();
 		LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
 		ScenceCache.getInstance().scences.remove(mScene);
-		overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+		if (!TextUtils.isEmpty(mAnimType)) {
+			overridePendingTransition(getOutAnim(mAnimType), getInAnim(mAnimType));
+		}
 	}
 }

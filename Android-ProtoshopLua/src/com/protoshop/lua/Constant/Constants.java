@@ -5,5 +5,6 @@ public class Constants {
 	public static final String SCENE = "scene";
 	public static final String APPID = "appID";
 	public static final String BACK_HOME = "back_home";
+	public static final String ANIM_TYPE = "animType";
 
 }
