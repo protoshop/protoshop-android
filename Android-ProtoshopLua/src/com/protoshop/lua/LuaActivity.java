@@ -217,13 +217,39 @@ public class LuaActivity extends Activity {
 		return 0;
 	}
 
+	private int getFinishInAnim(String animType) {
+		if ("1".equals(animType)) {
+			return R.anim.push_right_in;
+		} else if ("2".equals(animType)) {
+			return R.anim.push_left_in;
+		} else if ("3".equals(animType)) {
+			return R.anim.push_up_in;
+		} else if ("4".equals(animType)) {
+			return R.anim.push_down_in;
+		}
+		return 0;
+	}
+
+	private int getFinishOutAnim(String animType) {
+		if ("1".equals(animType)) {
+			return R.anim.push_right_out;
+		} else if ("2".equals(animType)) {
+			return R.anim.push_left_out;
+		} else if ("3".equals(animType)) {
+			return R.anim.push_up_out;
+		} else if ("4".equals(animType)) {
+			return R.anim.push_down_out;
+		}
+		return 0;
+	}
+
 	@Override
 	public void finish() {
 		super.finish();
 		LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
 		ScenceCache.getInstance().scences.remove(mScene);
 		if (!TextUtils.isEmpty(mAnimType)) {
-			overridePendingTransition(getOutAnim(mAnimType), getInAnim(mAnimType));
+			overridePendingTransition(getFinishInAnim(mAnimType), getFinishOutAnim(mAnimType));
 		}
 	}
 }
