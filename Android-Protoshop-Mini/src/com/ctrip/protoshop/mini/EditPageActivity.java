@@ -159,6 +159,7 @@ public class EditPageActivity extends BaseActivity {
 			Intent intent = new Intent(getApplicationContext(), LuaActivity.class);
 			intent.putExtra(Constans.APPID, mProjectModel.appID);
 			intent.putExtra(Constans.SCENE, mProjectModel.homeScene);
+			intent.putExtra(Constans.ANIM_TYPE, mProjectModel.appAnimType);
 			startActivity(intent);
 
 		} catch (JSONException e) {
@@ -182,9 +183,7 @@ public class EditPageActivity extends BaseActivity {
 			mProjectModel.scenes.get(mPageNum).elements = new ArrayList<LinkModel>();
 		}
 		mProjectModel.scenes.get(mPageNum).elements.add(model);
-
 		LinkView linkView = new LinkView(this, model);
-
 		linkView.setOnLinkListener(new OnLinkListener() {
 
 			@Override
@@ -217,7 +216,7 @@ public class EditPageActivity extends BaseActivity {
 
 		if (model.actions.size() > 0) {
 			intent.putExtra(Constans.LINK_PAGE_ID, model.actions.get(0).target);
-			intent.putExtra(Constans.ANIM_TYPE, model.actions.get(0).animationType);
+			intent.putExtra(Constans.ANIM_TYPE, model.actions.get(0).animType);
 		}
 
 		intent.putExtra(Constans.LINK_CUR_PAGE, mPageNum);
@@ -233,7 +232,7 @@ public class EditPageActivity extends BaseActivity {
 			mLinkViewMap.get(id).updateLinkViewState(LinkViewState.LINK_NORMAL);
 			ActionModel actionModel = new ActionModel();
 			actionModel.target = data.getStringExtra(Constans.PAGE_ID);
-			actionModel.animationType = String.valueOf(data.getIntExtra(Constans.ANIM_TYPE, 0));
+			actionModel.animType = String.valueOf(data.getIntExtra(Constans.ANIM_TYPE, 0));
 			if (mLinkViewMap.get(id).getLinkModel().actions == null) {
 				mLinkViewMap.get(id).getLinkModel().actions = new ArrayList<ActionModel>();
 			}
