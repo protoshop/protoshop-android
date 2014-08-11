@@ -92,7 +92,7 @@ public class EditProjectActivity extends BaseActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 		if (id == android.R.id.home) {
-			finishEditor();
+			judgeBack();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -277,23 +277,27 @@ public class EditProjectActivity extends BaseActivity {
 		mAdapter.notifyDataSetChanged();
 	}
 
-	private void finishEditor() {
-		setResult(RESULT_OK);
-		finish();
-	}
+	
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-
-			if (mProjectModel.scenes.get(0).isEditModel) {
-				editFinish();
-			} else {
-				finishEditor();
-			}
+			judgeBack();
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);
+	}
+
+	/**
+	 * 
+	 */
+	private void judgeBack() {
+		if (mProjectModel.scenes.get(0).isEditModel) {
+			editFinish();
+		} else {
+			setResult(RESULT_OK);
+			finish();
+		}
 	}
 
 	/**
