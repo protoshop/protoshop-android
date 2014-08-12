@@ -99,7 +99,7 @@ public class ProjectListActivity extends BaseActivity {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				MiniApplication.getInstance().currentProjectModel = mProjectModels.get(position);
+				MiniCache.getInstance().currentProjectModel = mProjectModels.get(position);
 				startActivityForResult(new Intent(getApplicationContext(), EditProjectActivity.class), EDITE_CODE);
 			}
 		});

@@ -7,8 +7,8 @@ import com.ctrip.protoshop.mini.model.PageModel;
 import com.ctrip.protoshop.mini.model.ProjectModel;
 import com.protoshop.lua.LuaConfig;
 
-public class MiniApplication implements LuaConfig {
-	private static MiniApplication instance=new MiniApplication();
+public class MiniCache implements LuaConfig {
+	private static MiniCache instance=new MiniCache();
 	public ProjectModel currentProjectModel;
 	public PageModel pageModel;
 
@@ -16,7 +16,7 @@ public class MiniApplication implements LuaConfig {
 
 	public List<String> scenes = new ArrayList<String>();
 
-	public static MiniApplication getInstance() {
+	public static MiniCache getInstance() {
 		return instance;
 	}
 

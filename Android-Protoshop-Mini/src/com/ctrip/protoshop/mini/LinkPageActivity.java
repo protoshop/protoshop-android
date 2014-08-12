@@ -49,7 +49,7 @@ public class LinkPageActivity extends BaseActivity implements OnItemClickListene
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setTitle("链接至");
 
-		mProjectModel = MiniApplication.getInstance().currentProjectModel;
+		mProjectModel = MiniCache.getInstance().currentProjectModel;
 		mGridView = (GridView) findViewById(R.id.link_gridview);
 
 		for (int i = 0; i < mProjectModel.scenes.size(); i++) {

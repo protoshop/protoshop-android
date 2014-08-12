@@ -53,7 +53,7 @@ public class EditProjectActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_project);
-		mProjectModel = MiniApplication.getInstance().currentProjectModel;
+		mProjectModel = MiniCache.getInstance().currentProjectModel;
 		initUI();
 	}
 
@@ -134,7 +134,7 @@ public class EditProjectActivity extends BaseActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-				MiniApplication.getInstance().currentProjectModel = mProjectModel;
+				MiniCache.getInstance().currentProjectModel = mProjectModel;
 				Intent intent = new Intent(getApplicationContext(), EditPageActivity.class);
 				intent.putExtra(Constans.PAGE_NUM, position);
 				startActivity(intent);

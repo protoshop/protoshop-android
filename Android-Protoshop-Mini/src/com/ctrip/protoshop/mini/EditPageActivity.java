@@ -60,7 +60,7 @@ public class EditPageActivity extends BaseActivity {
 
 	private void initData() {
 		mPageNum = getIntent().getIntExtra(Constans.PAGE_NUM, 0);
-		mProjectModel = MiniApplication.getInstance().currentProjectModel;
+		mProjectModel = MiniCache.getInstance().currentProjectModel;
 
 		mLinkViewMap = new HashMap<String, LinkView>();
 	}
