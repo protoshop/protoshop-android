@@ -91,6 +91,12 @@ public class BaseActivity extends ActionBarActivity {
 		ProtoshopApplication.getInstance().requestQueue.add(request);
 	}
 
+	/**
+	 * 域账号登陆需要传递Cookie
+	 * 
+	 * @param function
+	 * @param onHttpListener
+	 */
 	public void setCookieRequest(Function function, final OnHttpListener onHttpListener) {
 		onHttpListener.onHttpStart();
 		AppRequest request = new AppRequest(Method.GET, HttpUtil.getUrlByFunction(this, function), onHttpListener, onHttpListener);
