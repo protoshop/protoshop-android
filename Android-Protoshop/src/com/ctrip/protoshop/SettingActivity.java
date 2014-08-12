@@ -144,19 +144,27 @@ public class SettingActivity extends BaseActivity implements OnClickListener, Te
 						if ("0".equals(status)) {
 							Toast.makeText(getApplicationContext(), "修改成功!", Toast.LENGTH_SHORT).show();
 						} else if ("1".equals(status)) {
-							if (resultObject.has("code")) {
-								String errorCode = resultObject.getString("code");
-								if ("5002".equals(errorCode)) {
-									dealLogout();
-								} else if ("5003".equals(errorCode)) {
-									Toast.makeText(getApplicationContext(), "服务器内部错误!", Toast.LENGTH_SHORT).show();
-								}
-							}
+							dealOtherResult(resultObject);
 						}
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
 					Toast.makeText(getApplicationContext(), "解析错误!", Toast.LENGTH_SHORT).show();
+				}
+			}
+
+			/**
+			 * @param resultObject
+			 * @throws JSONException
+			 */
+			private void dealOtherResult(JSONObject resultObject) throws JSONException {
+				if (resultObject.has("code")) {
+					String errorCode = resultObject.getString("code");
+					if ("5002".equals(errorCode)) {
+						dealLogout();
+					} else if ("5003".equals(errorCode)) {
+						Toast.makeText(getApplicationContext(), "服务器内部错误!", Toast.LENGTH_SHORT).show();
+					}
 				}
 			}
 
