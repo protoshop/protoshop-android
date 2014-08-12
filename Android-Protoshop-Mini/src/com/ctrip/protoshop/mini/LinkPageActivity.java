@@ -37,8 +37,11 @@ public class LinkPageActivity extends BaseActivity implements OnItemClickListene
 		setContentView(R.layout.activity_page_link);
 
 		intent = getIntent();
+		// 当前页面
 		mCurPage = intent.getIntExtra(Constans.LINK_CUR_PAGE, 0);
+		// 当前页面的链接页面
 		mLinkPage = intent.getStringExtra(Constans.LINK_PAGE_ID);
+		// 动画类型
 		String type = intent.getStringExtra(Constans.ANIM_TYPE);
 		if (!TextUtils.isEmpty(type)) {
 			mAnimType = Integer.parseInt(type);
@@ -52,6 +55,7 @@ public class LinkPageActivity extends BaseActivity implements OnItemClickListene
 		mProjectModel = MiniCache.getInstance().currentProjectModel;
 		mGridView = (GridView) findViewById(R.id.link_gridview);
 
+		// 判断当前页面是否有链接
 		for (int i = 0; i < mProjectModel.scenes.size(); i++) {
 			PageModel model = mProjectModel.scenes.get(i);
 			if (model.id.equals(mLinkPage)) {
@@ -67,6 +71,14 @@ public class LinkPageActivity extends BaseActivity implements OnItemClickListene
 		mGridView.setAdapter(mAdapter);
 		mGridView.setOnItemClickListener(this);
 
+		setPageAnimation();
+
+	}
+
+	/**
+	 * 设置动画类型
+	 */
+	private void setPageAnimation() {
 		int[] animTypeIDs = { R.id.none_view, R.id.push_left_view, R.id.push_right_view, R.id.push_down_view, R.id.push_up_view };
 		for (int i = 0; i < animTypeIDs.length; i++) {
 			mAnimTypeViews[i] = (ImageView) findViewById(animTypeIDs[i]);
@@ -86,7 +98,6 @@ public class LinkPageActivity extends BaseActivity implements OnItemClickListene
 			});
 		}
 		mAnimTypeViews[mAnimType].setSelected(true);
-
 	}
 
 	@Override
@@ -99,6 +110,7 @@ public class LinkPageActivity extends BaseActivity implements OnItemClickListene
 		return super.onOptionsItemSelected(item);
 	}
 
+	// 重写finish方法，页面返回时传递当前页面的ID和动画类型
 	@Override
 	public void finish() {
 		if (mSelectedPage != -1) {
@@ -131,6 +143,7 @@ public class LinkPageActivity extends BaseActivity implements OnItemClickListene
 		}
 	}
 
+	// 恢复当前页面状态
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
