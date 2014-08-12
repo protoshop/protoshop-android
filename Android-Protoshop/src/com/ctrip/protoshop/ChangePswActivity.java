@@ -40,9 +40,7 @@ public class ChangePswActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_change_psw);
-
 		initUI();
-
 	}
 
 	private void initUI() {
@@ -75,21 +73,7 @@ public class ChangePswActivity extends BaseActivity {
 					if (resultObject.has("status")) {
 						status = resultObject.getString("status");
 						if ("1".equals(status) && resultObject.has("code")) {
-
-							String code = resultObject.getString("code");
-							if ("3002".equals(code)) {
-								resultStr = "请重新登陆!";
-								LocalBroadcastManager.getInstance(ChangePswActivity.this).sendBroadcast(new Intent(Constans.LOGOUT));
-								startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-								finish();
-							} else if ("3005".equals(code)) {
-								resultStr = "服务器错误，请稍后再试!";
-							} else if ("3004".equals(code)) {
-								resultStr = "旧密码错误!";
-							} else {
-								resultStr = "未知错误,请联系开发者!";
-							}
-
+							resultStr = dealNormalResult(resultObject);
 						} else if ("0".equals(status)) {
 							resultStr = "修改密码成功!";
 							finish();
@@ -102,6 +86,27 @@ public class ChangePswActivity extends BaseActivity {
 
 				Toast.makeText(getApplicationContext(), resultStr, Toast.LENGTH_SHORT).show();
 
+			}
+
+			/**
+			 * @param resultObject
+			 * @return
+			 * @throws JSONException
+			 */
+			private String dealNormalResult(JSONObject resultObject) throws JSONException {
+				String resultStr;
+				String code = resultObject.getString("code");
+				if ("3002".equals(code)) {
+					resultStr = "请重新登陆!";
+					loginOut();
+				} else if ("3005".equals(code)) {
+					resultStr = "服务器错误，请稍后再试!";
+				} else if ("3004".equals(code)) {
+					resultStr = "旧密码错误!";
+				} else {
+					resultStr = "未知错误,请联系开发者!";
+				}
+				return resultStr;
 			}
 
 			@Override
@@ -170,6 +175,15 @@ public class ChangePswActivity extends BaseActivity {
 
 		sendPostRequest(Function.CHANGE_PSW, postParams, mAsyncLayout);
 
+	}
+
+	/**
+	 * 登出
+	 */
+	private void loginOut() {
+		LocalBroadcastManager.getInstance(ChangePswActivity.this).sendBroadcast(new Intent(Constans.LOGOUT));
+		startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+		finish();
 	}
 
 }
