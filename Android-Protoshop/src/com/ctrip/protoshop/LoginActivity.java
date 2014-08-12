@@ -227,7 +227,8 @@ public class LoginActivity extends BaseActivity {
 						if ("1".equals(status) && resultObject.has("code")) {
 							String code = resultObject.getString("code");
 							if ("1002".equals(code)) {
-								startActivityForResult(new Intent(getApplicationContext(), DomainActivity.class), REQUEST_DOMMAIN_CODE);
+								Intent intent = new Intent(getApplicationContext(), DomainActivity.class);
+								startActivityForResult(intent, REQUEST_DOMMAIN_CODE);
 							}
 						} else if ("0".equals(status)) {
 							dealLoginResult(resultObject);
