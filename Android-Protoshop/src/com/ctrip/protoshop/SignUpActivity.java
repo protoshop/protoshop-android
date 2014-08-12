@@ -112,6 +112,7 @@ public class SignUpActivity extends BaseActivity {
 					JSONObject resultObject = new JSONObject(response);
 					String status = "";
 
+					// status=0 注册成功，status=1注册失败。
 					if (resultObject.has("status")) {
 						status = resultObject.getString("status");
 						if ("0".equals(status) && resultObject.has("result")) {
