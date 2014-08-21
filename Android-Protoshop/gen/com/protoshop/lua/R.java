@@ -277,7 +277,7 @@ public final class R {
 		public static final int activity_chooser_view_content = 0x7f060030;
 		public static final int always = 0x7f06000b;
 		public static final int beginning = 0x7f060011;
-		public static final int cancel = 0x7f06001b;
+		public static final int cancel = 0x7f060024;
 		public static final int checkbox = 0x7f060038;
 		public static final int collapseActionView = 0x7f06000d;
 		public static final int default_activity_button = 0x7f060033;
@@ -299,7 +299,7 @@ public final class R {
 		public static final int never = 0x7f060009;
 		public static final int none = 0x7f060010;
 		public static final int normal = 0x7f060000;
-		public static final int ok = 0x7f06001a;
+		public static final int ok = 0x7f060023;
 		public static final int progress_circular = 0x7f060018;
 		public static final int progress_horizontal = 0x7f060019;
 		public static final int radio = 0x7f06003a;
@@ -379,11 +379,11 @@ public final class R {
 		public static final int abc_searchview_description_voice = 0x7f0b0008;
 		public static final int abc_shareactionprovider_share_with = 0x7f0b000c;
 		public static final int abc_shareactionprovider_share_with_application = 0x7f0b000b;
-		public static final int app_name = 0x7f0b000d;
+		public static final int app_name = 0x7f0b0011;
 	}
 	public static final class style {
 		public static final int AppBaseTheme = 0x7f0c008b;
-		public static final int AppDialog = 0x7f0c008d;
+		public static final int AppDialog = 0x7f0c008f;
 		public static final int AppTheme = 0x7f0c008c;
 		public static final int TextAppearance_AppCompat_Base_CompactMenu_Dialog = 0x7f0c0063;
 		public static final int TextAppearance_AppCompat_Base_SearchResult = 0x7f0c006d;
